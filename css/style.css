@@ -1,0 +1,237 @@
+@import http://fonts.googleapis.com/css?family=Raleway;
+/*----------------------------------------------
+CSS Settings For HTML Div ExactCenter
+------------------------------------------------*/
+
+#main {
+width:960px;
+margin:50px auto;
+font-family:raleway
+}
+#header{
+	display:inline;
+}
+
+
+/*my code*/
+
+/*
+.outtxt{
+	float:right;
+
+}
+.inbtn{
+}
+.outbtn{
+	float:right;
+}
+.ds{
+	margin:1% 0%;	
+}*/
+.src{
+	float:right;
+	
+}
+.pname{
+	margin:2% 2%;
+}
+.name{
+	
+	font-size:20px;
+	
+}
+.green{
+	color:green;
+	
+}
+.red{
+	color:red;
+	
+}
+
+#addCon{
+	margin:2% 0%;
+}
+
+#conls{
+	margin:10% 10%;
+	
+}
+
+body {
+    margin:1% 5%; padding:0%;
+    
+}
+.dash{
+	margin:1% 10%;
+
+}
+
+
+#uinfo{
+	float:right;
+	
+}
+
+
+
+.uinfo{
+	border-style:outset;
+    margin: auto;
+}
+
+span {
+color:red
+}
+h2 {
+background-color:#FEFFED;
+text-align:center;
+border-radius:10px 10px 0 0;
+margin:-10px -40px;
+padding:15px
+}
+hr {
+border:0;
+border-bottom:1px solid #ccc;
+margin:10px -40px;
+margin-bottom:30px
+}
+#dash input[type=button].minus {
+float:right;	
+width:30%;
+background-color:#001133;
+color:#fff;
+border:2px solid #FFCB00;
+padding:10px;
+font-size:20px;
+cursor:pointer;
+border-radius:5px;
+margin-bottom:15px;
+margin-top:5%;
+}
+#dash input[type=button].plus {
+float:left;
+width:30%;
+background-color:#001133;
+color:#fff;
+border:2px solid #00FF00;
+padding:10px;
+font-size:20px;
+cursor:pointer;
+border-radius:5px;
+margin-bottom:15px;
+margin-top:5%;
+}
+
+#dash {
+width:75%;
+margin:10% 10%
+border-radius:10px;
+font-family:raleway;
+border:2px solid #ccc;
+padding:10px 40px 25px;
+margin-top:70px
+}
+#dash  input[type=text].pname{
+width:65%;
+padding:10px;
+margin-top:8px;
+border:1px solid #ccc;
+padding-left:5px;
+font-size:16px;
+font-family:raleway
+}
+#dash  input[type=text].limit{
+width:15%;
+padding:10px;
+margin-top:8px;
+border:1px solid #ccc;
+padding-left:5px;
+font-size:16px;
+font-family:raleway
+}
+
+#dash input[type=submit] {
+width:100%;
+background-color:#FFBC00;
+color:#fff;
+border:2px solid #FFCB00;
+padding:10px;
+font-size:20px;
+cursor:pointer;
+border-radius:5px;
+margin-bottom:15px
+}
+
+
+#login {
+width:300px;
+float:left;
+border-radius:10px;
+font-family:raleway;
+border:2px solid #ccc;
+padding:10px 40px 25px;
+margin-top:70px
+}
+#register {
+	
+width:300px;
+float:left;
+border-radius:10px;
+font-family:raleway;
+border:2px solid #ccc;
+padding:10px 40px 25px;
+margin-top:70px;
+	
+}
+#login  input[type=text],input[type=password] {
+width:99.5%;
+padding:10px;
+margin-top:8px;
+border:1px solid #ccc;
+padding-left:5px;
+font-size:16px;
+font-family:raleway
+}
+#login input[type=submit] {
+width:100%;
+background-color:#FFBC00;
+color:#fff;
+border:2px solid #FFCB00;
+padding:10px;
+font-size:20px;
+cursor:pointer;
+border-radius:5px;
+margin-bottom:15px
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+#profile {
+padding:50px;
+border:1px dashed grey;
+font-size:20px;
+background-color:#DCE6F7
+}
+#logout {
+float:right;
+padding:5px;
+border:dashed 1px gray
+}
+a {
+text-decoration:none;
+color:#6495ed
+}
+i {
+color:#6495ed
+}
