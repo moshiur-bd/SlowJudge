@@ -72,6 +72,7 @@ public class Judge {
         }//end finally try
         return;
     }
+	
 
 
     public static int  checker(int pid,String pathInput,String pathOutput,String pathAnswer,boolean mchk){//yes or no only

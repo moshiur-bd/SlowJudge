@@ -5,6 +5,11 @@ import java.sql.*;
 import java.util.*;
 import java.util.concurrent.TimeUnit;
 
+class Contestant{
+    int score,penalty,rank,uid;
+    String name,uname;
+}
+
 public class Scoreboard {
 
     String dir;
@@ -64,6 +69,12 @@ public class Scoreboard {
         return true;
 
     }
+    
+    void clear() throws SQLException{//clears stmt object
+        if(stmt != null) {
+            stmt.close();
+         }
+    }
 
     void disconnect() {
         try {
@@ -85,23 +96,75 @@ public class Scoreboard {
     void scoreboard(){
         try{
             stmt=conn.createStatement();
-            String sql="SELECT * FROM `"+cDB+"`.scoreboard";
+            int size=0;
+            String sql="SELCET COUNT(uid) FROM `"+cDB+"`.`scoreboard`";
             rs=stmt.executeQuery(sql);
-            int score=0,penalty=0,rank=1,solvingTime=0,firstAC=0;
-        
-            //will declare array here for rank,pen,slt;
+            if(rs.next()){
+                size=rs.getInt("COUNT(uid)");
+                clear();//clears stmt obj
+            }
+            else {
+                System.out.println("'Count of participants' finding error!");
+            }
+            
+            
+            
+            //get the full scoreboard
+            sql="SELECT * FROM `"+cDB+"`.scoreboard";
+            stmt=conn.createStatement();
+            rs=stmt.executeQuery(sql);
+            int solvingTime=0,firstAC=0;
+            
+            List<Contestant> contestant=new ArrayList();
+            Contestant x=new Contestant();
+            
+            int j=0;
             while(rs.next())
-            {//calculate rank for every contestant
-                
+            {//calculate score&penalty for every contestant
+                x.score=x.score=x.rank=0;
                 for(int i=0;i<problemCount;i++){
                     firstAC=rs.getInt("fac"+i);
                     solvingTime=rs.getInt("st"+i);
                     if(firstAC>0){//current problem solved by the participant
-                        score+=pscore[i];
-                        penalty+=(solvingTime+(firstAC-1)*ppenalty);
+                        x.score+=pscore[i];
+                        x.penalty+=(solvingTime+(firstAC-1)*ppenalty);
                     }
                 }
+                contestant.add(x);
+                
+                j++;
             }
+            clear();
+            
+            //sort according to score 
+
+              Collections.sort(contestant, new Comparator<Contestant>(){
+                @Override
+                public int compare(Contestant a,Contestant b){
+                    int ret=0;
+                    if(a.score==b.score)
+                    {
+                        if(a.penalty==b.penalty){
+                            return a.name.compareTo(b.name);
+                        }
+                        else ret=a.penalty-b.penalty;
+                    } 
+                    else ret=b.score-a.score;
+                    
+                    if(ret<0)ret=-1;
+                    if(ret>0)ret=1;
+                    return ret;
+                }
+              });
+
+            
+            
+            
+            sql="UPDATE `"+cDB+"`.`scoreboard`  SET `rank`= '"+contestant[j].rank+"' , `score`='"+
+                    contestant[j].score+"',`penalty`='"+contestant[j].penalty+"' WHERE `uid`='"+contestant[j].uid+"';";
+            
+            
+            
         }
         catch (SQLException e) {
             System.out.println("Connection Failed! Check output console");
@@ -126,11 +189,13 @@ public class Scoreboard {
             if (rs.next()) {
                 problemCount = rs.getInt("value");
                 System.out.println("number of problems=  "+problemCount);
+                clear();
 
             } else {
                 System.out.println("fetching problemCount failed!");
                 return false;
             }
+            
             
             //getting penalty per wrong submission
             stmt = conn.createStatement();
@@ -139,6 +204,7 @@ public class Scoreboard {
             if(rs.next()){
                 ppenalty=rs.getInt("value");
                 System.out.println("Penalty set to : "+ppenalty);
+                clear();
             }
             else {
                 ppenalty=0;
@@ -154,6 +220,7 @@ public class Scoreboard {
             while(rs.next()){
                 pscore[rs.getInt("cpid")]=rs.getInt("score");
             }
+            clear();
             ////
             
             ///checeking score
