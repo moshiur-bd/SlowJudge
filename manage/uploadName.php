@@ -24,27 +24,48 @@
 		if(!$result) die("Couldn't been updated");
 	}
 	
-	if($total>=$up) // if greater new problems added
-	for(;$i<$total;$i++)
-	{
-		$tl=$_POST['tl'.$i];
-		$ml=$_POST['ml'.$i];
-		$name=$_POST['name'.$i];
-
-		
-		$sql="INSERT INTO `$DB`.`problem`  (`name`,`tl`,`ml`) VALUES( '$name', '$tl', '$ml');";
-		$result=mysqli_query($conn,$sql);
-		if(!$result) die("Couldn't been inserted");
-		
-		$pid=mysqli_insert_id($conn);
 	
-		$sql="INSERT INTO `$cDB`.`problem` (`pid`,`cpid`) VALUES( '$pid', '$i');";
+	
+	if($total>=$up){ // if greater new problems added or unchanged!!
+		$sqlScr="ALTER TABLE `$cDB`.`scoreboard` ";
+		$comma="";
+		for(;$i<$total;$i++)
+		{
+			$tl=$_POST['tl'.$i];
+			$ml=$_POST['ml'.$i];
+			$name=$_POST['name'.$i];
+
+			
+			$sql="INSERT INTO `$DB`.`problem`  (`name`,`tl`,`ml`) VALUES( '$name', '$tl', '$ml');";
+			$result=mysqli_query($conn,$sql);
+			if(!$result) die("Intertion failed into Golbal DB!");
+			
+			$pid=mysqli_insert_id($conn);
 		
-		$result=mysqli_query($conn,$sql);
-		if(!$result) die("Couldn't been Inseted in Contest DB");
+			$sql="INSERT INTO `$cDB`.`problem` (`pid`,`cpid`) VALUES( '$pid', '$i');";
+			
+			$result=mysqli_query($conn,$sql);
+			if(!$result) die("Intertion failed into Contest DB!");
+			//add scoreboard coloumn
+			
+			
+			$sqlScr=$sqlScr.$comma."ADD `actime$i` int NOT NULL DEFAULT '-1', ADD `firstac$i` int NOT NULL DEFAULT '0'";
+			$comma=" , ";
+			
+			
+		}
+		
+		echo "$sqlScr</br>";
+		$result=mysqli_query($conn,$sqlScr);
+		if(!$result) die("Scoreboard Alter failed while adding new row!");
+		
 		
 	}
 	else{//problems deleted
+	
+		//
+		$sqlScr="ALTER TABLE `$cDB`.`scoreboard` ";
+		$comma="";
 		for($i=$mn;$i<$up;$i++)
 		{
 			$sql="SELECT * FROM `$cDB`.`problem` WHERE `cpid`='$i'";
@@ -60,9 +81,16 @@
 			
 			$sql="DELETE FROM `$DB`.`problem` WHERE `pid`='$pid'";
 			$res=mysqli_query($conn,$sql);
-			if(!$res)die("couldn't delete mainDB record!");
+			if(!$res)die("couldn't delete Golbal DB record!");
+			
+			//delete scoreboard coloumn
+			$sqlScr=$sqlScr.$comma."DROP COLUMN `actime$i` , DROP  COLUMN `firstac$i` ";
+			$comma=" , ";
 			
 		}
+		echo "$sqlScr</br>";
+		$result=mysqli_query($conn,$sqlScr);
+		if(!$result) die("Scoreboard Alter failed while adding new row!");
 	
 	}
 	

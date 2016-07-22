@@ -27,6 +27,17 @@
 		$sql="CREATE TABLE IF NOT EXISTS `$cDB`.`problem` ( pid int NOT NULL ,cpid int NOT NULL)";
 		$qcnt+=mysqli_query($conn,$sql);
 		
+		$sql="CREATE TABLE IF NOT EXISTS `$cDB`.`scoreboard` (
+			  `uid` int(11) NOT NULL,
+			  `uname` varchar(100) NOT NULL,
+			  `name` varchar(100) NOT NULL,
+			  `rank` int(11) NOT NULL,
+			  `score` int(11) NOT NULL DEFAULT '0',
+			  `penalty` int(11) NOT NULL DEFAULT '0',
+			  PRIMARY KEY (`uid`)
+			)";//change
+		$qcnt+=mysqli_query($conn,$sql);
+		
 		$sql="CREATE TABLE IF NOT EXISTS `$cDB`.`settings` ( name varchar(30) NOT NULL , value varchar(100) NOT NULL, PRIMARY KEY (name) ) ";
 		$qcnt+=mysqli_query($conn,$sql);
 		
@@ -39,7 +50,7 @@
 		$sql="CREATE TABLE IF NOT EXISTS `$cDB`.`srcset` ( pid int NOT NULL, sid int NOT NULL, `src` VARCHAR(100)  ) ";
 		$qcnt+=mysqli_query($conn,$sql);
 		
-		if($qcnt==7)
+		if($qcnt==8)
 			echo "Adding Contest was successfull!";
 		else{
 			$conid=mysqli_insert_id($conn);

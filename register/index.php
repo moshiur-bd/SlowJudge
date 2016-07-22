@@ -26,7 +26,7 @@ if(isset($_SESSION['uid']))
 		<input id="password" name="upass" placeholder="**********" type="password" pattern="[A-Za-z0-9_\.]{3,30}" title="paasword can contain alphanumberic,underscore and dot and between 3-30 of size">
 		<label>Confirm Password :</label>
 		<input id="password" name="upass2" placeholder="**********" type="password">
-		<input name="submit" type="submit" value=" Login ">
+		<input name="submit" type="submit" value=" Submit ">
 		</form>
 	</div>
 </div>

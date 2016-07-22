@@ -5,7 +5,7 @@
 	$upass=$_POST['upass'];
 	
 	mysqli_select_db($conn,$uDB);
-	$sql="INSERT INTO `$uDB`.`user` (`uname`, `upass`) VALUES ( '$uname', '$upass'); ";
+	$sql="INSERT INTO `$DB`.`user` (`uname`, `upass`) VALUES ( '$uname', '$upass'); ";
 	echo $sql;
 	if(mysqli_query($conn,$sql))
 	{
