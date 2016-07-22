@@ -15,21 +15,43 @@ font-family:raleway
 
 /*my code*/
 
-/*
-.outtxt{
+#pdf-field{
+	width:80%;
+	height:80%;
+	float:left;
+}
+
+#submit-sub{
 	float:right;
+}
+
+td.dash,tr.dash,th .dash{
+   border: 1px solid black;
 
 }
-.inbtn{
+.dash{
+	margin-left :10%;
+
 }
-.outbtn{
-	float:right;
+table.dash{
+	width:100%;
+	margin:1% 1%;
 }
-.ds{
-	margin:1% 0%;	
-}*/
-.src{
-	float:right;
+.tl,.ml,.sub{
+	width:5%;
+}
+
+.ltr{
+	width:3%;
+	
+}
+.cnt{
+	width:4%;
+	
+}
+
+.srctxt,.pdftxt{
+	margin-left:5%;
 	
 }
 .pname{
@@ -62,10 +84,7 @@ body {
     margin:1% 5%; padding:0%;
     
 }
-.dash{
-	margin:1% 10%;
 
-}
 
 
 #uinfo{
@@ -132,6 +151,8 @@ border:2px solid #ccc;
 padding:10px 40px 25px;
 margin-top:70px
 }
+
+
 #dash  input[type=text].pname{
 width:65%;
 padding:10px;

@@ -50,7 +50,12 @@
 		$sql="CREATE TABLE IF NOT EXISTS `$cDB`.`srcset` ( pid int NOT NULL, sid int NOT NULL, `src` VARCHAR(100)  ) ";
 		$qcnt+=mysqli_query($conn,$sql);
 		
-		if($qcnt==8)
+		$sql="CREATE TABLE IF NOT EXISTS `$cDB`.`pdfset` (  `pid` int(11) NOT NULL, `pdf` varchar(100) NOT NULL );";
+		$qcnt+=mysqli_query($conn,$sql);
+		
+		
+		
+		if($qcnt==9)
 			echo "Adding Contest was successfull!";
 		else{
 			$conid=mysqli_insert_id($conn);

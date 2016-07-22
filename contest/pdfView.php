@@ -1,17 +1,22 @@
-<!DOCTYPE html>
 <html>
+<head></head>
 <body>
-<div id="subid">
-<?php
-include(__DIR__ ."\\..\\header.php");
-
-echo "<div id='msg'>";
-if(!isset($_SESSION['uid']))
-	die("you are not logged in!");
-
-$conid=$_GET['conid'];
-$pid=$_GET['pid'];
-echo "<div id='submit-onepage'>
+	
+	<?php
+		include(__DIR__ ."\\..\\header.php");
+		include(__DIR__ ."\\..\\connection.php");
+		$pid=$_GET['pid'];
+		$conid=$_GET['conid'];
+		
+		
+		echo "<div id='pdf'>
+				<object data='..\\pdf-archive\\$pid.pdf' type='application/pdf' id='pdf-field'>
+				alt : <a href='..\\pdf-archive\\$pid.pdf'>PDF Statement</a>
+				</object>
+			</div> ";
+		
+		
+	echo "<div id='submit-sub'>
 	
 	<form id='subform' action='upload.php?conid=$conid&pid=$pid' method='post' enctype='multipart/form-data'> 
 	
@@ -25,13 +30,15 @@ echo "<div id='submit-onepage'>
 	</tr>
     
 	<tr><td> source </td>           <td><input type='file' name='fileToUpload' id='fileToUpload' accept='.txt,.c,.cpp,.java'></br> </td></tr>
-    <tr> <td>  </td> <td>  </td>    <td><input type='submit' value='Submit code' name='submit'> </td> </tr>
+    <tr> <td>  </td>    <td><input type='submit' value='Submit code' name='submit'> </td> </tr>
 	
 	</table>
 </form>
 </div>";
-
-?>
-
+					
+		
+	
+	?>
+	
 </body>
 </html>

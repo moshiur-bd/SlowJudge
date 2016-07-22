@@ -3,6 +3,7 @@
 	include(__DIR__ ."\\..\\header.php");
 	$maxFileSize=5*1024*1024;
 	$maxSrcSize=1*1024*1024;
+	$maxPdfSize=20*1024*1024;
 
 	if(disk_free_space($slowjudge)<=$maxFileSize) die("Disk is full!"); //incase the disk is full
 	
@@ -58,6 +59,36 @@
 		}
 		
 		
+		$target_pdf="..\\pdf-archive\\";
+		///pdf up
+		{
+			///pdf upload
+			if ($_FILES["pdf$i"]['error']==UPLOAD_ERR_NO_FILE) {
+			}
+			else if($_FILES["pdf$i"]["size"]>$maxSrcSize)
+			{
+				echo "$i  Pdf File too large!";
+			}
+			else{
+				if (move_uploaded_file($_FILES["pdf$i"]["tmp_name"], $target_pdf.$pid.".pdf")) {
+					$flabel=basename( $_FILES["pdf$i"]["name"]);
+					echo "</br>The PDF file ".$flabel. " has been uploaded. $i";
+					$sql="DELETE FROM `$cDB`.`pdfset` WHERE `pid`='$pid' ";
+					if(!mysqli_query($conn,$sql))
+						echo "</br>PDF label del failed!</br>";
+					$sql=" INSERT INTO `$cDB`.`pdfset` (`pid`,`pdf`) VALUES ('$pid','$flabel')";
+					if(!mysqli_query($conn,$sql))
+						echo "</br>PDF label insertion failed!</br>";
+					
+				} else {
+					echo "</br>Sorry, there was an error uploading your PDF file $i . ";
+				}
+				
+			}
+			
+		}
+		
+		
 		
 		
 		
@@ -93,7 +124,6 @@
 			}
 			///out upload
 			if ($_FILES["$i$out$k"]['error']==UPLOAD_ERR_NO_FILE) {
-				echo "</br>No out file Selected $i-$k</br>";
 			}
 			else if($_FILES["$i$out$k"]["size"]>$maxFileSize)
 			{

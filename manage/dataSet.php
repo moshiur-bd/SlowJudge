@@ -43,19 +43,38 @@
 			}
 			else $srcl='Source code:';
 			
+			//for pdf
+			$sql="SELECT * FROM `$cDB`.`pdfset` WHERE `pid`='$pid'";
+			$pdfl= mysqli_query($conn,$sql);
+			if($pdfl=mysqli_fetch_array($pdfl)){
+				$pdfl=$pdfl['pdf'];
+				if(file_exists(__DIR__ ."\\..\\pdf-archive\\$pid.pdf"))
+					$pdfl="<label class='green'> ".$pdfl."</label>";
+				else $pdfl="<label class='red'> ".$pdfl."</label>";
+			}
+			else $pdfl='pdf statement:';
 			
+			
+			
+			//source& statement
 			echo "
 					
 					<div class='pname'>
 					<li><label class='name' id='name$i'> $name</label> 
-						<div class='src' >
+						
+						<label id='pdfl$i' for='pdf$i' class='pdftxt'>$pdfl</label>
+						<input class='pdfbtn' id='pdf$i' type='file' name='pdf$i'> 
+						
+						
 						<label id='srcl$i' for='src$i' class='srctxt'>$srcl</label>
 						<input class='srcbtn' id='src$i' type='file' name='src$i'> 
-						</div>
+						
 					</li>	
 					</div> 
 					<ol>
 					";
+					
+					//io
 					for($j=0;$j<$dscnt;$j++){
 						$sql="SELECT * FROM `$cDB`.`inset` WHERE `pid`='$pid' AND `dsid`='$j'";
 						$inl=mysqli_query($conn,$sql);
@@ -92,7 +111,7 @@
 							";
 					}
 					
-					
+					//extend
 					echo "
 					<div id='new$i'> </div>
 					<div id='btn$i'>
