@@ -21,7 +21,7 @@
 		$qcnt+=mysqli_query($conn,$sql);
 		
 		
-		$sql="CREATE TABLE IF NOT EXISTS `$cDB`.`submission`  ( id int NOT NULL , uid int NOT NULL, pid int NOT NULL, PRIMARY KEY (id) )";
+		$sql="CREATE TABLE IF NOT EXISTS `$cDB`.`submission`  ( id int NOT NULL , uid int NOT NULL, pid int NOT NULL,arrtime INT NOT NULL, PRIMARY KEY (id) )";
 		$qcnt+=mysqli_query($conn,$sql);
 		
 		$sql="CREATE TABLE IF NOT EXISTS `$cDB`.`problem` ( pid int NOT NULL ,cpid int NOT NULL)";

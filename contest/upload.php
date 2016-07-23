@@ -30,17 +30,6 @@ $servername = "localhost";
 
 
 
-
-
-
-
-
-
-
-
-
-
-$slowjudge="C:\\SlowJudge\\";
 $target_dir = $slowjudge."sub\\";
 if(	!file_exists($target_dir))
 	mkdir($target_dir);
@@ -104,14 +93,32 @@ if ($uploadOk == 0) {
 		$pid=$_GET['pid'];
 		$uid=$_SESSION['uid'];
 		$conid=$_GET['conid'];
-		$sql="INSERT INTO `slowjudge`.`submission` (`id`, `pid`, `lang`, `flag`, `runtime`, `arrtime`, `hold`,`uid`,`conid`) VALUES (NULL, '$pid', '$lang', NULL, NULL, CURRENT_TIMESTAMP, NULL,'$uid','$conid');";
+		$cDB=$pre.$conid;
+
+		$milliseconds = round(microtime(true) * 1000);//current time in milis
+		$unixTimestamp = round($milliseconds / 1000);//current time in sec
+		$timestamp= date("Y-m-d H:i:s", $unixTimestamp);
+		$arrtime=getArrTime($milliseconds,$cDB,$conn);
+		if($arrtime==-1)
+			die("Contest is not running!");
+		
+		$arrtime/=60000;
+		
+		
+		//insert into global DB
+		$sql="INSERT INTO `$DB`.`submission` (`id`, `pid`, `lang`, `flag`, `runtime`, `arrtime`, `hold`,`uid`,`conid`) VALUES (NULL, '$pid', '$lang', NULL, NULL, '$timestamp', NULL,'$uid','$conid');";
 		//echo '</br>'.$sql;
 		if(mysqli_query($conn,$sql)==FALSE)
-			die("Eror Ocuured while Inseting into Database!");
-		$folder=mysqli_insert_id($conn);
+			die("Eror Occured while Inseting into DB!");
+		$id=mysqli_insert_id($conn);
+		$folder=$id;
 		
-
+		//insert into contest DB
+		$sql="INSERT INTO `$cDB`.`submission` (`id`,`pid`,`uid`, `arrtime`) VALUES('$id','$pid','$uid','$arrtime')";
+		if(mysqli_query($conn,$sql)==FALSE)
+			die("Eror Occured while Inseting into cDB!");
 		
+		//close database connection must be added to other files
 		mysqli_close($conn);
 		
 		
@@ -127,7 +134,7 @@ if ($uploadOk == 0) {
 		include("LaunchBgProcess.php");
 		$cmdl=$slowjudge."compiler.exe ".$lang." ".$folder;
 		LaunchBackgroundProcess($cmdl);
-		header("Location: " . $root. "\\my\\");//////////////////later
+		//header("Location: " . $root. "\\my\\");//////////////////later
 		
 		////////////////////////\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 		

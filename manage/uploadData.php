@@ -1,4 +1,6 @@
 <?php
+///some bug found in this file . need to fix later
+
 	include(__DIR__ ."\\..\\connection.php");
 	include(__DIR__ ."\\..\\header.php");
 	$maxFileSize=5*1024*1024;
