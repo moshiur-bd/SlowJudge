@@ -29,6 +29,17 @@ td.dash,tr.dash,th .dash{
    border: 1px solid black;
 
 }
+.sum,.pen{
+	width:5%;
+}
+.name{
+	width:20%;
+}
+.rank{
+	width:4%;
+}
+
+
 .dash{
 	margin-left :10%;
 

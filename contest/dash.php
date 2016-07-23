@@ -5,6 +5,7 @@
 	<?php
 		include(__DIR__ ."\\..\\header.php");
 		include(__DIR__ ."\\..\\connection.php");
+		include("toolbar.php");
 		
 		
 		
@@ -20,7 +21,7 @@
 		
 		echo "<div id='dash' class='dash'>
 				<table class='dash'>";
-		echo "<tr class='dash' > <td class='dash ltr'> # </td>    <td class='dash'> Name </td> <td class='dash tl'> Time Limit (ms) </td> <td class='dash ml'> Memory Limit (MB) </td>   <td class='dash sub'> Submit</td> <td class='dash cnt'> Solved by</td> </tr>";
+		echo "<tr class='dash' > <th class='dash ltr'> # </th>    <th class='dash'> Name </th> <th class='dash tl'> Time Limit (ms) </th> <th class='dash ml'> Memory Limit (MB) </th>   <th class='dash sub'> Submit</th> <th class='dash cnt'> Solved by</th> </tr>";
 
 		while($row=mysqli_fetch_array($respid))
 		{

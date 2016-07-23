@@ -102,7 +102,7 @@ if ($uploadOk == 0) {
 		if($arrtime==-1)
 			die("Contest is not running!");
 		
-		$arrtime/=60000;
+		$arrtime/=1000;
 		
 		
 		//insert into global DB
@@ -117,6 +117,32 @@ if ($uploadOk == 0) {
 		$sql="INSERT INTO `$cDB`.`submission` (`id`,`pid`,`uid`, `arrtime`) VALUES('$id','$pid','$uid','$arrtime')";
 		if(mysqli_query($conn,$sql)==FALSE)
 			die("Eror Occured while Inseting into cDB!");
+		
+		//auto register into contest Scoreboard
+		$sql="SELECT * FROM `$cDB`.`scoreboard` WHERE `uid`='$uid'";
+		$res=mysqli_query($conn,$sql);
+		if(!mysqli_fetch_array($res)){//not registered to scoreboard
+			//register
+			$uname="";
+			$name="";
+			$sql="SELECT `uname`,`name` FROM `$DB`.`user` WHERE `uid`='$uid'";
+			echo "$sql</br>";
+			if($result=mysqli_query($conn,$sql))
+			{
+				$row=mysqli_fetch_array($result);
+				
+				$uname=$row['uname'];
+				$name=$row['name'];
+			}else{
+				echo "username fetching failed while registering to contest!";
+				$uname=$name=$uid;
+			}
+			
+			$sql="INSERT INTO `$cDB`.`scoreboard` (`uid`,`uname`,`name`) VALUES('$uid','$uname','$name')";
+			if(!mysqli_query($conn,$sql)) die("registering to the contest failed!");
+				
+		}
+		
 		
 		//close database connection must be added to other files
 		mysqli_close($conn);

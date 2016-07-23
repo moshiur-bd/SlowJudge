@@ -49,7 +49,7 @@
 			//add scoreboard coloumn
 			
 			
-			$sqlScr=$sqlScr.$comma."ADD `actime$i` int NOT NULL DEFAULT '-1', ADD `firstac$i` int NOT NULL DEFAULT '0'";
+			$sqlScr=$sqlScr.$comma."ADD `penalty$i` int NOT NULL DEFAULT '0', ADD `score$i` int NOT NULL DEFAULT '0',  ADD `firstac$i` int NOT NULL DEFAULT '2147483647',  ADD `wrong$i` int NOT NULL DEFAULT '2147483647'";
 			$comma=" , ";
 			
 			

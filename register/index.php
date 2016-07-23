@@ -18,6 +18,7 @@ if(isset($_SESSION['uid']))
 	
 	<div id="login"> 
 		<h2>Registration Form</h2>
+		<h3 style='color:red'>*Don't use your social id's password!!</h3>
 		<p id="error" class="error" style="color:red;"><br/></p>
 		<form name="regf" action="register.php" method="post" onsubmit="return validateForm()" >
 		<label>UserName :</label>
