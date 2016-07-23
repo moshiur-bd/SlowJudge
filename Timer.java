@@ -62,6 +62,11 @@ public class Timer {
         return true;
 
     }
+    void clear() throws SQLException{//clears stmt object
+        if(stmt != null) {
+            stmt.close();
+         }
+    }
 
     void disconnect() {
         try {
@@ -140,48 +145,45 @@ public class Timer {
 
     void timeManager() {
         try {
-            //get duration
+            //get duration &delay
             stmt = conn.createStatement();
-            String sql = "SELECT `value` FROM `" + cDB + "`.`settings` WHERE `name`='duration' ";
+            String sql = "SELECT * FROM `" + cDB + "`.`settings`";
             rs = stmt.executeQuery(sql);
             if (rs.next()) {
-                duration = rs.getLong("value");
+                duration = rs.getLong("duration");
+                delay = rs.getLong("delay");
 
             } else {
-                System.out.println("fetching duration failed!");
+                System.out.println("fetching settings failed!");
             }
+            clear();
 
-            //get delay
-            stmt = conn.createStatement();
-            sql = "SELECT `value` FROM `" + cDB + "`.`settings` WHERE `name`='delay' ";
-            rs = stmt.executeQuery(sql);
-            if (rs.next()) {
-                delay = rs.getLong("value");
-
-            } else {
-                System.out.println("fetching duration failed!");
-            }
 
             //continuous time upgrading....
             while (true) {
                 //know if the contest is running or not!
                 stmt = conn.createStatement();
-                sql = "SELECT `value` FROM `" + cDB + "`.`settings` WHERE `name`='status' ";
+                sql = "SELECT `status` FROM `" + cDB + "`.`settings`";
                 rs = stmt.executeQuery(sql);
                 if (rs.next()) {
-                    String status = rs.getString("value");
+                    String status = rs.getString("status");
                     if (status.equals("running")) {
                         remaining = duration - increaseTime();
                         long sleepTime = Math.min(delay, remaining);
                         System.out.println("Sleeping for " + sleepTime);
                         if (remaining <= 0) {
                             System.out.println("Contest is over!");
-                            sql = "UPDATE `" + cDB + "`.`settings` SET `value`='finished' WHERE `name`='status' ;";
-                            stmt = conn.createStatement();
-                            int ret = stmt.executeUpdate(sql);
+                            sql = "UPDATE `" + cDB + "`.`settings` SET `status`='finished';";
+                            //stmt is used so new declaration
+                            Statement stmt2 = conn.createStatement();
+                            int ret = stmt2.executeUpdate(sql);
                             if (ret != 1) {
                                 System.out.println("Someting wrong updating contest status!");
                             }
+                            //clear stmt
+                            if(stmt2 != null) {
+                                stmt2.close();
+                             }
 
                             return;
                         } else {

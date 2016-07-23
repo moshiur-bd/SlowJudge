@@ -1,5 +1,0 @@
-C:\SlowJudge\sub\123\Main.cpp: In function 'int main()':
-C:\SlowJudge\sub\123\Main.cpp:64:12: warning: division by zero [-Wdiv-by-zero]
-     int a=9/0;
-            ^
-END

@@ -1,3 +1,7 @@
+
+# Created by https://www.gitignore.io/api/windows,c++
+
+### Windows ###
 # Windows image file caches
 Thumbs.db
 ehthumbs.db
@@ -17,31 +21,41 @@ $RECYCLE.BIN/
 # Windows shortcuts
 *.lnk
 
-# =========================
-# Operating System Files
-# =========================
 
-# OSX
-# =========================
+### C++ ###
+# Prerequisites
+*.d
 
-.DS_Store
-.AppleDouble
-.LSOverride
+##my added###
+*.txt
+Main.cpp
 
-# Thumbnails
-._*
+# Compiled Object files
+*.slo
+*.lo
+*.o
+*.obj
 
-# Files that might appear in the root of a volume
-.DocumentRevisions-V100
-.fseventsd
-.Spotlight-V100
-.TemporaryItems
-.Trashes
-.VolumeIcon.icns
+# Precompiled Headers
+*.gch
+*.pch
 
-# Directories potentially created on remote AFP share
-.AppleDB
-.AppleDesktop
-Network Trash Folder
-Temporary Items
-.apdisk
+# Compiled Dynamic libraries
+*.so
+*.dylib
+*.dll
+
+# Fortran module files
+*.mod
+*.smod
+
+# Compiled Static libraries
+*.lai
+*.la
+*.a
+*.lib
+
+# Executables
+*.exe
+*.out
+*.app

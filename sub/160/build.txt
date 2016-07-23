@@ -1,6 +1,0 @@
-C:\SlowJudge\sub\160\Main.cpp:1:1: error: expected unqualified-id before numeric constant
- 4 12
- ^
-g++.exe: error: C:\SlowJudge\sub\160\Main.o: No such file or directory
-Could Not Find C:\SlowJudge\sub\160\Main.o
-END

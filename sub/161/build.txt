@@ -1,3 +1,0 @@
-C:/Program Files (x86)/CodeBlocks/MinGW/bin/../lib/gcc/mingw32/4.9.2/../../../libmingw32.a(main.o):main.c:(.text.startup+0xa7): undefined reference to `WinMain@16'
-collect2.exe: error: ld returned 1 exit status
-END
