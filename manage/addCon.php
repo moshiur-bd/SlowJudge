@@ -38,7 +38,13 @@
 			)";//change
 		$qcnt+=mysqli_query($conn,$sql);
 		
-		$sql="CREATE TABLE IF NOT EXISTS `$cDB`.`settings` ( name varchar(30) NOT NULL , value varchar(100) NOT NULL, PRIMARY KEY (name) ) ";
+		$sql="CREATE TABLE IF NOT EXISTS `$cDB`.`settings` (
+			  `delay` int(11) NOT NULL DEFAULT '2000',
+			  `duration` bigint(20) NOT NULL DEFAULT '3600000',
+			  `penalty` int(11) NOT NULL DEFAULT '20',
+			  `problemCount` int(11) NOT NULL DEFAULT '0',
+			  `status` varchar(30) NOT NULL DEFAULT 'upcoming'
+			) ";
 		$qcnt+=mysqli_query($conn,$sql);
 		
 		$sql="CREATE TABLE IF NOT EXISTS `$cDB`.`inset` ( pid int NOT NULL, dsid int NOT NULL, `in` VARCHAR(100)  ) ";
