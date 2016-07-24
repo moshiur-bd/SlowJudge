@@ -296,7 +296,7 @@ public class JudgeCDB {
 
                     //get WA sub< id
                     int wsub = 0;
-                    sql = "SELECT COUNT(`id`) FROM `" + cDB + "`.`submission` WHERE `id`<" + id + " AND `uid`=" + uid;
+                    sql = "SELECT COUNT(`id`) FROM `" + cDB + "`.`submission` WHERE `id`<" + id + " AND `uid`=" + uid+" AND `pid`= "+pid;
                     stmt2 = conn.createStatement();
                     rs2 = stmt2.executeQuery(sql);
                     if (rs2.next()) {
@@ -335,15 +335,16 @@ public class JudgeCDB {
                     System.err.println("arr= " + pen);
 
                     pen += (penalty * wsub);
-
-                    String sql2;
+                    //remove privious penalty and add new one
+                    String sql2,sql3;
                     sql = "UPDATE `" + cDB + "`.`scoreboard` SET `firstac" + cpid + "` = " + id
                             + ", `penalty`=`penalty`-`penalty" + cpid + "` ,"
                             + "`score`=`score`-`score" + cpid + "` WHERE `uid`=" + uid + ";";
                     // 
 
                     sql2 = "UPDATE `" + cDB + "`.`scoreboard` SET `penalty" + cpid + "` = " + pen + ", `score" + cpid + "` = " + pscore[cpid]
-                            + ",`penalty`=`penalty`+`penalty" + cpid + "` , `score`=`score`+`score" + cpid + "` WHERE `uid` = " + uid + ";";
+                            + " ,`penalty`=`penalty`+`penalty" + cpid + "` , `score`=`score`+`score" + cpid + "` WHERE `uid` = " + uid + ";";
+                            
 
                     stmt2 = conn.createStatement();
                     stmt2.executeUpdate(sql);
