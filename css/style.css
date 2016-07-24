@@ -2,6 +2,109 @@
 /*----------------------------------------------
 CSS Settings For HTML Div ExactCenter
 ------------------------------------------------*/
+/*global*/
+/*a {
+text-decoration:none;
+color:#6495ed
+}
+i {
+color:#6495ed
+}
+*/
+/*end of global*/
+
+
+
+/*  header */
+ul.nav{
+	list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #444;
+	margin: 1% 1%;
+	
+}
+li.nav{
+	float:left;
+	font-size:20px;
+	
+}
+
+li.nav a {
+    display: inline-block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration:none;
+}
+li.nav a:hover {
+    background-color: #111;
+}
+li.user{
+	float:right;
+	
+}
+a.uinfo{
+	display: inline-block;
+	text-decoration:underline;
+	text-align:center;
+	padding: 5px 16px;
+	color:white;
+}
+a.uinfo:hover {
+    background-color: #111;
+}
+
+/*End of header */
+
+/*Contest navigation bar*/
+ul.navCon{
+	list-style-type: none;
+    margin: 0;
+    padding-left:5%;
+	padding-top:2%;
+	padding-bottom:2%;
+    overflow: hidden;
+    background-color: white;
+	margin: 1% 1%;
+	
+}
+li.navCon{
+	float:left;
+	font-size:20px;
+	
+}
+
+li.navCon a {
+    display: inline-block;
+    color: black;
+    text-align: center;
+    padding: 7px 10px;
+    text-decoration:none;
+	border-style:rounded;
+	border-left:6px solid black;
+}
+li.navCon a:hover {
+    background-color: #DDDDDD;
+}
+
+/*End of Contest navigation bar*/
+
+
+/*page structure*/
+
+	
+
+/*End page structure*/
+
+
+
+
+
+
+
+
 
 #main {
 width:960px;
@@ -97,18 +200,6 @@ body {
 }
 
 
-
-#uinfo{
-	float:right;
-	
-}
-
-
-
-.uinfo{
-	border-style:outset;
-    margin: auto;
-}
 
 span {
 color:red
@@ -259,11 +350,4 @@ background-color:#DCE6F7
 float:right;
 padding:5px;
 border:dashed 1px gray
-}
-a {
-text-decoration:none;
-color:#6495ed
-}
-i {
-color:#6495ed
 }

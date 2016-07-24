@@ -6,26 +6,23 @@
 	$root="\\slowjudge";
 	echo "<link href='$root\\css\\style.css' rel='stylesheet' type='text/css'>";
 	
-	echo "<div id='uinfo' >"; 
-	echo "<table><tr>";
+	echo "<ul class='nav'>";
+		echo "<li class='nav'><a href='$root'>Home</a></li>";
+		echo "<li class='nav'><a href='$root\\contest'>Contest</a></li>";
+	
 		session_start();
 		if(isset($_SESSION['uid']))
 		{
 			$uname=$_SESSION['uname'];
-			echo "<td class ='uname'><a href='$root\\profile'> $uname </a></td>";
-			echo "<td class ='uinfo'><a href='$root\\logout'> Logout </a></td>";
+			echo "<li class='user' ><a class ='uinfo' href='$root\\profile'> $uname </a> | <a class='uinfo' href='$root\\logout'> Logout </a></li>";
 		}else{
-			echo "<td class ='uinfo'><a href='$root\\login'> Login </a></td>";
-			echo "<td class ='uinfo'><a href='$root\\register'> Register </a></td>";
+			echo "<li class ='user'><a class='uinfo' href='$root\\login'> Login </a> | <a class= 'uinfo' href='$root\\register'> Register </a></li>";
 			
 		}
-	echo "</tr></table>";	
-	echo "</div>";	
+	echo "</ul>";	
+
 	
-	echo "<div id='menu'>";
-	echo "<li><a href='$root'>Home</a></li>";
-	echo "<li><a href='$root\\contest'>Contest</a></li>";
-	echo "</div ></br></br></br>";
+	echo "";
 	?>
 	
 	
