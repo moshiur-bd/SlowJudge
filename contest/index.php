@@ -1,3 +1,4 @@
+<div id='body'>
 <?php
 include(__DIR__ ."\\..\\header.php");
 include(__DIR__ ."\\..\\connection.php");
@@ -19,3 +20,4 @@ echo "</div>";
 
 
 ?>
+</div>

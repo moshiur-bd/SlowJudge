@@ -1,13 +1,15 @@
 <html>
 <head></head>
 <body>
+	<div id='body'>
 	
 	<?php
 		include(__DIR__ ."\\..\\header.php");
 		include(__DIR__ ."\\..\\connection.php");
+		
+		include("sidebar.php");
+		echo "<div id='content' >\n";
 		include("toolbar.php");
-		
-		
 		
 		$conid=$_GET['conid'];
 		$cDB=$pre.$conid;
@@ -38,8 +40,11 @@
 			$ltr++;
 		}
 		echo "</table></div>";
+		
+		echo "</div>";
 	
 	?>
+	</div>
 	
 </body>
 </html>

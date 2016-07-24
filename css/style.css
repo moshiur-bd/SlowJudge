@@ -3,13 +3,39 @@
 CSS Settings For HTML Div ExactCenter
 ------------------------------------------------*/
 /*global*/
-/*a {
-text-decoration:none;
-color:#6495ed
+#body{
+	max-width:1200px;
+	max-height:1080px;
+	width:1200px;
+	margin:auto;
+	display:block;
+	padding:10px;
 }
-i {
-color:#6495ed
+
+/*style form cf*/
+/*
+div {
+    display: block;
 }
+body {
+    font-size: 1.4rem;
+}
+body, select {
+    font-family: verdana,arial,sans-serif;
+}
+body {
+    background: #fff;
+    margin: 3px 8px;
+}
+body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre, form, fieldset, input, p, blockquote, th, td {
+    margin: 0;
+    padding: 0;
+}
+body {
+    display: block;
+    margin: 8px;
+}
+
 */
 /*end of global*/
 
@@ -22,7 +48,6 @@ ul.nav{
     padding: 0;
     overflow: hidden;
     background-color: #444;
-	margin: 1% 1%;
 	
 }
 li.nav{
@@ -62,17 +87,16 @@ a.uinfo:hover {
 ul.navCon{
 	list-style-type: none;
     margin: 0;
-    padding-left:5%;
-	padding-top:2%;
-	padding-bottom:2%;
+    padding:0;
     overflow: hidden;
     background-color: white;
-	margin: 1% 1%;
+	margin-top:2em;
+	margin-bottom:2em;
 	
 }
 li.navCon{
 	float:left;
-	font-size:20px;
+	font-size:1.3em;
 	
 }
 
@@ -82,7 +106,6 @@ li.navCon a {
     text-align: center;
     padding: 7px 10px;
     text-decoration:none;
-	border-style:rounded;
 	border-left:6px solid black;
 }
 li.navCon a:hover {
@@ -93,18 +116,32 @@ li.navCon a:hover {
 
 
 /*page structure*/
-
+#sidebar{
+	float: right;
+    width: 20em;
+    display: inline;
+    padding-left: 4em;
+    margin: 3em 1em 1em -22em;
 	
+}
+#content{
+	margin-right:22em;
+}
 
 /*End page structure*/
 
+/*contest*/
+#pdf-field{
+	width:100%;
+	height:80%;
+}
+/*end of contest*/
 
 
 
 
 
-
-
+/*unknown
 
 #main {
 width:960px;
@@ -114,15 +151,11 @@ font-family:raleway
 #header{
 	display:inline;
 }
-
+*/
 
 /*my code*/
 
-#pdf-field{
-	width:80%;
-	height:80%;
-	float:left;
-}
+
 
 #submit-sub{
 	float:right;
@@ -246,7 +279,6 @@ margin-top:5%;
 
 #dash {
 width:75%;
-margin:10% 10%
 border-radius:10px;
 font-family:raleway;
 border:2px solid #ccc;
