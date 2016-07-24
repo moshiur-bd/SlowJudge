@@ -1,6 +1,7 @@
 <html>
 <head></head>
 <body>
+<div id='body'>
 
 
 <?php
@@ -32,7 +33,7 @@ function addCon(){
 }
 
 </script>
-	
+</div>
 
 </body>
 </html>

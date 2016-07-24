@@ -50,12 +50,12 @@
 	$now =round($duration-$now);
 	if($now<0)$now=0;
 	echo "
-		<table class='contestInfo' >
-		<tr><td> <span class='conName' id='conName'> $conName </span> </td><tr>
-		<tr><td> <span class='status' id='status'>$status</span> </td><tr>
+		<table class='scrcontestInfo' >
+		<tr><td> <span class='scrconName' id='conName'> $conName </span> </td><tr>
+		<tr><td> <span class='scrstatus' id='status'>$status</span> </td><tr>
 		
-		<tr><td> <span class='timeremain' id='timeremain' >$now</span> </td><tr>
-		<tr><td> <span class='duration' id='duration' >$duration</span> </td><tr>
+		<tr><td> <span class='scrtimeremain' id='timeremain' >$now</span> </td><tr>
+		<tr><td> <span class='scrduration' id='duration' >$duration</span> </td><tr>
 		</table>
 	   ";
 	   

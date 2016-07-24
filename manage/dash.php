@@ -1,6 +1,7 @@
 <html>
 <head></head>
 <body>
+<div id='body'>
 	
 	<?php
 		include(__DIR__ ."\\..\\header.php");
@@ -81,6 +82,6 @@
 		}
 </script>
 
-	
+	</div>
 </body>
 </html>

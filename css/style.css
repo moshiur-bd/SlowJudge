@@ -135,7 +135,85 @@ li.navCon a:hover {
 	width:100%;
 	height:80%;
 }
+/*standing*/
+
+table.scrcontestInfo{
+	margin: auto;
+    padding: 10px;
+}
+table.scrcontestInfo tr{
+	text-align:center;
+}
+.scrconName{
+	font-size: 1.7em;
+}
+.scrtimeremain{
+	font-size:1em;
+}
+.scrstatus{
+	font-size:1.2em;
+}
+.scrduration{
+	display:none;
+}
+
+/*standing table*/
+
+td.standing,tr.standing,th.standing{
+   border: 1px solid black;
+
+}
+.field{
+	width:5em;
+	text-align:center;
+}
+.sum,.pen{
+	text-align:center;
+	width:4em;
+}
+.rank{
+	text-align:center;
+	width:2em;
+}
+
+.field a{
+	display: inline-block;
+	text-decoration:underline;
+	text-align:center;
+	color:white;
+}
+
+.accepted{
+	background:#93c54b;
+}
+
+table.standing{
+	width:90%;
+	margin:10px 10px;
+}
+
+
+
+/*end standing*/
+
+
 /*end of contest*/
+
+/*sidebar designs*/
+table.contestInfo{
+	float:right;
+}
+table.contestInfo tr{
+	background-color:#CCC;
+	text-align:center;
+}
+.conName,.timeremain{
+	font-size: 1.7em;
+	
+}
+
+/*End of sidebar designs*/
+
 
 
 
@@ -161,18 +239,9 @@ font-family:raleway
 	float:right;
 }
 
-td.dash,tr.dash,th .dash{
+td.dash,tr.dash,th.dash{
    border: 1px solid black;
 
-}
-.sum,.pen{
-	width:5%;
-}
-.name{
-	width:20%;
-}
-.rank{
-	width:4%;
 }
 
 
@@ -184,18 +253,7 @@ table.dash{
 	width:100%;
 	margin:1% 1%;
 }
-.tl,.ml,.sub{
-	width:5%;
-}
 
-.ltr{
-	width:3%;
-	
-}
-.cnt{
-	width:4%;
-	
-}
 
 .srctxt,.pdftxt{
 	margin-left:5%;
@@ -233,10 +291,6 @@ body {
 }
 
 
-
-span {
-color:red
-}
 h2 {
 background-color:#FEFFED;
 text-align:center;

@@ -1,0 +1,7 @@
+time table add
+initialize  setting
+intialize time table
+add contest name on settings
+manage failures!!
+scoreboard alter problem!
+add problem !!

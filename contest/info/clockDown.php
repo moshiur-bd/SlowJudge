@@ -17,12 +17,15 @@ function myTimer() {
 	var t=Math.round(written-((Date.now()/1000)-start));
 	var sts=document.getElementById("status").innerHTML;
 	
+	if(String(sts).localeCompare("running")!=0){
+		clearInterval(retId);
+		return;
+	}
+	
     document.getElementById("timeremain").innerHTML=sec2str(t);
 
 	
-	if(String(sts).localeCompare("running")!=0){
-		clearInterval(retId);
-	}
+	
 	if(t==0){
 		clearInterval(retId);
 		alert("contest finished!");
