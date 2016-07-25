@@ -11,7 +11,7 @@ public class JudgeCDB {
     String dir;
     String cDB = "mos28";
     String DB = "mosuser";
-    int conid = 28,maxId=2147483647;
+    int conid = 28, maxId = 2147483647;
 
     Connection conn = null;
     Statement stmt = null;
@@ -23,6 +23,15 @@ public class JudgeCDB {
     int pscore[];
     int penalty;
     int problemCount;
+
+    //verdicts
+    int TLE = 1;
+    int YES = 0;
+    int WA = 2;
+    int PE = 3;
+    int RE = -1;
+    int CE = -2;
+    int SubmissionError = 100;
 
     public JudgeCDB(String s, String s1, String s2) {
         dir = s;
@@ -124,7 +133,7 @@ public class JudgeCDB {
     int judge(int id, int pid, int lang, int sid, boolean manualChecker, long limit) {
 
         String pathSubmission = "sub\\" + id + "\\Main.exe";
-        String pathDirectory = "C:\\windows\\";  ///misdirect user program!!!
+        String pathDirectory = "C:\\sandbox\\";  ///misdirect user program!!!
         String pathInput = "in\\" + pid + "\\" + sid + ".txt";
         String pathOutput = "sub\\" + id + "\\" + sid + ".txt";
         String pathAnswer = "out\\" + pid + "\\" + sid + ".txt";
@@ -137,12 +146,6 @@ public class JudgeCDB {
          System.out.println(pathOutput);
          System.out.println(pathError);*/
         int verdict = 0;
-        int TLE = 1;
-        int YES = 0;
-        int WA = 2;
-        int PE = 3;
-        int RE = -1;
-        int SubmissionError = 100;
 
         ProcessBuilder pb;
 
@@ -192,8 +195,35 @@ public class JudgeCDB {
 
     void judgeManager(int id, int pid, int lang) {
 
+        int verdict = 0;
+        ///compile the code. then run
+
+        String cmd[]={"compiler.exe " , ""+lang , "" + id};
+        ProcessBuilder pb = new ProcessBuilder(cmd);
+        try {
+            pb.directory(new File(dir));
+            Process compiler = pb.start();
+            compiler.waitFor(10, TimeUnit.SECONDS);
+            /*if (compiler.exitValue() != 0) {
+                System.err.println("Something wrong in execution of compiler or it taking more than 10 sec to compile");
+            }
+            if (new File(dir + "\\sub\\" + id + "\\Main.exe").exists() || new File(dir + "\\sub\\" + id + "\\Main.class").exists()) {
+                System.err.println("compilation success!");
+            } else {
+                verdict =CE;
+                System.err.println("Found CE");
+        
+            }*/
+            verdict=compiler.exitValue();
+        } catch (Exception e) {
+            System.err.println("Compiler execution failed!!");
+            verdict=SubmissionError;
+            e.printStackTrace();
+        }
+
+        //compiling finished!
         long runtime = 0;
-        int verdict = 100;
+
         long tl = 5000;
         int dsCnt = 0;
 
@@ -219,7 +249,10 @@ public class JudgeCDB {
         System.err.println("\n\n*Starting judgement of submission: " + id + " of problem: " + pid + " with ds= " + dsCnt);
 
         for (int i = 0; i < dsCnt; i++) {
-            verdict = judge(id, pid, lang, i, false, tl);
+            if (verdict != 0) {
+                break;
+            }
+            verdict = judge(id, pid, lang, i, false, tl);//calling the judge here
             if (verdict != 0) {
                 break;
             }
@@ -392,6 +425,7 @@ public class JudgeCDB {
             try {
                 int wsub = 0;
                 sql = "SELECT COUNT(`id`) FROM `" + DB + "`.submission WHERE `countable`=1 AND `pid`= " + pid + " AND `uid`=" + uid + " AND `conid`= " + conid;
+                System.err.println("sql count: "+sql);
                 stmt2 = conn.createStatement();
                 rs2 = stmt2.executeQuery(sql);
                 if (rs2.next()) {
@@ -400,7 +434,9 @@ public class JudgeCDB {
                     System.err.println("wsub counting failed - it's a wrong submission");
                 }
 
-                sql = "UPDATE `" + cDB + "`.`scoreboard` SET `wrong" + cpid + "` = " + wsub + " WHERE `uid`= " + uid+" AND `firstac"+cpid+"` > " +id;
+                sql = "UPDATE `" + cDB + "`.`scoreboard` SET `score"+cpid+"`= 0 , `penalty"+cpid+"` = 0  ,"
+                        + " `firstac"+cpid+"`= "+maxId+" , `wrong" + cpid + "` = " + wsub + " WHERE `uid`= " + uid + " AND `firstac" + cpid + "` >= " + id;
+                System.err.println(sql);
                 if (stmt2.executeUpdate(sql) == 0) {
                     System.err.println("couldn't update wrong sub- this is a wrong sub");
                 }
@@ -456,7 +492,7 @@ public class JudgeCDB {
                 int id = rs.getInt("id");
                 //System.out.println(id+" "+rs.getString("hold"));
                 if (hold(id, rs.getString("hold"))) {//look if it's still free
-                    judgeManager(id, rs.getInt("pid"), rs.getInt("lang"));//dataset assumed to be 1
+                    judgeManager(id, rs.getInt("pid"), rs.getInt("lang"));
                 }
                 cnt_r++;
             }
