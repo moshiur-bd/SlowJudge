@@ -11,6 +11,7 @@ public class JudgeCDB {
     String dir;
     String cDB = "mos28";
     String DB = "mosuser";
+    int conid = 28,maxId=2147483647;
 
     Connection conn = null;
     Statement stmt = null;
@@ -23,9 +24,10 @@ public class JudgeCDB {
     int penalty;
     int problemCount;
 
-    public JudgeCDB(String s, String s2) {
+    public JudgeCDB(String s, String s1, String s2) {
         dir = s;
-        cDB = s2;
+        cDB = s1 + s2;
+        conid = Integer.parseInt(s2);
         System.err.println("cDB= " + cDB);
 
     }
@@ -240,63 +242,74 @@ public class JudgeCDB {
         }
 
         System.err.println("# Judgement Complete with verdict: " + verdict + " with runtime= " + runtime + "\n\n");
+        Statement stmt2;
+        ResultSet rs2;
+        int cpid = 0, uid = 0;
+        int facid = 0;
+        ///get cpid,uid
+        try {
+            //getcpid
+            sql = "SELECT `cpid` FROM `" + cDB + "`.`problem` WHERE `pid`= " + pid;
+            stmt2 = conn.createStatement();
+            rs2 = stmt2.executeQuery(sql);
+            if (rs2.next()) {
+                cpid = rs2.getInt("cpid");
+                System.err.println("cpid= " + cpid);
+            } else {
+                System.err.println("couldn't get cpid");
+            }
+            if (stmt2 != null) {
+                stmt2.close();
+            }
+            //get uid
+            sql = "SELECT `uid` FROM `" + cDB + "`.`submission` WHERE `id`= " + id;
+            stmt2 = conn.createStatement();
+            rs2 = stmt2.executeQuery(sql);
+            if (rs2.next()) {
+                uid = rs2.getInt("uid");
+                System.err.println("uid= " + uid);
+            } else {
+                System.err.println("couldn't get uid");
+            }
+            if (stmt2 != null) {
+                stmt2.close();
+            }
+
+            //get AC sub< id
+            sql = "SELECT `firstac" + cpid + "` FROM `" + cDB + "`.`scoreboard` WHERE `uid`=" + uid;
+            stmt2 = conn.createStatement();
+            rs2 = stmt2.executeQuery(sql);
+            if (rs2.next()) {
+                facid = rs2.getInt("firstac" + cpid);
+            } else {
+                System.err.println("getting firstAcid failed!");
+            }
+
+            System.err.println("facid=" + facid);
+
+            if (stmt2 != null) {
+                stmt2.close();
+            }
+
+        } catch (SQLException se) {
+//Handle errors for JDBC
+            se.printStackTrace();
+        } catch (Exception e) {
+//Handle errors for Class.forName
+            e.printStackTrace();
+        }
 
         if (verdict == 0) {
             System.err.println("------updating Scoreboard.........");
-            int cpid = 0, uid = 0;
 
             try {
-
-                //getcpid
-                sql = "SELECT `cpid` FROM `" + cDB + "`.`problem` WHERE `pid`= " + pid;
-                Statement stmt2 = conn.createStatement();
-                ResultSet rs2 = stmt2.executeQuery(sql);
-                if (rs2.next()) {
-                    cpid = rs2.getInt("cpid");
-                    System.err.println("cpid= " + cpid);
-                } else {
-                    System.err.println("couldn't get cpid");
-                }
-                if (stmt2 != null) {
-                    stmt2.close();
-                }
-                //get uid
-                sql = "SELECT `uid` FROM `" + cDB + "`.`submission` WHERE `id`= " + id;
-                stmt2 = conn.createStatement();
-                rs2 = stmt2.executeQuery(sql);
-                if (rs2.next()) {
-                    uid = rs2.getInt("uid");
-                    System.err.println("uid= " + uid);
-                } else {
-                    System.err.println("couldn't get uid");
-                }
-                if (stmt2 != null) {
-                    stmt2.close();
-                }
-
-                //get WA sub< id
-                int facid = 0;
-                sql = "SELECT `firstac" + cpid + "` FROM `" + cDB + "`.`scoreboard` WHERE `uid`=" + uid;
-                stmt2 = conn.createStatement();
-                rs2 = stmt2.executeQuery(sql);
-                if (rs2.next()) {
-                    facid = rs2.getInt("firstac" + cpid);
-                } else {
-                    System.err.println("getting firstAcid failed!");
-                }
-
-                System.err.println("facid=" + facid);
-
-                if (stmt2 != null) {
-                    stmt2.close();
-                }
 
                 if (facid > id) ///if and only if new ac id is less than prev        
                 {
 
                     //get WA sub< id
                     int wsub = 0;
-                    sql = "SELECT COUNT(`id`) FROM `" + cDB + "`.`submission` WHERE `id`<" + id + " AND `uid`=" + uid+" AND `pid`= "+pid;
+                    sql = "SELECT COUNT(`id`) FROM `" + DB + "`.`submission` WHERE `id` <= " + id + " AND `uid`=" + uid + " AND `pid`= " + pid + " AND `conid` = " + conid + " AND `countable`= 1";
                     stmt2 = conn.createStatement();
                     rs2 = stmt2.executeQuery(sql);
                     if (rs2.next()) {
@@ -320,12 +333,12 @@ public class JudgeCDB {
                     }
 
                     //get arrivaltime&calculate penalty
-                    int pen = 0,arr=0;
+                    int pen = 0, arr = 0;
                     sql = "SELECT `arrtime` FROM `" + cDB + "`.`submission` WHERE `id`=" + id;
                     stmt2 = conn.createStatement();
                     rs2 = stmt2.executeQuery(sql);
                     if (rs2.next()) {
-                        arr=pen = rs2.getInt("arrtime") / 60;//in minutes
+                        arr = pen = rs2.getInt("arrtime") / 60;//in minutes
                     } else {
                         System.err.println("Counting arrival time failed!");
                     }
@@ -336,7 +349,7 @@ public class JudgeCDB {
 
                     pen += (penalty * wsub);
                     //remove privious penalty and add new one
-                    String sql2,sql3;
+                    String sql2, sql3;
                     sql = "UPDATE `" + cDB + "`.`scoreboard` SET `firstac" + cpid + "` = " + id
                             + ", `penalty`=`penalty`-`penalty" + cpid + "` ,"
                             + "`score`=`score`-`score" + cpid + "` WHERE `uid`=" + uid + ";";
@@ -344,21 +357,20 @@ public class JudgeCDB {
 
                     sql2 = "UPDATE `" + cDB + "`.`scoreboard` SET `penalty" + cpid + "` = " + pen + ", `score" + cpid + "` = " + pscore[cpid]
                             + " ,`penalty`=`penalty`+`penalty" + cpid + "` , `score`=`score`+`score" + cpid + "` WHERE `uid` = " + uid + ";";
-                            
 
                     stmt2 = conn.createStatement();
-                    stmt2.executeUpdate(sql);
-                    if (stmt2 != null) {
-                        stmt2.close();
-                    } else {
+                    if (stmt2.executeUpdate(sql) == 0) {
                         System.err.println("score clac pt-1 failed! ");
                     }
-                    stmt2 = conn.createStatement();
-                    stmt2.executeUpdate(sql2);
                     if (stmt2 != null) {
                         stmt2.close();
-                    } else {
+                    }
+                    stmt2 = conn.createStatement();
+                    if (stmt2.executeUpdate(sql2) == 0) {
                         System.err.println("score clac pt-2 failed! ");
+                    }
+                    if (stmt2 != null) {
+                        stmt2.close();
                     }
 
                     System.err.println("Updated scoreboard");
@@ -367,6 +379,35 @@ public class JudgeCDB {
                     System.err.println("Result is already better. quitting!");
                 }
 
+            } catch (SQLException se) {
+//Handle errors for JDBC
+                se.printStackTrace();
+            } catch (Exception e) {
+//Handle errors for Class.forName
+                e.printStackTrace();
+            }
+
+        } else {//wrong sub //countable modify later
+
+            try {
+                int wsub = 0;
+                sql = "SELECT COUNT(`id`) FROM `" + DB + "`.submission WHERE `countable`=1 AND `pid`= " + pid + " AND `uid`=" + uid + " AND `conid`= " + conid;
+                stmt2 = conn.createStatement();
+                rs2 = stmt2.executeQuery(sql);
+                if (rs2.next()) {
+                    wsub = rs2.getInt("COUNT(`id`)");
+                } else {
+                    System.err.println("wsub counting failed - it's a wrong submission");
+                }
+
+                sql = "UPDATE `" + cDB + "`.`scoreboard` SET `wrong" + cpid + "` = " + wsub + " WHERE `uid`= " + uid+" AND `firstac"+cpid+"` > " +id;
+                if (stmt2.executeUpdate(sql) == 0) {
+                    System.err.println("couldn't update wrong sub- this is a wrong sub");
+                }
+
+                if (stmt2 != null) {
+                    stmt2.close();
+                }
             } catch (SQLException se) {
 //Handle errors for JDBC
                 se.printStackTrace();
@@ -476,7 +517,7 @@ public class JudgeCDB {
 
     public static void main(String[] argv) throws SQLException {
 
-        JudgeCDB obj = new JudgeCDB(System.getProperty("user.dir"), argv[0]);
+        JudgeCDB obj = new JudgeCDB(System.getProperty("user.dir"), argv[0], argv[1]);
         obj.init();
         obj.connect();
         obj.getScores();
