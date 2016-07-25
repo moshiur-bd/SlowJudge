@@ -5,6 +5,9 @@
 		if($x== 1) return 'Time limit Exceeded';
 		if($x== 2) return 'Wrong Answer';
 		if($x== 100) return 'Submission Error';
+		if($x== 3) return 'Presentation Error';
+		if($x== -2) return 'Compile Error';
+		if($x== -1) return 'Runtime Error';
 		return $x;
 	}
 	function getLanguage($idx,$DB,$conn){

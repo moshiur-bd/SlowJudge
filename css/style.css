@@ -6,10 +6,28 @@ CSS Settings For HTML Div ExactCenter
 #body{
 	max-width:1200px;
 	max-height:1080px;
-	min-width:600px;
+	min-width:800px;
+
 	margin:auto;
 	display:block;
 	padding:10px;
+	padding-bottom:100px;
+}
+#footer{
+	width:100%;
+	padding: 3em 3em;
+	text-align:center;
+	color:#333378;
+	font-size:1.5em;
+	height:2em;
+}
+span.slowjudge{
+	font-size:2.5em;
+	font-family:fantasy;
+}
+span.slowjudge-footer{
+	font-size:3em;
+	font-family:monospace;
 }
 
 /*style form cf*/
@@ -96,7 +114,7 @@ ul.navCon{
 }
 li.navCon{
 	float:left;
-	font-size:1.3em;
+	font-size:1em;
 	
 }
 

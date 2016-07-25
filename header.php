@@ -1,6 +1,7 @@
 
 
 <div id="header">
+<span class='slowjudge'>SlowJudge</span>
 
 <?php
 	$root="\\slowjudge";

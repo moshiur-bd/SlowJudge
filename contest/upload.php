@@ -157,10 +157,12 @@ if ($uploadOk == 0) {
     if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
         echo "The file ". basename( $_FILES["fileToUpload"]["name"]). " has been uploaded.";
 		/////////////////////Start Compiling\\\\\\\\\\\\\\\\\\\\
-		include("LaunchBgProcess.php");
+		/*include("LaunchBgProcess.php");
 		$cmdl=$slowjudge."compiler.exe ".$lang." ".$folder;
-		LaunchBackgroundProcess($cmdl);
-		header("Location: my.php?conid=$conid");//////////////////later
+		LaunchBackgroundProcess($cmdl);*/
+		
+		//////////////////later
+		header("Location: my.php?conid=$conid");
 		
 		////////////////////////\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 		
