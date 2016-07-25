@@ -8,14 +8,18 @@
 		include(__DIR__ ."\\..\\header.php");
 		include(__DIR__ ."\\..\\connection.php");
 
+		$conid=$_GET['conid'];
+		$pid=$_GET['pid'];
+		$uid=$_GET['uid'];
+		
 		include("sidebar.php");
 		echo "<div id='content' >\n";
 		include("toolbar.php");
 
-		$conid=$_GET['conid'];
+		
 		$cDB=$pre.$conid;
 		
-		$sql="SELECT * FROM `$cDB`.`submission` WHERE `uid`=$uid ORDER BY `arrtime` DESC";
+		$sql="SELECT * FROM `$cDB`.`submission` WHERE `uid`=$uid AND `pid`='$pid'  ORDER BY `arrtime` DESC";
 		$ressub=mysqli_query($conn,$sql);
 
 

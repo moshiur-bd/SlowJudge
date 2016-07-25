@@ -10,6 +10,7 @@
 	$target_in = $slowjudge."in\\";
 	$target_out = $slowjudge."out\\";
 	$target_src = $slowjudge."src\\";
+	$target_sub = $slowjudge."sub\\";
 	
 	$conn=mysqli_connect("localhost","root","");
 	if(!$conn)die("connection Failed".mysqli_connect_error());

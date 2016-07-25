@@ -5,3 +5,5 @@ add contest name on settings
 manage failures!!
 scoreboard alter problem!
 add problem !!
+
+DB.submission new column `status`='private' added

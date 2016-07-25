@@ -213,6 +213,42 @@ table.standing{
 
 /*end standing*/
 
+/*my submission*/
+table.submission{
+}
+
+td.submission,tr.submission,th.submission{
+   border: 1px solid black;
+   text-align:center;
+}
+
+
+table.submission td.id{
+	width:3em;
+	text-align:center;
+}
+a.verdict{
+	text-decoration:none;
+}
+
+span.acceptedText{
+	color:green;
+}
+span.queueText{
+	color:gray;
+}
+span.rejectedText{
+	color:red;
+
+}
+
+/*viewsource*/
+table.viewsource{
+	width:100%;
+}
+
+
+
 
 /*end of contest*/
 

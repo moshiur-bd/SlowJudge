@@ -160,7 +160,7 @@ if ($uploadOk == 0) {
 		include("LaunchBgProcess.php");
 		$cmdl=$slowjudge."compiler.exe ".$lang." ".$folder;
 		LaunchBackgroundProcess($cmdl);
-		//header("Location: " . $root. "\\my\\");//////////////////later
+		header("Location: my.php?conid=$conid");//////////////////later
 		
 		////////////////////////\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 		
