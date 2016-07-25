@@ -79,13 +79,15 @@
 			else echo "<tr class='standing odd' > <td class='standing rank'> $rank </td>    <td class='standing name'> $name </td>    <td class='standing sum'> $score </td> <td class='standing pen'> $penalty</td> ";
 			for($i=0;$i<$problemCount;$i++){
 				$time=$row["penalty$i"];
-				$wsub=$row["wrong$i"]+1;
+				$wsub=$row["wrong$i"];
 				$time=$time-($wsub*$penaltyset); ///read penalty here from settings
 				$fac=$row["firstac$i"];
-				if($fac==2147483647)
-					echo"<td class='standing field nosub' ></td>";
-
-				else echo "<td class='standing field accepted' > <a class='score field' href='submissions.php?uid=$uid&pid=$pid[$i]'>$wsub($time)</a> </td>";
+				if($fac==2147483647){
+					if($wsub>0)
+						echo"<td class='standing field rejected' ><span class='field rejected' > </span> <a class='score field' href='submissions.php?uid=$uid&pid=$pid[$i]'>-$wsub</a> </td>";
+					else echo"<td class='standing field nosub' ></td>";
+				}
+				else echo "<td class='standing field accepted' ><span class='field accepted' > </span> <a class='score field' href='submissions.php?uid=$uid&pid=$pid[$i]'>$wsub($time)</a> </td>";
 
 
 			}

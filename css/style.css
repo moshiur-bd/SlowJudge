@@ -6,7 +6,7 @@ CSS Settings For HTML Div ExactCenter
 #body{
 	max-width:1200px;
 	max-height:1080px;
-	width:1200px;
+	min-width:600px;
 	margin:auto;
 	display:block;
 	padding:10px;
@@ -163,9 +163,33 @@ td.standing,tr.standing,th.standing{
    border: 1px solid black;
 
 }
-.field{
+td.field{
 	width:5em;
+	height:2.4em;
+}
+
+span.field{
+	display: inline-block;
+	height:50%;
+	width:100%;
+
+}
+span.accepted{
+	background:#93c54b;
+}
+span.rejected{
+	background:#f47c3c;
+
+}
+a.field{
+	display: inline-block;
+	text-decoration:none;
 	text-align:center;
+	background:#555;
+	color:white;
+	height:50%;
+	width:100%;
+
 }
 .sum,.pen{
 	text-align:center;
@@ -176,16 +200,9 @@ td.standing,tr.standing,th.standing{
 	width:2em;
 }
 
-.field a{
-	display: inline-block;
-	text-decoration:underline;
-	text-align:center;
-	color:white;
-}
 
-.accepted{
-	background:#93c54b;
-}
+
+
 
 table.standing{
 	width:90%;
