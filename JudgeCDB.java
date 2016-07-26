@@ -198,10 +198,10 @@ public class JudgeCDB {
         int verdict = 0;
         ///compile the code. then run
 
-        String cmd[]={"compiler.exe " , ""+lang , "" + id};
+        String cmd[]={"compiler.exe " , ""+lang ,};
         ProcessBuilder pb = new ProcessBuilder(cmd);
         try {
-            pb.directory(new File(dir));
+            pb.directory(new File(dir+"\\sub\\"+id+"\\"));
             Process compiler = pb.start();
             compiler.waitFor(10, TimeUnit.SECONDS);
             /*if (compiler.exitValue() != 0) {

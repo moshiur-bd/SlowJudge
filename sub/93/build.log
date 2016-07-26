@@ -1,0 +1,2 @@
+Main.o:Main.c:(.text+0x16): undefined reference to `ssystem'
+collect2.exe: error: ld returned 1 exit status

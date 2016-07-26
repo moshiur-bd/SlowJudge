@@ -37,17 +37,28 @@ bool fileExists(const char *fileName)
 ///////////windows\\\\\\\\\\\\\\\
 
 void cpp11(){
-    system("gcc -c forbid.c");
-    //system((((((nl+"g++.exe -std=c++11  -c "+dir+"sub\\")+id)+"\\Main.cpp -o "+dir+"sub\\")+id)+"\\Main.o").c_str());
-    freopen((dir+"sub\\"+id+"\\build.txt").c_str(),"w",stderr);
-    system((((((("g++.exe -std=c++11  -c "+nl+"sub\\")+id)+"\\Main.cpp -o ")+"sub\\")+id)+"\\Main.o").c_str());
-    system((((((nl+"g++.exe  -o  sub\\")+id)+"\\Main.exe sub\\")+id)+"\\Main.o "+dir+"forbid.o ").c_str());
-    system(("del /f /q "+dir+"sub\\"+id+"\\Main.o").c_str());
+    system("gcc -c ..\\forbid.c -o ..\\forbid.o");
+    freopen("build.log","w",stderr);
+    system("g++.exe -std=c++11  -c Main.cpp -o Main.o");
+    freopen("habijabi.txt","w",stderr);
+    system("g++.exe -o Main.exe Main.o ..\\forbid.o");
+
+
 }
 void c(){
+    system("gcc -c ..\\forbid.c -o ..\\forbid.o");
+    freopen("build.log","w",stderr);
+    system("gcc.exe -c Main.c -o Main.o");
+    //freopen("habijabi.txt","w",stderr);
+    system("g++.exe -o Main.exe Main.o ..\\forbid.o");
 
 }
 void cpp(){
+    system("gcc -c ..\\forbid.c -o ..\\forbid.o");
+    freopen("build.log","w",stderr);
+    system("g++.exe  -c Main.cpp -o Main.o");
+    freopen("habijabi.txt","w",stderr);
+    system("g++.exe -o Main.exe Main.o ..\\forbid.o");
 
 }
 void java(){
@@ -56,17 +67,16 @@ void java(){
 int main(int argc ,char *argv[] ){
     dir=getexepath();
 
-    if(argc==3){
+    if(argc==2){
         lang=argv[1];
-        id=argv[2];
-        if(fileExists(("sub\\"+id+"\\Main.cpp").c_str())||fileExists(("sub\\"+id+"\\Main.java").c_str())||fileExists(("sub\\"+id+"\\Main.c").c_str()))
+        if(fileExists("Main.cpp")||fileExists("Main.c")||fileExists("Main.java"))
             cout<<"source found";
         else return 100;
 
-        if(fileExists(("sub\\"+id+"\\Main.exe").c_str()))
+        if(fileExists("Main.exe"))
             return 0;
 
-        freopen((dir+"sub\\"+id+"\\build.txt").c_str(),"w",stderr);
+        freopen("build.log","w",stderr);
         if(lang=="1")
             c();
         else if(lang=="2")
@@ -78,8 +88,7 @@ int main(int argc ,char *argv[] ){
 
     }
     else cerr<<"Too Few arguments\n";
-    cerr<<"END\n";
-    if(fileExists(("sub\\"+id+"\\Main.exe").c_str())||fileExists(("sub\\"+id+"\\Main.class").c_str()))
+    if(fileExists("Main.exe")||fileExists("Main.class"))
             return 0;
 
     return -2;
