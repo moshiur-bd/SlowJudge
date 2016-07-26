@@ -27,8 +27,9 @@
 				<table class='submission my'>";
 		echo "<tr class='submission my' >
 				<th class='submission my id'> # </th>  
-				<th class='submission pname'> Name </th> 
-				<th class='submission my'> when </th>
+				<th class='submission pname'> Problem  </th> 
+				<th class='submission uname'> Who  </th> 
+				<th class='submission my'> When </th>
 				<th class='submission my lang'> Language </th>
 				<th class='submission my tl'> CPU Time (ms) </th>
 				<th class='submission my ml'> Memory (MB) </th> 
@@ -36,7 +37,6 @@
 
 		while($row=mysqli_fetch_array($ressub))
 		{
-			
 			$pid=$row['pid'];
 			$id=$row['id'];
 			$arrtime=$row['arrtime'];
@@ -48,14 +48,19 @@
 			$pname=$data['name'];
 
 			//fetch sub info
-			$sql="SELECT `flag`,`runtime`,`lang` FROM `$DB`.`submission` WHERE `id`='$id'";
+			$sql="SELECT `flag`,`runtime`,`lang`,`uname`,`uid` FROM `$DB`.`submission` WHERE `id`='$id'";
 			$result=mysqli_query($conn,$sql);
-			if(!$data=mysqli_fetch_array($result))
-				die("sub info fetching failed!");
+			if(!$data=mysqli_fetch_array($result)){
+				echo "$id $pid  fetching faied!!";
+				//die("sub info fetching failed!");
+			}
 			$mb=512;// not defined!!
+			$puname=$data['uname'];
+			$puid=$data['uid'];
 			$runtime=$data['runtime'];
 			$langid=$data['lang'];
 			$flag=$data['flag'];
+			
 			$verdict=getVerdict($flag);
 			$arrtime=sec2str($arrtime);
 			$lang=getLanguage($langid,$DB,$conn);
@@ -63,6 +68,7 @@
 				echo "<tr class='submission my' >
 						<td class='submission my id'> <a class='submission' href='view?conid=$conid&id=$id&pid=$pid'> $id</a> </td>
 						<td class='submission my pname'> $pname </td>  
+						<td class='submission my uname'> $puname </td>  
 						
 						<td class='submission my time'>$arrtime</td>
 						<td class='submission my lang'>$lang</td>
@@ -73,6 +79,7 @@
 				echo "<tr class='submission my' >
 						<td class='submission my id'> <a class='submission' href='view?conid=$conid&id=$id&pid=$pid'> $id</a> </td>
 						<td class='submission my pname'> $pname </td>  
+						<td class='submission my uname'> $puname </td>  
 						
 						<td class='submission my time'>$arrtime</td>
 						<td class='submission my lang'>$lang</td>
@@ -83,6 +90,7 @@
 			else echo "<tr class='submission my' >
 						<td class='submission my id'> <a class='submission' href='view?conid=$conid&id=$id&pid=$pid'> $id</a> </td>
 						<td class='submission my pname'> $pname </td>  
+						<td class='submission my uname'> $puname </td>  
 						
 						<td class='submission my time'>$arrtime</td>
 						<td class='submission my lang'>$lang</td>

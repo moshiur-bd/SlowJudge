@@ -19,11 +19,15 @@
 		else return $idx;
 	}
 	function sec2str($t){
-		$d = substr('0'.floor($t/86400),-2);
+		//return $t;
+		$d = floor($t/86400);
         $h = substr('0'.(floor($t/3600) % 24),-2);
         $m = substr('0'.(floor($t/60)%60),-2);
         $s = substr('0'.($t % 60),-2);
+		$ret="";
+		if($d!='0') $ret=$d."d ";
+		$ret=$ret.$h.":".$m.":".$s;
 		
-    return ($d>0?$d+'d ':'').$h.":".$m.":".$s;
+    return $ret;
 }
 ?>

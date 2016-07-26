@@ -10,6 +10,7 @@ if(!isset($_SESSION['uid']))
 
 //sql////////////////
 include(__DIR__ ."\\..\\connection.php");
+include(__DIR__ ."\\..\\header.php");
 
 /*
 $servername = "localhost";
@@ -106,7 +107,7 @@ if ($uploadOk == 0) {
 		
 		
 		//insert into global DB
-		$sql="INSERT INTO `$DB`.`submission` (`id`, `pid`, `lang`, `flag`, `runtime`, `arrtime`, `hold`,`uid`,`conid`) VALUES (NULL, '$pid', '$lang', NULL, NULL, '$timestamp', NULL,'$uid','$conid');";
+		$sql="INSERT INTO `$DB`.`submission` (`id`, `pid`, `lang`, `flag`, `runtime`, `arrtime`, `hold`,`uid`,`conid`,`uname`) VALUES (NULL, '$pid', '$lang', NULL, NULL, '$timestamp', NULL,'$uid','$conid','$uname');";
 		//echo '</br>'.$sql;
 		if(mysqli_query($conn,$sql)==FALSE)
 			die("Eror Occured while Inseting into DB!");
@@ -123,6 +124,8 @@ if ($uploadOk == 0) {
 		$res=mysqli_query($conn,$sql);
 		if(!mysqli_fetch_array($res)){//not registered to scoreboard
 			//register
+			
+			//uname find
 			$uname="";
 			$name="";
 			$sql="SELECT `uname`,`name` FROM `$DB`.`user` WHERE `uid`='$uid'";

@@ -232,6 +232,12 @@ table.standing{
 /*end standing*/
 
 /*my submission*/
+#who{
+	text-align:center;
+	font-size:2em;
+	color:#555;
+}
+
 table.submission{
 }
 
@@ -265,7 +271,21 @@ table.viewsource{
 	width:100%;
 }
 
-
+.buildlog{
+	float: right;
+    
+	
+}
+.buildlog p{
+	color:#f47c3c;
+	position:fixed;
+	width: 20em;
+	background:white;
+    display: inline;
+    padding-left: 4em;
+	margin:auto;
+    margin: 3em 1em 1em -22em;
+}
 
 
 /*end of contest*/

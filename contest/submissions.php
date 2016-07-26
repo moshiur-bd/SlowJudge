@@ -23,14 +23,14 @@
 		$ressub=mysqli_query($conn,$sql);
 
 
-
+		include("who.php");//contestant name
 
 		echo "<div id='submission my' class='submission my'>
 				<table class='submission my'>";
 		echo "<tr class='submission my' >
 				<th class='submission my id'> # </th>  
-				<th class='submission pname'> Name </th> 
-				<th class='submission my'> when </th>
+				<th class='submission pname'> Problem </th> 
+				<th class='submission my'> When </th>
 				<th class='submission my lang'> Language </th>
 				<th class='submission my tl'> CPU Time (ms) </th>
 				<th class='submission my ml'> Memory (MB) </th> 

@@ -58,8 +58,10 @@
 			$runtime=$row['runtime'];
 			$arrtime=$row['arrtime'];
 			$flag=$row['flag'];
+			$lang=$row['lang'];
 			$mb='512';//fake
 			$verdict=getVerdict($flag);
+			$lang=getLanguage($lang,$DB,$conn);
 		}else die("submission info fetching failed!");
 		
 		if($status=='private'&& $uid!=$suid)
@@ -125,6 +127,12 @@
 						<td class='submission my verdict'>  <span class='rejectedText' >$verdict</span> </td>	</tr>";
 	
 		echo "</table>";
+		
+		if ($flag==-2)
+			include("buildlog.php");
+		
+		
+		
 	?>
 	
 
@@ -132,7 +140,8 @@
   <pre>
   <code class="<?php echo $src; ?>">
 	<?php
-		echo htmlentities("\n".file_get_contents($path));
+		if(file_exists($path))
+			echo htmlentities("\n".file_get_contents($path));
 	?>
   </code>
   </pre>
