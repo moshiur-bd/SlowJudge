@@ -169,7 +169,7 @@ public class Timer {
                     String status = rs.getString("status");
                     if (status.equals("running")) {
                         remaining = duration - increaseTime();
-                        long sleepTime = Math.min(delay, remaining);
+                        long sleepTime = Math.min((2*delay)/3, remaining);
                         System.out.println("Sleeping for " + sleepTime);
                         if (remaining <= 0) {
                             System.out.println("Contest is over!");
