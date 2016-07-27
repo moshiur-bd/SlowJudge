@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 23, 2016 at 01:59 PM
+-- Generation Time: Jul 27, 2016 at 07:58 AM
 -- Server version: 5.6.16
 -- PHP Version: 5.5.9
 
@@ -31,39 +31,36 @@ CREATE TABLE IF NOT EXISTS `contest` (
   `name` varchar(100) NOT NULL,
   `uid` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=40 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=29 ;
 
 --
 -- Dumping data for table `contest`
 --
 
 INSERT INTO `contest` (`id`, `name`, `uid`) VALUES
-(1, 'Testing Contest', 0),
-(6, 'que', 0),
-(7, 'This Is the first', 0),
-(9, 'd', 0),
-(10, 'hell', 0),
-(11, 'hell', 0),
-(12, 'COCI', 0),
-(14, 'Again', 0),
-(15, 'New', 0),
-(16, 'BE', 0),
-(19, 'sjjk-.*', 0),
-(22, 'Hellyah', 0),
-(23, 'SJ round #1', 0),
-(24, 'hhjjj', 0),
-(25, 'Eid Day', 0),
-(28, 'NHSPC practice contest 2', 0),
-(29, 'qwqwqwqw', 0),
-(30, 'sfjksdkjfdkj', 0),
-(31, '', 0),
-(32, 'NEWER', 0),
-(34, 'sdsds', 0),
-(35, 'ghtki', 0),
-(36, 'newdff', 0),
-(37, 'TESTING ', 0),
-(38, 'testing2', 0),
-(39, 'abcde', 0);
+(28, 'NHSPC practice contest 2', 0);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `language`
+--
+
+CREATE TABLE IF NOT EXISTS `language` (
+  `id` int(11) NOT NULL,
+  `value` varchar(30) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `language`
+--
+
+INSERT INTO `language` (`id`, `value`) VALUES
+(1, 'C'),
+(2, 'C++'),
+(3, 'C++11'),
+(4, 'java');
 
 -- --------------------------------------------------------
 
@@ -77,46 +74,55 @@ CREATE TABLE IF NOT EXISTS `problem` (
   `tl` int(11) NOT NULL,
   `ml` int(11) NOT NULL,
   `dscnt` int(11) NOT NULL,
+  `status` varchar(30) NOT NULL DEFAULT 'private',
   PRIMARY KEY (`pid`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=57 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=83 ;
 
 --
 -- Dumping data for table `problem`
 --
 
-INSERT INTO `problem` (`pid`, `name`, `tl`, `ml`, `dscnt`) VALUES
-(1, 'a', 1000, 512, 0),
-(2, 'a', 1000, 512, 0),
-(3, 'hhsdhsdh', 1000, 512, 0),
-(4, 'hhsdhsdh', 1000, 512, 0),
-(5, 'new', 1000, 512, 0),
-(6, 'first success', 1000, 512, 0),
-(7, 'dfdf', 1000, 512, 0),
-(8, 'A deep', 1000, 512, 0),
-(9, 'Way', 1000, 512, 0),
-(10, 'To ', 1000, 512, 0),
-(11, 'Learn', 3000, 1233, 0),
-(17, 'New', 1000, 512, 0),
-(18, 'Eid 1', 1000, 512, 0),
-(19, 'Eid 2', 1000, 512, 0),
-(20, 'Eid 3', 1000, 512, 0),
-(21, 'Ant', 0, 0, 2),
-(27, 'Ball', 1000, 512, 0),
-(28, 'Cat', 1000, 512, 0),
-(29, 'Dog', 1000, 512, 0),
-(30, 'Egg', 1000, 512, 0),
-(31, 'Asia Cup 2016', 1000, 512, 1),
-(32, 'Leap Year', 1000, 512, 1),
-(33, 'Number System', 1000, 512, 1),
-(34, 'Pyramid of Dreamland', 1000, 512, 1),
-(40, 'a', 1000, 512, 0),
-(50, 'Robot Command', 1000, 512, 0),
-(51, 'SameSymWord', 1000, 512, 0),
-(52, 'The Mathmatician NusLaAlludba', 1000, 512, 0),
-(53, 'The Value of X', 1000, 512, 0),
-(54, 'abc', 1000, 512, 0),
-(55, 'dfdfdf', 1000, 512, 0),
-(56, '', 1000, 512, 0);
+INSERT INTO `problem` (`pid`, `name`, `tl`, `ml`, `dscnt`, `status`) VALUES
+(1, 'a', 1000, 512, 0, 'private'),
+(2, 'a', 1000, 512, 0, 'private'),
+(3, 'hhsdhsdh', 1000, 512, 0, 'private'),
+(4, 'hhsdhsdh', 1000, 512, 0, 'private'),
+(5, 'new', 1000, 512, 0, 'private'),
+(6, 'first success', 1000, 512, 0, 'private'),
+(7, 'dfdf', 1000, 512, 0, 'private'),
+(8, 'A deep', 1000, 512, 0, 'private'),
+(9, 'Way', 1000, 512, 0, 'private'),
+(10, 'To ', 1000, 512, 0, 'private'),
+(11, 'Learn', 3000, 1233, 0, 'private'),
+(17, 'New', 1000, 512, 0, 'private'),
+(18, 'Eid 1', 1000, 512, 0, 'private'),
+(19, 'Eid 2', 1000, 512, 0, 'private'),
+(20, 'Eid 3', 1000, 512, 0, 'private'),
+(21, 'Ant', 0, 0, 2, 'private'),
+(27, 'Ball', 1000, 512, 0, 'private'),
+(28, 'Cat', 1000, 512, 0, 'private'),
+(29, 'Dog', 1000, 512, 0, 'private'),
+(30, 'Egg', 1000, 512, 0, 'private'),
+(31, 'Asia Cup 2016', 1000, 512, 10, 'private'),
+(32, 'Leap Year', 10000, 512, 1, 'private'),
+(33, 'Number System', 1000, 512, 1, 'private'),
+(34, 'Pyramid of Dreamland', 1000, 512, 1, 'private'),
+(40, 'a', 1000, 512, 0, 'private'),
+(50, 'Robot Command', 1000, 512, 0, 'private'),
+(51, 'SameSymWord', 1000, 512, 0, 'private'),
+(52, 'The Mathmatician NusLaAlludba', 1000, 512, 0, 'private'),
+(53, 'The Value of X', 1000, 512, 0, 'private'),
+(54, 'abc', 1000, 512, 0, 'private'),
+(55, 'dfdfdf', 1000, 512, 0, 'private'),
+(56, '', 1000, 512, 0, 'private'),
+(57, 'one', 1000, 512, 0, 'private'),
+(58, 'two', 1000, 512, 0, 'private'),
+(77, '', 1000, 512, 0, 'private'),
+(78, '', 1000, 512, 0, 'private'),
+(79, '', 1000, 512, 0, 'private'),
+(80, '', 1000, 512, 0, 'private'),
+(81, '', 1000, 512, 0, 'private'),
+(82, '', 1000, 512, 0, 'private');
 
 -- --------------------------------------------------------
 
@@ -134,36 +140,93 @@ CREATE TABLE IF NOT EXISTS `submission` (
   `hold` bigint(11) DEFAULT NULL,
   `uid` int(11) NOT NULL,
   `conid` int(11) NOT NULL,
+  `countable` int(11) NOT NULL DEFAULT '1',
+  `uname` varchar(50) NOT NULL DEFAULT 'noname',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=23 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=113 ;
 
 --
 -- Dumping data for table `submission`
 --
 
-INSERT INTO `submission` (`id`, `pid`, `lang`, `flag`, `runtime`, `arrtime`, `hold`, `uid`, `conid`) VALUES
-(1, 31, 3, NULL, NULL, '2016-07-23 06:53:14', NULL, 2, 28),
-(2, 31, 3, NULL, NULL, '2016-07-23 06:53:22', NULL, 2, 28),
-(3, 31, 3, NULL, NULL, '2016-07-23 06:54:47', NULL, 2, 28),
-(4, 31, 3, NULL, NULL, '2016-07-23 06:56:14', NULL, 2, 28),
-(5, 31, 3, NULL, NULL, '2016-07-23 06:56:56', NULL, 2, 28),
-(6, 31, 3, NULL, NULL, '2016-07-23 06:58:08', NULL, 2, 28),
-(7, 31, 3, NULL, NULL, '2016-07-23 06:58:58', NULL, 2, 28),
-(8, 31, 3, NULL, NULL, '2016-07-23 06:59:13', NULL, 2, 28),
-(9, 31, 3, NULL, NULL, '2016-07-23 07:00:11', NULL, 2, 28),
-(10, 31, 3, NULL, NULL, '2016-07-23 07:00:19', NULL, 2, 28),
-(11, 31, 3, NULL, NULL, '2016-07-23 07:02:00', NULL, 2, 28),
-(12, 31, 3, NULL, NULL, '2016-07-23 07:02:46', NULL, 2, 28),
-(13, 31, 3, NULL, NULL, '2016-07-23 07:03:51', NULL, 2, 28),
-(14, 31, 3, NULL, NULL, '2016-07-23 07:03:53', NULL, 2, 28),
-(15, 31, 3, NULL, NULL, '2016-07-23 07:03:56', NULL, 2, 28),
-(16, 31, 3, NULL, NULL, '2016-07-23 07:04:46', NULL, 2, 28),
-(17, 31, 3, NULL, NULL, '2016-07-23 07:10:45', NULL, 2, 28),
-(18, 31, 3, NULL, NULL, '2016-07-23 07:10:54', NULL, 2, 28),
-(19, 31, 3, NULL, NULL, '2016-07-23 07:10:57', NULL, 2, 28),
-(20, 34, 3, NULL, NULL, '2016-07-23 07:12:12', NULL, 2, 28),
-(21, 34, 3, NULL, NULL, '2016-07-23 07:12:19', NULL, 2, 28),
-(22, 34, 3, NULL, NULL, '2016-07-23 07:42:33', NULL, 2, 28);
+INSERT INTO `submission` (`id`, `pid`, `lang`, `flag`, `runtime`, `arrtime`, `hold`, `uid`, `conid`, `countable`, `uname`) VALUES
+(35, 31, 3, 0, 12, '2016-07-23 11:35:32', 1469559656, 2, 28, 1, 'moshiur.bd'),
+(36, 31, 3, 0, 18, '2016-07-23 12:47:06', 1469559657, 2, 28, 1, 'moshiur.bd'),
+(37, 31, 3, 0, 14, '2016-07-23 12:47:10', 1469559658, 2, 28, 1, 'moshiur.bd'),
+(38, 31, 3, 0, 60, '2016-07-23 12:47:12', 1469559658, 2, 28, 1, 'moshiur.bd'),
+(39, 31, 3, 0, 44, '2016-07-23 12:47:15', 1469559659, 2, 28, 1, 'moshiur.bd'),
+(40, 34, 3, 0, 342, '2016-07-23 12:49:49', 1469559660, 2, 28, 1, 'moshiur.bd'),
+(41, 34, 3, 0, 103, '2016-07-23 12:51:30', 1469559661, 2, 28, 1, 'moshiur.bd'),
+(42, 31, 3, 1, 1012, '2016-07-23 14:52:01', 1469559661, 2, 28, 1, 'moshiur.bd'),
+(43, 33, 3, 0, 178, '2016-07-23 14:54:27', 1469559663, 11, 28, 1, 'tnvr'),
+(45, 33, 3, 2, 352, '2016-07-24 04:14:39', 1469559663, 13, 28, 1, 'FakeUser'),
+(46, 33, 3, 0, 56, '2016-07-24 04:16:26', 1469559664, 13, 28, 1, 'FakeUser'),
+(47, 31, 3, 0, 12, '2016-07-24 04:55:56', 1469559664, 9, 28, 1, 'sudipto.bd'),
+(48, 31, 3, 0, 41, '2016-07-24 04:58:00', 1469559665, 9, 28, 1, 'sudipto.bd'),
+(49, 32, 3, -2, 41, '2016-07-24 15:57:13', 1469559665, 2, 28, 1, 'moshiur.bd'),
+(50, 31, 3, 2, 55, '2016-07-25 04:03:16', 1469559666, 2, 28, 1, 'moshiur.bd'),
+(51, 32, 3, 2, 75, '2016-07-25 04:18:19', 1469559666, 13, 28, 1, 'FakeUser'),
+(52, 32, 3, 2, 105, '2016-07-25 04:18:52', 1469559667, 13, 28, 1, 'FakeUser'),
+(53, 32, 3, 0, 87, '2016-07-25 04:19:09', 1469559667, 13, 28, 1, 'FakeUser'),
+(54, 31, 3, 1, 1024, '2016-07-25 04:20:13', 1469559668, 13, 28, 1, 'FakeUser'),
+(55, 31, 3, 0, 13, '2016-07-25 04:20:24', 1469559669, 13, 28, 1, 'FakeUser'),
+(56, 31, 3, 2, 353, '2016-07-25 04:25:27', 1469559669, 9, 28, 1, 'sudipto.bd'),
+(57, 32, 3, 2, 57, '2016-07-25 04:26:10', 1469559670, 9, 28, 1, 'sudipto.bd'),
+(58, 31, 3, 3, 75, '2016-07-25 06:20:10', 1469559670, 14, 28, 1, 'skmonir'),
+(59, 31, 3, 3, 70, '2016-07-25 06:20:20', 1469559670, 14, 28, 1, 'skmonir'),
+(60, 31, 3, 0, 16, '2016-07-25 06:20:56', 1469559671, 14, 28, 1, 'skmonir'),
+(61, 31, 3, 0, 11, '2016-07-25 06:49:35', 1469559672, 13, 28, 1, 'FakeUser'),
+(62, 33, 3, 2, 160, '2016-07-25 07:26:10', 1469559672, 13, 28, 1, 'FakeUser'),
+(63, 31, 3, 0, 13, '2016-07-25 08:30:19', 1469559673, 9, 28, 1, 'sudipto.bd'),
+(64, 31, 3, 1, 1243, '2016-07-25 09:54:56', 1469559674, 14, 28, 1, 'skmonir'),
+(65, 31, 3, -2, 1243, '2016-07-25 09:55:47', 1469559675, 14, 28, 1, 'skmonir'),
+(66, 31, 3, 2, 77, '2016-07-25 09:57:23', 1469559678, 14, 28, 1, 'skmonir'),
+(67, 31, 3, -2, 77, '2016-07-25 09:58:05', 1469559678, 14, 28, 1, 'skmonir'),
+(68, 31, 3, -2, 77, '2016-07-25 09:58:20', 1469559679, 14, 28, 1, 'skmonir'),
+(69, 31, 3, 0, 18, '2016-07-25 10:01:41', 1469559681, 14, 28, 1, 'skmonir'),
+(70, 31, 3, -2, 18, '2016-07-25 17:23:27', 1469559682, 2, 28, 1, 'moshiur.bd'),
+(71, 31, 3, 2, 47, '2016-07-25 17:23:43', 1469559682, 2, 28, 1, 'moshiur.bd'),
+(72, 32, 3, 0, 68, '2016-07-25 17:29:18', 1469559682, 2, 28, 1, 'moshiur.bd'),
+(73, 32, 3, 1, 10017, '2016-07-25 17:30:48', 1469559683, 2, 28, 1, 'moshiur.bd'),
+(74, 32, 3, -1, 70, '2016-07-25 17:31:38', 1469559693, 2, 28, 1, 'moshiur.bd'),
+(75, 32, 3, -1, 50, '2016-07-25 17:32:30', 1469559693, 2, 28, 1, 'moshiur.bd'),
+(76, 32, 3, -2, 50, '2016-07-25 17:34:06', 1469559693, 2, 28, 1, 'moshiur.bd'),
+(77, 32, 3, 1, 10020, '2016-07-25 17:34:46', 1469559695, 2, 28, 1, 'moshiur.bd'),
+(78, 31, 3, 1, 1021, '2016-07-25 18:19:08', 1469559705, 13, 28, 1, 'FakeUser'),
+(79, 31, 3, -1, 50, '2016-07-26 02:52:41', 1469559706, 2, 28, 1, 'moshiur.bd'),
+(80, 31, 3, 1, 1017, '2016-07-26 02:53:33', 1469559707, 2, 28, 1, 'moshiur.bd'),
+(81, 32, 3, 0, 74, '2016-07-26 02:55:26', 1469559708, 2, 28, 1, 'moshiur.bd'),
+(82, 32, 3, -1, 69, '2016-07-26 02:56:44', 1469559708, 2, 28, 1, 'moshiur.bd'),
+(83, 33, 3, 1, 1021, '2016-07-26 04:01:42', 1469559708, 9, 28, 1, 'sudipto.bd'),
+(84, 33, 3, 100, 1021, '2016-07-26 04:03:46', 1469559710, 9, 28, 1, 'sudipto.bd'),
+(85, 31, 3, 100, 1021, '2016-07-26 04:05:36', 1469559710, 2, 28, 1, 'moshiur.bd'),
+(86, 31, 3, 2, 59, '2016-07-26 04:06:27', 1469559710, 2, 28, 1, 'moshiur.bd'),
+(87, 31, 3, 1, 1009, '2016-07-26 04:08:51', 1469559710, 2, 28, 1, 'moshiur.bd'),
+(88, 34, 3, -1, 62, '2016-07-26 04:09:22', 1469559711, 9, 28, 1, 'sudipto.bd'),
+(89, 33, 3, -2, 62, '2016-07-26 04:14:20', 1469559711, 9, 28, 1, 'sudipto.bd'),
+(90, 31, 3, -2, 62, '2016-07-26 04:28:14', 1469559715, 2, 28, 1, 'moshiur.bd'),
+(91, 31, 1, 2, 24, '2016-07-26 08:38:38', 1469559717, 2, 28, 1, 'moshiur.bd'),
+(92, 31, 1, -1, 28, '2016-07-26 08:43:21', 1469559717, 2, 28, 1, 'moshiur.bd'),
+(93, 31, 1, -2, 28, '2016-07-26 08:43:41', 1469559717, 2, 28, 1, 'moshiur.bd'),
+(94, 31, 1, -2, 28, '2016-07-26 08:47:37', 1469559718, 2, 28, 1, 'moshiur.bd'),
+(95, 31, 3, -2, 28, '2016-07-26 08:47:55', 1469559718, 2, 28, 1, 'moshiur.bd'),
+(96, 31, 2, -2, 28, '2016-07-26 08:49:00', 1469559720, 2, 28, 1, 'moshiur.bd'),
+(97, 31, 1, -2, 28, '2016-07-26 08:50:04', 1469559720, 2, 28, 1, 'moshiur.bd'),
+(98, 31, 1, -2, 28, '2016-07-26 08:51:09', 1469559721, 2, 28, 1, 'moshiur.bd'),
+(99, 31, 3, -2, 28, '2016-07-26 09:01:30', 1469559721, 2, 28, 1, 'moshiur.bd'),
+(100, 31, 3, -2, 28, '2016-07-26 09:01:33', 1469559723, 2, 28, 1, 'moshiur.bd'),
+(101, 31, 3, -2, 28, '2016-07-26 09:01:36', 1469559724, 2, 28, 1, 'moshiur.bd'),
+(102, 31, 3, -2, 28, '2016-07-26 09:01:38', 1469559726, 2, 28, 1, 'moshiur.bd'),
+(103, 31, 1, -2, 28, '2016-07-26 09:01:48', 1469559728, 2, 28, 1, 'moshiur.bd'),
+(104, 31, 3, 0, 35, '2016-07-26 09:19:13', 1469559728, 2, 28, 1, 'moshiur.bd'),
+(105, 34, 3, 2, 62, '2016-07-26 09:52:18', 1469559729, 13, 28, 1, 'FakeUser'),
+(106, 31, 4, -2, 62, '2016-07-26 11:54:39', 1469559729, 2, 28, 1, 'moshiur.bd'),
+(107, 33, 3, -2, 62, '2016-07-26 12:00:50', 1469559729, 2, 28, 1, 'moshiur.bd'),
+(108, 33, 4, -2, 62, '2016-07-26 12:00:55', 1469559730, 2, 28, 1, 'moshiur.bd'),
+(109, 33, 2, 2, 55, '2016-07-26 12:01:25', 1469559730, 2, 28, 1, 'moshiur.bd'),
+(110, 33, 1, -2, 55, '2016-07-26 12:02:12', 1469559730, 2, 28, 1, 'moshiur.bd'),
+(111, 31, 3, 0, 12, '2016-07-26 14:39:12', 1469559730, 2, 28, 1, 'moshiur.bd'),
+(112, 31, 3, 0, 27, '2016-07-26 14:56:38', 1469559731, 2, 28, 1, 'moshiur.bd');
 
 -- --------------------------------------------------------
 
@@ -173,25 +236,28 @@ INSERT INTO `submission` (`id`, `pid`, `lang`, `flag`, `runtime`, `arrtime`, `ho
 
 CREATE TABLE IF NOT EXISTS `user` (
   `uid` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(100) NOT NULL,
   `uname` varchar(40) NOT NULL,
   `upass` varchar(40) NOT NULL,
   `type` varchar(20) NOT NULL DEFAULT 'user',
   PRIMARY KEY (`uid`),
   UNIQUE KEY `uname` (`uname`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=13 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=15 ;
 
 --
 -- Dumping data for table `user`
 --
 
-INSERT INTO `user` (`uid`, `uname`, `upass`, `type`) VALUES
-(1, 'root', '', 'admin'),
-(2, 'moshiur.bd', '1', 'coach'),
-(5, 'ab', 'a', 'user'),
-(6, 'aaa', 'a', 'user'),
-(9, 'sudipto.bd', '12345', 'user'),
-(10, 'newer', '12345', 'user'),
-(11, 'tnvr', 'tnvr', 'user');
+INSERT INTO `user` (`uid`, `name`, `uname`, `upass`, `type`) VALUES
+(1, '', 'root', '', 'admin'),
+(2, 'Moshiur Rahman', 'moshiur.bd', '1', 'coach'),
+(5, '', 'ab', 'a', 'user'),
+(6, '', 'aaa', 'a', 'user'),
+(9, 'Sudipto', 'sudipto.bd', '12345', 'user'),
+(10, '', 'newer', '12345', 'user'),
+(11, 'Tanvir Hasan', 'tnvr', 'tnvr', 'user'),
+(13, 'FakeUser', 'FakeUser', '12345', 'user'),
+(14, 'skmonir', 'skmonir', 'ghorardim', 'user');
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
