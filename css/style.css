@@ -74,6 +74,7 @@ li.nav{
 	
 }
 
+
 li.nav a {
     display: inline-block;
     color: white;
@@ -81,8 +82,13 @@ li.nav a {
     padding: 14px 16px;
     text-decoration:none;
 }
+
 li.nav a:hover {
-    background-color: #111;
+    background-color: #bdbdbd;
+}
+
+.active span{
+	background:#bdbdbd;
 }
 li.user{
 	float:right;
@@ -129,6 +135,9 @@ li.navCon a {
 li.navCon a:hover {
     background-color: #DDDDDD;
 }
+.activecon{
+	background:#DDDDDD;
+}
 
 /*End of Contest navigation bar*/
 
@@ -136,7 +145,7 @@ li.navCon a:hover {
 /*page structure*/
 #sidebar{
 	float: right;
-    width: 20em;
+    width: 15em;
     display: inline;
     padding-left: 4em;
     margin: 3em 1em 1em -22em;

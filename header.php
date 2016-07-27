@@ -4,12 +4,26 @@
 <span class='slowjudge'>SlowJudge</span>
 
 <?php
-	$root="\\slowjudge";
-	echo "<link href='$root\\css\\style.css' rel='stylesheet' type='text/css'>";
+	$root="/slowjudge";
 	
+	/*this block is to highlight active link*/
+	$url=rtrim($_SERVER['REQUEST_URI'],"/\\");
+	$conurl=$root."/contest";
+	//add active class variable
+	$activecon='';
+	$activehome='';
+	/*...........................*/
+	
+	if(strpos($url,$conurl)!==false)
+		$activecon='active';
+	else if(strpos($url,$root)!==false)
+		$activehome='active';
+	
+	
+	echo "<link href='$root/css/style.css' rel='stylesheet' type='text/css'>";
 	echo "<ul class='nav'>";
-		echo "<li class='nav'><a href='$root'>Home</a></li>";
-		echo "<li class='nav'><a href='$root\\contest'>Contest</a></li>";
+		echo "<li class='nav $activehome'><span id='contestTab' > <a href='$root'>Home</a> </span></li>";
+		echo "<li class='nav $activecon'><span id='homeTab'> <a href='$conurl'>Contest</a> </span></li>";
 		
 		
 		$uname='';
@@ -27,12 +41,9 @@
 		}
 	echo "</ul>";	
 
-	
-	echo "";
 	?>
 	
 	
 
-	
 
 </div>
