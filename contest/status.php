@@ -44,7 +44,7 @@
 			$sql="SELECT * FROM `$DB`.`problem` WHERE `pid`='$pid'";
 			$result=mysqli_query($conn,$sql);
 			if(!$data=mysqli_fetch_array($result))
-				die("Problem info fetching failed!");
+				echo "Problem info fetching failed! $pid";
 			$pname=$data['name'];
 
 			//fetch sub info

@@ -5,6 +5,7 @@
 
 
 <body>
+<div id="body">
 <?php
 include(__DIR__ . '\\..\\header.php');
 if(isset($_SESSION['uid']))
@@ -47,7 +48,7 @@ function validateForm() {
     }
 }
 </script>
-
+</div>
 </body>
 
 </html>

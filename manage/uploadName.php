@@ -49,7 +49,7 @@
 			//add scoreboard coloumn
 			
 			
-			$sqlScr=$sqlScr.$comma."ADD `penalty$i` int NOT NULL DEFAULT '0', ADD `score$i` int NOT NULL DEFAULT '0',  ADD `firstac$i` int NOT NULL DEFAULT '2147483647',  ADD `wrong$i` int NOT NULL DEFAULT '2147483647'";
+			$sqlScr=$sqlScr.$comma."ADD `penalty$i` int NOT NULL DEFAULT '0', ADD `score$i` int NOT NULL DEFAULT '0',  ADD `firstac$i` int NOT NULL DEFAULT '2147483647',  ADD `wrong$i` int NOT NULL DEFAULT '0'";
 			$comma=" , ";
 			
 			
@@ -84,7 +84,7 @@
 			if(!$res)die("couldn't delete Golbal DB record!");
 			
 			//delete scoreboard coloumn
-			$sqlScr=$sqlScr.$comma."DROP COLUMN `actime$i` , DROP  COLUMN `firstac$i` ";
+			$sqlScr=$sqlScr.$comma."DROP COLUMN `penalty$i`, DROP COLUMN  `score$i`,  DROP COLUMN  `firstac$i`,  DROP COLUMN  `wrong$i`";;
 			$comma=" , ";
 			
 		}
@@ -93,6 +93,11 @@
 		if(!$result) die("Scoreboard Alter failed while adding new row!");
 	
 	}
+	
+	//update problemCount
+	$sql="UPDATE `$cDB`.`settings` SET `problemCount`='$total'";
+	mysqli_query($conn,$sql);
+	
 	
 	echo "OK!";
 	header("Location: dataSet.php?conid=$conid");

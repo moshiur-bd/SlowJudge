@@ -8,6 +8,8 @@
 		include(__DIR__ ."\\..\\connection.php");
 		
 		echo "<div id='dash' class='dash'>";
+		echo "<p >total bytes to upload: <span id='totalbytes' >0</span></p>";
+		echo "<p >Max: <span  >8MB</span></p>";
 		
 		echo '<h2>Upload dataset & source </h2>';
 		
@@ -56,7 +58,7 @@
 			else $pdfl='pdf statement:';
 			
 			
-			
+			$pdf='pdf';
 			//source& statement
 			echo "
 					
@@ -64,11 +66,11 @@
 					<li><label class='name' id='name$i'> $name</label> 
 						
 						<label id='pdfl$i' for='pdf$i' class='pdftxt'>$pdfl</label>
-						<input class='pdfbtn' id='pdf$i' type='file' name='pdf$i'> 
+						<input class='pdfbtn' id='pdf$i' type='file' name='pdf$i' onChange='getFileSize(&quot;pdf$i&quot;)'> 
 						
 						
 						<label id='srcl$i' for='src$i' class='srctxt'>$srcl</label>
-						<input class='srcbtn' id='src$i' type='file' name='src$i'> 
+						<input class='srcbtn' id='src$i' type='file' name='src$i' onChange='getFileSize(&quot;src$i&quot;)'> 
 						
 					</li>	
 					</div> 
@@ -102,9 +104,9 @@
 						<div id='$i.dataset$j'>
 							<li class='ds'> 
 									<label for='$i.in$j' id='$i.inl$j' class='intxt'>$inl</label> 
-									<input class='inbtn' id='$i.in$j' type='file' name='$i$in$j'>
+									<input class='inbtn' id='$i.in$j' type='file' name='$i$in$j' onChange='getFileSize(&quot;$i.in$j&quot;)'>
 									 <label for='$i.out$j' id='$i.outl$j' class='outtxt'>$outl</label>
-									 <input class='outbtn' id='$i.out$j' type='file' name='$i$out$j'>
+									 <input class='outbtn' id='$i.out$j' type='file' name='$i$out$j' onChange='getFileSize(&quot;$i.out$j&quot;)'>
 							</li>
 						</div>
 						
@@ -150,7 +152,7 @@
 			
 			
 			var s=document.getElementById("new"+i).innerHTML;
-			var addF= "<li class='ds'> <label for='"+i+".in"+j+"' id='"+i+".inl"+j+"' class='intxt'>Input:</label> <input class='inbtn' id='"+i+".in"+j+"' type='file' name='"+i+"in"+j+"' required='true' > <label for='"+i+".out"+j+"' id='"+i+".outl"+j+"' class='outtxt'>Output:</label> <input class='outbtn' id='"+i+"out"+j+"' type='file' name='"+i+"out"+j+"' required='true'>	</li>";
+			var addF= "<li class='ds'> <label for='"+i+".in"+j+"' id='"+i+".inl"+j+"' class='intxt'>Input:</label> <input class='inbtn' id='"+i+".in"+j+"' type='file' name='"+i+"in"+j+"'   onChange='getFileSize(&quot;"+i+".in"+j+"&quot;)'> <label for='"+i+".out"+j+"' id='"+i+".outl"+j+"' class='outtxt'>Output:</label> <input class='outbtn' id='"+i+".out"+j+"' type='file' name='"+i+"out"+j+"' required='true'   onChange='getFileSize(&quot;"+i+".out"+j+"&quot;)'>	</li>";
 			
 			
 			//add new field
@@ -183,6 +185,21 @@
 			document.getElementById('len'+i).innerHTML="<input type='hidden' name='len"+i+"' value='"+j+"'>";
 			
 			
+		}
+		function getFileSize(x){
+			
+			//alert("fucl"+x);
+			var v=document.getElementById(x).files[0].size;
+			//alert(v);
+			var a=parseInt(document.getElementById("totalbytes").innerHTML)+v;
+			document.getElementById("totalbytes").innerHTML=a;
+			if(a<8388096) 
+				document.getElementById("totalbytes").setAttribute("class","green");
+			else 	document.getElementById("totalbytes").setAttribute("class","red");
+			
+		}
+		function fuck(){
+			alert("fucking!");
 		}
 </script>
 </div>				
