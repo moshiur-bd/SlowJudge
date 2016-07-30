@@ -9,8 +9,8 @@ import java.util.concurrent.TimeUnit;
 public class JudgeCDB {
 
     String dir;
-    String cDB = "mos28";
-    String DB = "mosuser";
+    String DB ;
+    String pre; //get later
     int conid = 28, maxId = 2147483647;
 
     Connection conn = null;
@@ -20,7 +20,6 @@ public class JudgeCDB {
     long holdTime = 30;//in sec
     long execution_time = 0;//in milis
 
-    int pscore[];
     int penalty;
     int problemCount;
 
@@ -35,9 +34,8 @@ public class JudgeCDB {
 
     public JudgeCDB(String s, String s1, String s2) {
         dir = s;
-        cDB = s1 + s2;
-        conid = Integer.parseInt(s2);
-        System.err.println("cDB= " + cDB);
+        pre = s2;
+        DB = s1;
 
     }
 
@@ -193,91 +191,18 @@ public class JudgeCDB {
 
     }
 
-    void judgeManager(int id, int pid, int lang) {
+    
+    
+    int getScoreICPC(int passed,int dscnt){
+        return passed==dscnt?100:0;
+    }
+    
+    void scoreBoardHandler(int id,int pid,int verdict,String cDB,int pscore,int uid) {
 
-        int verdict = 0;
-        ///compile the code. then run
-
-        String cmd[]={"compiler.exe " , ""+lang ,};
-        ProcessBuilder pb = new ProcessBuilder(cmd);
-        try {
-            pb.directory(new File(dir+"\\sub\\"+id+"\\"));
-            Process compiler = pb.start();
-            compiler.waitFor(10, TimeUnit.SECONDS);
-            /*if (compiler.exitValue() != 0) {
-                System.err.println("Something wrong in execution of compiler or it taking more than 10 sec to compile");
-            }
-            if (new File(dir + "\\sub\\" + id + "\\Main.exe").exists() || new File(dir + "\\sub\\" + id + "\\Main.class").exists()) {
-                System.err.println("compilation success!");
-            } else {
-                verdict =CE;
-                System.err.println("Found CE");
-        
-            }*/
-            verdict=compiler.exitValue();
-        } catch (Exception e) {
-            System.err.println("Compiler execution failed!!");
-            verdict=SubmissionError;
-            e.printStackTrace();
-        }
-
-        //compiling finished!
-        long runtime = 0;
-
-        long tl = 5000;
-        int dsCnt = 0;
-
-        String sql = "SELECT * FROM `" + DB + "`.problem WHERE `pid`=" + pid;
-        try {
-            Statement stmt2 = conn.createStatement();
-            ResultSet rs2 = stmt2.executeQuery(sql);
-            if (rs2.next()) {
-                tl = rs2.getInt("tl");
-                dsCnt = rs2.getInt("dscnt");
-            }
-            if (stmt2 != null) {
-                stmt2.close();
-            }
-        } catch (SQLException se) {
-//Handle errors for JDBC
-            se.printStackTrace();
-        } catch (Exception e) {
-//Handle errors for Class.forName
-            e.printStackTrace();
-        }
-
-        System.err.println("\n\n*Starting judgement of submission: " + id + " of problem: " + pid + " with ds= " + dsCnt);
-
-        for (int i = 0; i < dsCnt; i++) {
-            if (verdict != 0) {
-                break;
-            }
-            verdict = judge(id, pid, lang, i, false, tl);//calling the judge here
-            if (verdict != 0) {
-                break;
-            }
-            runtime = Math.max(runtime, execution_time);
-        }
-        sql = "UPDATE `" + DB + "`.`submission` SET flag = " + verdict + " , runtime = " + execution_time + " WHERE id = " + id;
-        // System.err.println(sql);
-        try {
-            Statement stmt2 = conn.createStatement();
-            int cnt = stmt2.executeUpdate(sql);
-            if (stmt2 != null) {
-                stmt2.close();
-            }
-        } catch (SQLException se) {
-//Handle errors for JDBC
-            se.printStackTrace();
-        } catch (Exception e) {
-//Handle errors for Class.forName
-            e.printStackTrace();
-        }
-
-        System.err.println("# Judgement Complete with verdict: " + verdict + " with runtime= " + runtime + "\n\n");
         Statement stmt2;
         ResultSet rs2;
-        int cpid = 0, uid = 0;
+        String sql;
+        int cpid = 0;
         int facid = 0;
         ///get cpid,uid
         try {
@@ -294,19 +219,7 @@ public class JudgeCDB {
             if (stmt2 != null) {
                 stmt2.close();
             }
-            //get uid
-            sql = "SELECT `uid` FROM `" + cDB + "`.`submission` WHERE `id`= " + id;
-            stmt2 = conn.createStatement();
-            rs2 = stmt2.executeQuery(sql);
-            if (rs2.next()) {
-                uid = rs2.getInt("uid");
-                System.err.println("uid= " + uid);
-            } else {
-                System.err.println("couldn't get uid");
-            }
-            if (stmt2 != null) {
-                stmt2.close();
-            }
+       
 
             //get AC sub< id
             sql = "SELECT `firstac" + cpid + "` FROM `" + cDB + "`.`scoreboard` WHERE `uid`=" + uid;
@@ -388,7 +301,7 @@ public class JudgeCDB {
                             + "`score`=`score`-`score" + cpid + "` WHERE `uid`=" + uid + ";";
                     // 
 
-                    sql2 = "UPDATE `" + cDB + "`.`scoreboard` SET `penalty" + cpid + "` = " + pen + ", `score" + cpid + "` = " + pscore[cpid]
+                    sql2 = "UPDATE `" + cDB + "`.`scoreboard` SET `penalty" + cpid + "` = " + pen + ", `score" + cpid + "` = " + pscore
                             + " ,`penalty`=`penalty`+`penalty" + cpid + "` , `score`=`score`+`score" + cpid + "` WHERE `uid` = " + uid + ";";
 
                     stmt2 = conn.createStatement();
@@ -425,7 +338,7 @@ public class JudgeCDB {
             try {
                 int wsub = 0;
                 sql = "SELECT COUNT(`id`) FROM `" + DB + "`.submission WHERE `countable`=1 AND `pid`= " + pid + " AND `uid`=" + uid + " AND `conid`= " + conid;
-                System.err.println("sql count: "+sql);
+                System.err.println("sql count: " + sql);
                 stmt2 = conn.createStatement();
                 rs2 = stmt2.executeQuery(sql);
                 if (rs2.next()) {
@@ -434,8 +347,8 @@ public class JudgeCDB {
                     System.err.println("wsub counting failed - it's a wrong submission");
                 }
 
-                sql = "UPDATE `" + cDB + "`.`scoreboard` SET `score"+cpid+"`= 0 , `penalty"+cpid+"` = 0  ,"
-                        + " `firstac"+cpid+"`= "+maxId+" , `wrong" + cpid + "` = " + wsub + " WHERE `uid`= " + uid + " AND `firstac" + cpid + "` >= " + id;
+                sql = "UPDATE `" + cDB + "`.`scoreboard` SET `score" + cpid + "`= 0 , `penalty" + cpid + "` = 0  ,"
+                        + " `firstac" + cpid + "`= " + maxId + " , `wrong" + cpid + "` = " + wsub + " WHERE `uid`= " + uid + " AND `firstac" + cpid + "` >= " + id;
                 System.err.println(sql);
                 if (stmt2.executeUpdate(sql) == 0) {
                     System.err.println("couldn't update wrong sub- this is a wrong sub");
@@ -453,6 +366,86 @@ public class JudgeCDB {
             }
 
         }
+
+    }
+
+    void judgeManager(int id, int pid, int lang,String cDB,int uid) {
+
+        int verdict = 0;
+        execution_time=0;
+        
+        ///compile the code. then run
+
+        String cmd[] = {"compiler.exe ", "" + lang,};
+        ProcessBuilder pb = new ProcessBuilder(cmd);
+        try {
+            pb.directory(new File(dir + "\\sub\\" + id + "\\"));
+            Process compiler = pb.start();
+            compiler.waitFor(10, TimeUnit.SECONDS); //maxcompile time =10 sec
+            verdict = compiler.exitValue();
+        } catch (Exception e) {
+            System.err.println("Compiler execution failed!!");
+            verdict = SubmissionError;
+            e.printStackTrace();
+        }
+
+        //compiling finished!
+        long runtime = 0;
+
+        long tl = 5000;
+        int dsCnt = 0;
+        int passedTest=0;
+
+        String sql = "SELECT * FROM `" + DB + "`.problem WHERE `pid`=" + pid;
+        try {
+            Statement stmt2 = conn.createStatement();
+            ResultSet rs2 = stmt2.executeQuery(sql);
+            if (rs2.next()) {
+                tl = rs2.getInt("tl");
+                dsCnt = rs2.getInt("dscnt");
+            }
+            if (stmt2 != null) {
+                stmt2.close();
+            }
+        } catch (SQLException se) {
+//Handle errors for JDBC
+            se.printStackTrace();
+        } catch (Exception e) {
+//Handle errors for Class.forName
+            e.printStackTrace();
+        }
+
+        System.err.println("\n\n*Starting judgement of submission: " + id + " of problem: " + pid + " with ds= " + dsCnt);
+        
+        for ( passedTest = 0; passedTest < dsCnt; passedTest++) {
+            if (verdict != 0) {
+                break;
+            }
+            verdict = judge(id, pid, lang, passedTest, false, tl);//calling the judge here
+            if (verdict != 0) {
+                break;
+            }
+            runtime = Math.max(runtime, execution_time);
+        }
+        sql = "UPDATE `" + DB + "`.`submission` SET flag = " + verdict + " , runtime = " + execution_time + " WHERE id = " + id;
+        // System.err.println(sql);
+        try {
+            Statement stmt2 = conn.createStatement();
+            int cnt = stmt2.executeUpdate(sql);
+            if (stmt2 != null) {
+                stmt2.close();
+            }
+        } catch (SQLException se) {
+//Handle errors for JDBC
+            se.printStackTrace();
+        } catch (Exception e) {
+//Handle errors for Class.forName
+            e.printStackTrace();
+        }
+
+        System.err.println("# Judgement Complete with verdict: " + verdict + " with runtime= " + runtime + "\n\n");
+
+        scoreBoardHandler(id,pid,verdict,cDB,getScoreICPC(passedTest, dsCnt),uid);
 
         return;
     }
@@ -492,7 +485,7 @@ public class JudgeCDB {
                 int id = rs.getInt("id");
                 //System.out.println(id+" "+rs.getString("hold"));
                 if (hold(id, rs.getString("hold"))) {//look if it's still free
-                    judgeManager(id, rs.getInt("pid"), rs.getInt("lang"));
+                    judgeManager(id, rs.getInt("pid"), rs.getInt("lang"),pre+rs.getInt("conid"),rs.getInt("uid"));
                 }
                 cnt_r++;
             }
@@ -512,51 +505,11 @@ public class JudgeCDB {
 
     }
 
-    void getScores() {
-        try {
-            String sql = "SELECT * FROM `" + cDB + "`.settings ";
-
-            Statement stmt2 = conn.createStatement();
-            ResultSet rs2 = stmt2.executeQuery(sql);
-            if (rs2.next()) {
-                penalty = rs2.getInt("penalty");
-                problemCount = rs2.getInt("problemCount");
-            } else {
-                System.out.println("fetching penalty Failed!");
-            }
-            if (stmt2 != null) {
-                stmt2.close();
-            }
-
-            pscore = new int[problemCount];
-
-            sql = "SELECT * FROM `" + cDB + "`.problem ";
-
-            stmt2 = conn.createStatement();
-            rs2 = stmt2.executeQuery(sql);
-            while (rs2.next()) {
-                pscore[rs2.getInt("cpid")] = rs2.getInt("score");
-            }
-            if (stmt2 != null) {
-                stmt2.close();
-            }
-
-        } catch (SQLException se) {
-//Handle errors for JDBC
-            se.printStackTrace();
-        } catch (Exception e) {
-//Handle errors for Class.forName
-            e.printStackTrace();
-        }
-
-    }
-
     public static void main(String[] argv) throws SQLException {
 
         JudgeCDB obj = new JudgeCDB(System.getProperty("user.dir"), argv[0], argv[1]);
         obj.init();
         obj.connect();
-        obj.getScores();
         obj.fetchSub();
         //query();
 
@@ -564,4 +517,4 @@ public class JudgeCDB {
         System.out.println("Goodbye!");
 
     }//end main
-}//end FirstExample
+}
