@@ -107,7 +107,7 @@ if ($uploadOk == 0) {
 		
 		
 		//insert into global DB
-		$sql="INSERT INTO `$DB`.`submission` (`id`, `pid`, `lang`, `flag`, `runtime`, `arrtime`, `hold`,`uid`,`conid`,`uname`) VALUES (NULL, '$pid', '$lang', NULL, NULL, '$timestamp', NULL,'$uid','$conid','$uname');";
+		$sql="INSERT INTO `$DB`.`submission` (`id`, `pid`, `lang`, `flag`, `runtime`, `arrtime`, `hold`,`uid`,`conid`,`uname`,`type`) VALUES (NULL, '$pid', '$lang', NULL, NULL, '$timestamp', NULL,'$uid','$conid','$uname','official');";
 		//echo '</br>'.$sql;
 		if(mysqli_query($conn,$sql)==FALSE)
 			die("Eror Occured while Inseting into DB!");
