@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 27, 2016 at 07:58 AM
+-- Generation Time: Jul 31, 2016 at 07:10 AM
 -- Server version: 5.6.16
 -- PHP Version: 5.5.9
 
@@ -49,7 +49,14 @@ INSERT INTO `inset` (`pid`, `dsid`, `in`) VALUES
 (31, 6, 'alter1.in'),
 (31, 7, 'alter1.in'),
 (31, 8, 'alter1.in'),
-(31, 9, 'alter2.in');
+(31, 9, 'alter2.in'),
+(83, 0, 'balance.in'),
+(83, 1, 'balance.in'),
+(83, 2, 'balance.in'),
+(83, 3, 'balance.in'),
+(83, 4, 'balance.in'),
+(83, 5, '1.in'),
+(83, 6, '1.in');
 
 -- --------------------------------------------------------
 
@@ -80,7 +87,14 @@ INSERT INTO `outset` (`pid`, `dsid`, `out`) VALUES
 (31, 6, 'judge.in'),
 (31, 7, 'judge.in'),
 (31, 8, 'judge.in'),
-(31, 9, 'judge.in');
+(31, 9, 'judge.in'),
+(83, 0, 'balance.out'),
+(83, 1, 'balance.out'),
+(83, 2, 'balance.out'),
+(83, 3, 'balance.out'),
+(83, 4, 'balance.out'),
+(83, 5, '1.in'),
+(83, 6, '1.in');
 
 -- --------------------------------------------------------
 
@@ -163,11 +177,11 @@ CREATE TABLE IF NOT EXISTS `scoreboard` (
 --
 
 INSERT INTO `scoreboard` (`uid`, `uname`, `name`, `rank`, `score`, `penalty`, `penalty0`, `firstac0`, `penalty1`, `firstac1`, `penalty2`, `firstac2`, `penalty3`, `firstac3`, `score0`, `score1`, `score2`, `score3`, `wrong0`, `wrong1`, `wrong2`, `wrong3`) VALUES
-(2, 'moshiur.bd', 'Moshiur Rahman', 0, 3, 1584, 158, 35, 1205, 72, 0, 2147483647, 221, 40, 1, 1, 0, 1, 1, 2, 4, 1),
-(9, 'sudipto.bd', 'sudipto', 0, 1, 294, 294, 47, 0, 2147483647, 0, 2147483647, 0, 2147483647, 1, 0, 0, 0, 1, 1, 3, 1),
-(11, 'tnvr', 'Tanvir', 0, 1, 233, 0, 2147483647, 0, 2147483647, 233, 43, 0, 2147483647, 0, 0, 1, 0, 0, 0, 1, 0),
-(13, 'FakeUser', 'FakeUser', 0, 3, 1337, 522, 55, 541, 53, 274, 46, 0, 2147483647, 1, 1, 1, 0, 2, 3, 2, 1),
-(14, 'skmonir', 'skmonir', 0, 1, 662, 662, 60, 0, 2147483647, 0, 2147483647, 0, 2147483647, 1, 0, 0, 0, 3, 0, 0, 0);
+(2, 'moshiur.bd', 'Moshiur Rahman', 0, 300, 1504, 138, 35, 1165, 72, 0, 2147483647, 201, 40, 100, 100, 0, 100, 1, 2, 4, 1),
+(9, 'sudipto.bd', 'sudipto', 0, 100, 274, 274, 47, 0, 2147483647, 0, 2147483647, 0, 2147483647, 100, 0, 0, 0, 1, 1, 3, 1),
+(11, 'tnvr', 'Tanvir', 0, 100, 213, 0, 2147483647, 0, 2147483647, 213, 43, 0, 2147483647, 0, 0, 100, 0, 0, 0, 1, 0),
+(13, 'FakeUser', 'FakeUser', 0, 300, 1197, 482, 55, 481, 53, 234, 46, 0, 2147483647, 100, 100, 100, 0, 2, 3, 2, 1),
+(14, 'skmonir', 'skmonir', 0, 100, 602, 602, 60, 0, 2147483647, 0, 2147483647, 0, 2147483647, 100, 0, 0, 0, 3, 0, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -190,7 +204,7 @@ CREATE TABLE IF NOT EXISTS `settings` (
 --
 
 INSERT INTO `settings` (`delay`, `duration`, `penalty`, `problemCount`, `status`, `name`) VALUES
-(5000, 187800000, 20, 4, 'running', 'NHSPC practice contest 2');
+(5000, 287800000, 20, 4, 'running', 'NHSPC practice contest 2');
 
 -- --------------------------------------------------------
 
@@ -212,7 +226,8 @@ INSERT INTO `srcset` (`pid`, `sid`, `src`) VALUES
 (31, 0, 'Judge.cpp'),
 (32, 0, 'judge.cpp'),
 (33, 0, 'Judge.cpp'),
-(34, 0, 'judge.cpp');
+(34, 0, 'judge.cpp'),
+(88, 0, 'balance.out');
 
 -- --------------------------------------------------------
 
@@ -307,7 +322,13 @@ INSERT INTO `submission` (`id`, `uid`, `pid`, `arrtime`) VALUES
 (109, 2, 33, 126904),
 (110, 2, 33, 126951),
 (111, 2, 31, 136371),
-(112, 2, 31, 137418);
+(112, 2, 31, 137418),
+(113, 13, 31, 147134),
+(114, 13, 31, 147210),
+(115, 2, 31, 158390),
+(116, 2, 31, 187816),
+(117, 2, 31, 188036),
+(118, 2, 31, 188067);
 
 -- --------------------------------------------------------
 
@@ -325,7 +346,7 @@ CREATE TABLE IF NOT EXISTS `time` (
 --
 
 INSERT INTO `time` (`elapsed`, `stamp`) VALUES
-('146968927', '1469568949585');
+('190554970', '1469903619878');
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

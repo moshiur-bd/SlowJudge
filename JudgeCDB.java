@@ -7,14 +7,15 @@ import java.util.*;
 import java.util.concurrent.TimeUnit;
 
 public class JudgeCDB {
-
+    boolean exitNow=false;
     String dir;
-    String DB ;
+    String DB;
     String pre; //get later
     int conid = 28, maxId = 2147483647;
 
     Connection conn = null;
     Statement stmt = null;
+    PreparedStatement pstmt = null;
     ResultSet rs = null;
 
     long holdTime = 30;//in sec
@@ -191,13 +192,11 @@ public class JudgeCDB {
 
     }
 
-    
-    
-    int getScoreICPC(int passed,int dscnt){
-        return passed==dscnt?100:0;
+    int getScoreICPC(int passed, int dscnt) {
+        return passed == dscnt ? 100 : 0;
     }
-    
-    void scoreBoardHandler(int id,int pid,int verdict,String cDB,int pscore,int uid) {
+
+    void scoreBoardHandler(int id, int pid, int verdict, String cDB, int pscore, int uid) {
 
         Statement stmt2;
         ResultSet rs2;
@@ -219,7 +218,6 @@ public class JudgeCDB {
             if (stmt2 != null) {
                 stmt2.close();
             }
-       
 
             //get AC sub< id
             sql = "SELECT `firstac" + cpid + "` FROM `" + cDB + "`.`scoreboard` WHERE `uid`=" + uid;
@@ -369,13 +367,12 @@ public class JudgeCDB {
 
     }
 
-    void judgeManager(int id, int pid, int lang,String cDB,int uid) {
+    void judgeManager(int id, int pid, int lang, String cDB, int uid,String subtype) {
 
         int verdict = 0;
-        execution_time=0;
-        
-        ///compile the code. then run
+        execution_time = 0;
 
+        ///compile the code. then run
         String cmd[] = {"compiler.exe ", "" + lang,};
         ProcessBuilder pb = new ProcessBuilder(cmd);
         try {
@@ -394,7 +391,7 @@ public class JudgeCDB {
 
         long tl = 5000;
         int dsCnt = 0;
-        int passedTest=0;
+        int passedTest = 0;
 
         String sql = "SELECT * FROM `" + DB + "`.problem WHERE `pid`=" + pid;
         try {
@@ -416,8 +413,8 @@ public class JudgeCDB {
         }
 
         System.err.println("\n\n*Starting judgement of submission: " + id + " of problem: " + pid + " with ds= " + dsCnt);
-        
-        for ( passedTest = 0; passedTest < dsCnt; passedTest++) {
+
+        for (passedTest = 0; passedTest < dsCnt; passedTest++) {
             if (verdict != 0) {
                 break;
             }
@@ -445,7 +442,7 @@ public class JudgeCDB {
 
         System.err.println("# Judgement Complete with verdict: " + verdict + " with runtime= " + runtime + "\n\n");
 
-        scoreBoardHandler(id,pid,verdict,cDB,getScoreICPC(passedTest, dsCnt),uid);
+        scoreBoardHandler(id, pid, verdict, cDB, getScoreICPC(passedTest, dsCnt), uid);
 
         return;
     }
@@ -462,8 +459,31 @@ public class JudgeCDB {
         //System.out.println(sql);
         int ret = stmt.executeUpdate(sql);
         System.out.println("hold = " + id);
+        if (stmt != null) {
+            stmt.close();
+        }
+
         if (ret == 1) {
             return true;
+        }
+        return false;
+    }
+
+    boolean status() {//this function get the response from manager via database. if it returns 0 judging get stops. and exit from this program 
+        try {
+            Statement stat = conn.createStatement();
+            ResultSet res = stat.executeQuery("SELECT `status` FROM `" + DB + "`.judge");
+            if (res.next()) {
+                return !(exitNow=(res.getString("status").endsWith("off")));
+            }
+            if (stat != null) {
+                stat.close();
+            }
+
+        } catch (SQLException e) {
+            System.err.println("judge status fetching failed!");
+            e.printStackTrace();
+
         }
         return false;
     }
@@ -471,26 +491,53 @@ public class JudgeCDB {
     int fetchSub() {
         int cnt_r = 0;
         try {
+            if(!status()) return 0;
 
             ////continuous sub judging
             stmt = conn.createStatement();
             long expireTime = (System.currentTimeMillis() / 1000 - holdTime);
+            pstmt = conn.prepareStatement("SELECT * FROM `" + DB + "`.`submission` WHERE (`flag` IS NULL) AND(`hold` IS NULL OR `hold` < " + expireTime + "  ) AND `type`=? ;");
 
-            String sql = "SELECT * FROM `" + DB + "`.`submission` WHERE (`flag` IS NULL) AND(`hold` IS NULL OR `hold` < " + expireTime + " );";
+            pstmt.setString(1, "official");
 
-            rs = stmt.executeQuery(sql);
-//STEP 5: Extract data from result set
+            rs = pstmt.executeQuery();
+
             while (rs.next()) {
-//Retrieve by column name
+
                 int id = rs.getInt("id");
                 //System.out.println(id+" "+rs.getString("hold"));
                 if (hold(id, rs.getString("hold"))) {//look if it's still free
-                    judgeManager(id, rs.getInt("pid"), rs.getInt("lang"),pre+rs.getInt("conid"),rs.getInt("uid"));
+                    judgeManager(id, rs.getInt("pid"), rs.getInt("lang"), pre + rs.getInt("conid"), rs.getInt("uid"),"official");
                 }
                 cnt_r++;
+                if (!status()) {
+                    break;
+                }
+
             }
 
-//STEP 6: Clean-up environment
+            if (cnt_r == 0) {
+                pstmt.setString(1, "unofficial");
+
+                rs = pstmt.executeQuery();
+
+                if (rs.next()) {
+
+                    int id = rs.getInt("id");
+                    //System.out.println(id+" "+rs.getString("hold"));
+                    if (hold(id, rs.getString("hold"))) {//look if it's still free
+                        judgeManager(id, rs.getInt("pid"), rs.getInt("lang"), pre + rs.getInt("conid"), rs.getInt("uid"),"unofficial");
+                    }
+                    cnt_r++;
+                    status();
+
+                }
+
+            }
+
+            if (pstmt != null) {
+                pstmt.close();
+            }
         } catch (SQLException se) {
 //Handle errors for JDBC
             se.printStackTrace();
@@ -498,7 +545,6 @@ public class JudgeCDB {
 //Handle errors for Class.forName
             e.printStackTrace();
         } finally {
-//finally block used to close resources
 
         }//end try
         return cnt_r;
@@ -510,10 +556,23 @@ public class JudgeCDB {
         JudgeCDB obj = new JudgeCDB(System.getProperty("user.dir"), argv[0], argv[1]);
         obj.init();
         obj.connect();
-        obj.fetchSub();
-        //query();
-
-        ////fetch setting...
+        obj.status();
+        while(true){
+            
+            if(obj.exitNow) break;
+            if(obj.fetchSub()==0){
+                try{
+                    System.err.println("Kaj nai. 7 second er jonno ghumailam!");
+                    Thread.sleep(7000);
+                }
+                catch(InterruptedException e){
+                    System.err.println("beshi ghumano hoye geche!");
+                    e.printStackTrace();
+                }
+            }
+            
+        };
+        obj.disconnect();
         System.out.println("Goodbye!");
 
     }//end main
