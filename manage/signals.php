@@ -7,9 +7,11 @@
 			$judge='bggreen';
 		else if($status=='off')
 			$judge='bgred';
-		else if($status=='shut'){
+		else if($status=='halting'){
 			$judge='bgorange';
-			$status='shutting';
+		}
+		else if($status=='initiating'){
+			$judge='bggreenish';
 		}
 	}
 	else "failed to get signals";
@@ -21,8 +23,9 @@
 	
 	<tr>
 	<td class='signal'> 
-	<span class="<?php echo $judge; ?> box" ><?php echo $status; ?></span>
+	<a  href="alterjudge.php" ><span class="<?php echo $judge; ?> box" ><?php echo $status; ?></span>~</a>
 	<span class='signallabel' >Judge</span>
+	
 	</td>
 	
 	</tr>

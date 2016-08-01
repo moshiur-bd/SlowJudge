@@ -19,7 +19,7 @@
 	{
 		$conid=$row['id'];
 		$name=$row['name'];
-		echo "<tr> <td>".htmlentities($name)."</td> <td>  </td><td><a href='dash.php?conid=$conid' > Manage</a></td> </tr>\n";
+		echo "<tr> <td>".htmlentities($name)."</td> <td>  </td><td><a href='dashman.php?conid=$conid' > Manage</a></td> </tr>\n";
 		
 	}
 	echo "</table>";

@@ -1,51 +1,33 @@
-<html>
-<head></head>
-<body>
-<div id='body'>
-	
-	<?php
-		include(__DIR__ ."\\..\\header.php");
-		include(__DIR__ ."\\..\\connection.php");
-		include("isManager.php");
-		include("signals.php");
-	?>
-	
-	
-	
-	<form name="control" action="getControl.php" >
-	<table id="control" class="controlbtns">
-		<tr>
-			<th>feature</th>
-			<th>control</th>
-		</tr>
-		<tr>
-			<td> Judge</td>
-			<td> 
-			<input type="button" id="controlJudge" class="black"  name="controlJudge" onclick="chageJudgeStatus()" value="<?php echo "$status" ?>">
-			</td>
-		</tr>
-		
-	</table>
-	<input type="submit">
-	</form>
-	
-	
-</div>
 
-	<script>
-		function chageJudgeStatus(){
-			var elm=document.getElementById("controlJudge");
-			if(elm.value=="off"||elm.value=="halt"){
-				elm.value="initiate";
-				elm.class="green";
-			}
-			else{ 
-				elm.value="halt";
-				elm.class="red";
-			}
+<?php
+	$color='bgred';
+	$conid=$_GET['conid'];
+	$cDB=$pre.$conid;
+	if($res=mysqli_query($conn,"SELECT `status` FROM `$cDB`.`settings` ")){
+		$status=mysqli_fetch_array($res)['status'];
+		if($status=='running')
+			$color='bggreen';
+		else if($status=='paused')
+			$color='bgred';
+		else if($status=='finished'){
+			$color='bgorange';
 		}
-		
-	</script>
+	}
+	else "failed to get signals";
+	
+ ?>
 
-</body>
-</html>
+<table id='signals' class='signals'>
+	
+	
+	<tr>
+	<td class='signal'> 
+	<a  href="alterconteststatus.php?conid=<?php echo $conid;?>" ><span class="<?php echo $color; ?> box" ><?php echo $status; ?></span>~</a>
+	<span class='signallabel' >Contest</span>
+	
+	</td>
+	
+	</tr>
+	
+	
+</table>

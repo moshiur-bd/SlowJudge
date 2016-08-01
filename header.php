@@ -14,6 +14,7 @@
 		$uid=$_SESSION['uid'];
 		$usertype=$_SESSION['usertype'];
 	}
+	
 
 
 	$root="/slowjudge";
@@ -35,7 +36,12 @@
 	else if(strpos($url,$root)!==false) //at last home checking. else it'll activate home always
 		$activehome='active';
 	
-	echo "<link href='$root/css/style.css' rel='stylesheet' type='text/css'>";
+	//in manager tab the whole style file is changed
+	if($activemgr=='active')
+		echo "<link href='$root/css/stylemgr.css' rel='stylesheet' type='text/css'>";
+	else 	echo "<link href='$root/css/style.css' rel='stylesheet' type='text/css'>";
+	
+	
 	echo "<ul class='nav'>";
 		echo "<li class='nav $activehome'><span id='contestTab' > <a href='$root'>Home</a> </span></li>";
 		echo "<li class='nav $activecon'><span id='homeTab'> <a href='$conurl'>Contest</a> </span></li>";
