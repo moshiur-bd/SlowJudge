@@ -1,6 +1,7 @@
 <?php
 	include(__DIR__ ."\\..\\header.php");
 	include(__DIR__ ."\\..\\connection.php");
+	include("isManager.php");
 	$conid=$_GET['conid'];
 	$cDB=$pre.$conid;
 	$up=$_POST['up'];

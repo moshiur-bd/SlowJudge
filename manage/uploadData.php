@@ -3,6 +3,7 @@
 
 	include(__DIR__ ."\\..\\connection.php");
 	include(__DIR__ ."\\..\\header.php");
+	include("isManager.php");
 	$maxFileSize=5*1024*1024;
 	$maxSrcSize=1*1024*1024;
 	$maxPdfSize=20*1024*1024;

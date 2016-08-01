@@ -386,7 +386,7 @@ table.dash{
 }
 
 body {
-    margin:1% 5%; padding:0%;
+    /*margin:1% 5%; padding:0%;*/
     
 }
 
@@ -537,3 +537,41 @@ float:right;
 padding:5px;
 border:dashed 1px gray
 }
+
+
+
+
+
+
+/*manage*/
+.signals{
+	float:right;
+	text-align:center;
+	
+}
+.signal{
+	display: inline-block;
+	
+	width:auto;
+	height:2em;
+}
+.box{
+	display: inline-block;
+	width:100%;
+	height:50%;
+}
+.signallabel{
+	width:100%;
+	height:50%;
+}
+.bgred{
+		background-color:red;
+}
+.bggreen{
+		background-color:green;
+}
+.bgorange{
+		background-color:orange;
+}
+/*endof manage*/
+

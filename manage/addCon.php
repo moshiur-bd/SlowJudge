@@ -2,6 +2,7 @@
 
 	include(__DIR__."\\..\\connection.php");
 	include(__DIR__."\\..\\header.php");
+	include("isManager.php");
 	//session_start();
 	if(!isset($_SESSION['uid'])){
 		die ("you are not Logged in!");

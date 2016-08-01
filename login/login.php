@@ -14,6 +14,7 @@
 		if($row['upass']==$upass){
 			$_SESSION['uid']=$row['uid'];
 			$_SESSION['uname']=$row['uname'];
+			$_SESSION['usertype']=$row['type'];
 			
 			echo "ok";
 			header("Location: ".$root);
