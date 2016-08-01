@@ -248,7 +248,7 @@ public class JudgeCDB {
 
             try {
 
-                if (facid > id) ///if and only if new ac id is less than prev        
+                if (facid > id) ///if and only if new ac id is less than prev
                 {
 
                     //get WA sub< id
@@ -297,7 +297,7 @@ public class JudgeCDB {
                     sql = "UPDATE `" + cDB + "`.`scoreboard` SET `firstac" + cpid + "` = " + id
                             + ", `penalty`=`penalty`-`penalty" + cpid + "` ,"
                             + "`score`=`score`-`score" + cpid + "` WHERE `uid`=" + uid + ";";
-                    // 
+                    //
 
                     sql2 = "UPDATE `" + cDB + "`.`scoreboard` SET `penalty" + cpid + "` = " + pen + ", `score" + cpid + "` = " + pscore
                             + " ,`penalty`=`penalty`+`penalty" + cpid + "` , `score`=`score`+`score" + cpid + "` WHERE `uid` = " + uid + ";";
@@ -469,12 +469,12 @@ public class JudgeCDB {
         return false;
     }
 
-    boolean status() {//this function get the response from manager via database. if it returns 0 judging get stops. and exit from this program 
+    boolean haltInterrupt() {//this function get the response from manager via database. if it returns 0 judging get stops. and exit from this program
         try {
             Statement stat = conn.createStatement();
             ResultSet res = stat.executeQuery("SELECT `status` FROM `" + DB + "`.judge");
             if (res.next()) {
-                return !(exitNow=(res.getString("status").endsWith("off")));
+                return exitNow=res.getString("status").equalsIgnoreCase("halting")||res.getString("status").equalsIgnoreCase("off");
             }
             if (stat != null) {
                 stat.close();
@@ -487,11 +487,44 @@ public class JudgeCDB {
         }
         return false;
     }
+    int  on() {//set judge status to on
+        try {
+            Statement stat = conn.createStatement();
+
+            int ret= stat.executeUpdate("UPDATE  `" + DB + "`.judge SET `status`='on' ");
+            if (stat != null) {
+                stat.close();
+            }
+            return ret;
+
+        } catch (SQLException e) {
+            System.err.println("judge status fetching failed!");
+            e.printStackTrace();
+
+        }
+        return 0;
+    }
+    int  off() {//set judge status to off
+        try {
+            Statement stat = conn.createStatement();
+
+            int ret= stat.executeUpdate("UPDATE  `" + DB + "`.judge SET `status`='off' ");
+            if (stat != null) {
+                stat.close();
+            }
+            return ret;
+
+        } catch (SQLException e) {
+            System.err.println("judge status fetching failed!");
+            e.printStackTrace();
+
+        }
+        return 0;
+    }
 
     int fetchSub() {
         int cnt_r = 0;
         try {
-            if(!status()) return 0;
 
             ////continuous sub judging
             stmt = conn.createStatement();
@@ -510,12 +543,13 @@ public class JudgeCDB {
                     judgeManager(id, rs.getInt("pid"), rs.getInt("lang"), pre + rs.getInt("conid"), rs.getInt("uid"),"official");
                 }
                 cnt_r++;
-                if (!status()) {
+                if (haltInterrupt()) {
                     break;
                 }
 
             }
-
+            if(exitNow) return cnt_r;
+            
             if (cnt_r == 0) {
                 pstmt.setString(1, "unofficial");
 
@@ -529,7 +563,6 @@ public class JudgeCDB {
                         judgeManager(id, rs.getInt("pid"), rs.getInt("lang"), pre + rs.getInt("conid"), rs.getInt("uid"),"unofficial");
                     }
                     cnt_r++;
-                    status();
 
                 }
 
@@ -556,10 +589,12 @@ public class JudgeCDB {
         JudgeCDB obj = new JudgeCDB(System.getProperty("user.dir"), argv[0], argv[1]);
         obj.init();
         obj.connect();
-        obj.status();
+        
+        obj.on();//set judge status on
+        obj.haltInterrupt();
         while(true){
-            
-            if(obj.exitNow) break;
+
+            if(obj.haltInterrupt()) break;
             if(obj.fetchSub()==0){
                 try{
                     System.err.println("Kaj nai. 7 second er jonno ghumailam!");
@@ -570,8 +605,10 @@ public class JudgeCDB {
                     e.printStackTrace();
                 }
             }
-            
+
         };
+        
+        obj.off();
         obj.disconnect();
         System.out.println("Goodbye!");
 
