@@ -1,16 +1,13 @@
 //package com.mkyong.common;
 
 import java.io.*;
-import java.lang.management.*;
-
 import java.nio.charset.Charset;
 import java.sql.*;
 import java.util.*;
 import java.util.concurrent.TimeUnit;
 
 public class JudgeCDB {
-
-    boolean exitNow = false;
+    boolean exitNow=false;
     String dir;
     String DB;
     String pre; //get later
@@ -26,7 +23,6 @@ public class JudgeCDB {
 
     int penalty;
     int problemCount;
-    ThreadMXBean bean;
 
     //verdicts
     int TLE = 1;
@@ -41,41 +37,8 @@ public class JudgeCDB {
         dir = s;
         pre = s2;
         DB = s1;
-        bean = ManagementFactory.getThreadMXBean();
 
     }
-    /* ManagementFactory functions*/
-
-    /**
-     * Get CPU time in nanoseconds.
-     */
-    public long getCpuTime(int id) {
-        ThreadMXBean bean = ManagementFactory.getThreadMXBean();
-        return bean.isCurrentThreadCpuTimeSupported()
-                ? bean.getThreadCpuTime(id): 0L;
-    }
-
-    /**
-     * Get user time in nanoseconds.
-     */
-    public long getUserTime(int id) {
-        ThreadMXBean bean = ManagementFactory.getThreadMXBean();
-        return bean.isCurrentThreadCpuTimeSupported()
-                ? bean.getThreadUserTime(id) : 0L;
-    }
-
-    /**
-     * Get system time in nanoseconds.
-     */
-    public long getSystemTime(int id) {
-        ThreadMXBean bean = ManagementFactory.getThreadMXBean();
-        return bean.isCurrentThreadCpuTimeSupported()
-                ? (bean.getThreadCpuTime(id) - bean.getThreadUserTime(id)) : 0L;
-    }
-
-    /**
-     * ****************************
-     */
 
     boolean init() {
         System.out.println("-------- MySQL JDBC Connection Testing ------------");
@@ -192,7 +155,8 @@ public class JudgeCDB {
         pb = pb.redirectError(new File(pathError));
         Process process;
         int ret = -1;
-        long start_time = System.currentTimeMillis(); //System.currentTimeMillis();//change
+
+        long start_time = System.currentTimeMillis();
         try {
 
             process = pb.start();
@@ -214,7 +178,7 @@ public class JudgeCDB {
             return SubmissionError;
 
         }
-        execution_time = (System.currentTimeMillis()- start_time);//change
+        execution_time = System.currentTimeMillis() - start_time;
         System.out.println(ret);
         System.out.println("Excecution: " + execution_time);
         if (verdict == TLE); else if (ret == 0) {
@@ -403,7 +367,7 @@ public class JudgeCDB {
 
     }
 
-    void judgeManager(int id, int pid, int lang, String cDB, int uid, String subtype) {
+    void judgeManager(int id, int pid, int lang, String cDB, int uid,String subtype) {
 
         int verdict = 0;
         execution_time = 0;
@@ -510,7 +474,7 @@ public class JudgeCDB {
             Statement stat = conn.createStatement();
             ResultSet res = stat.executeQuery("SELECT `status` FROM `" + DB + "`.judge");
             if (res.next()) {
-                return exitNow = res.getString("status").equalsIgnoreCase("halting") || res.getString("status").equalsIgnoreCase("off");
+                return exitNow=res.getString("status").equalsIgnoreCase("halting")||res.getString("status").equalsIgnoreCase("off");
             }
             if (stat != null) {
                 stat.close();
@@ -523,12 +487,11 @@ public class JudgeCDB {
         }
         return false;
     }
-
-    int on() {//set judge status to on
+    int  on() {//set judge status to on
         try {
             Statement stat = conn.createStatement();
 
-            int ret = stat.executeUpdate("UPDATE  `" + DB + "`.judge SET `status`='on' ");
+            int ret= stat.executeUpdate("UPDATE  `" + DB + "`.judge SET `status`='on' ");
             if (stat != null) {
                 stat.close();
             }
@@ -541,12 +504,11 @@ public class JudgeCDB {
         }
         return 0;
     }
-
-    int off() {//set judge status to off
+    int  off() {//set judge status to off
         try {
             Statement stat = conn.createStatement();
 
-            int ret = stat.executeUpdate("UPDATE  `" + DB + "`.judge SET `status`='off' ");
+            int ret= stat.executeUpdate("UPDATE  `" + DB + "`.judge SET `status`='off' ");
             if (stat != null) {
                 stat.close();
             }
@@ -578,7 +540,7 @@ public class JudgeCDB {
                 int id = rs.getInt("id");
                 //System.out.println(id+" "+rs.getString("hold"));
                 if (hold(id, rs.getString("hold"))) {//look if it's still free
-                    judgeManager(id, rs.getInt("pid"), rs.getInt("lang"), pre + rs.getInt("conid"), rs.getInt("uid"), "official");
+                    judgeManager(id, rs.getInt("pid"), rs.getInt("lang"), pre + rs.getInt("conid"), rs.getInt("uid"),"official");
                 }
                 cnt_r++;
                 if (haltInterrupt()) {
@@ -586,10 +548,8 @@ public class JudgeCDB {
                 }
 
             }
-            if (exitNow) {
-                return cnt_r;
-            }
-
+            if(exitNow) return cnt_r;
+            
             if (cnt_r == 0) {
                 pstmt.setString(1, "unofficial");
 
@@ -600,7 +560,7 @@ public class JudgeCDB {
                     int id = rs.getInt("id");
                     //System.out.println(id+" "+rs.getString("hold"));
                     if (hold(id, rs.getString("hold"))) {//look if it's still free
-                        judgeManager(id, rs.getInt("pid"), rs.getInt("lang"), pre + rs.getInt("conid"), rs.getInt("uid"), "unofficial");
+                        judgeManager(id, rs.getInt("pid"), rs.getInt("lang"), pre + rs.getInt("conid"), rs.getInt("uid"),"unofficial");
                     }
                     cnt_r++;
 
@@ -629,26 +589,25 @@ public class JudgeCDB {
         JudgeCDB obj = new JudgeCDB(System.getProperty("user.dir"), argv[0], argv[1]);
         obj.init();
         obj.connect();
-
+        
         obj.on();//set judge status on
         obj.haltInterrupt();
-        while (true) {
+        while(true){
 
-            if (obj.haltInterrupt()) {
-                break;
-            }
-            if (obj.fetchSub() == 0) {
-                try {
+            if(obj.haltInterrupt()) break;
+            if(obj.fetchSub()==0){
+                try{
                     System.err.println("Kaj nai. 7 second er jonno ghumailam!");
                     Thread.sleep(7000);
-                } catch (InterruptedException e) {
+                }
+                catch(InterruptedException e){
                     System.err.println("beshi ghumano hoye geche!");
                     e.printStackTrace();
                 }
             }
 
         };
-
+        
         obj.off();
         obj.disconnect();
         System.out.println("Goodbye!");
