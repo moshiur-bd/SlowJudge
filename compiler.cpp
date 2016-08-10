@@ -89,7 +89,7 @@ int main(int argc ,char *argv[] ){
     }
     else cerr<<"Too Few arguments\n";
     if(fileExists("Main.exe")||fileExists("Main.class"))
-            return 0;
+            return 0;//AC
 
-    return -2;
+    return -2;//CE
 }

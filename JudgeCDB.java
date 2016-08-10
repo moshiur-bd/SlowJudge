@@ -4,6 +4,8 @@ import java.io.*;
 import java.lang.management.*;
 
 import java.nio.charset.Charset;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.sql.*;
 import java.util.*;
 import java.util.concurrent.TimeUnit;
@@ -166,26 +168,32 @@ public class JudgeCDB {
         return ret;
     }
 
-    int judge(int id, int pid, int lang, int sid, boolean manualChecker, long limit) {
+    long judge(int id, int pid, int lang, int sid, boolean manualChecker, long limit) {
 
-        String pathSubmission = "sub\\" + id + "\\Main.exe";
+        String pathWatcher = "watcher.exe";
+        String pathSubmission = dir+"\\sub\\" + id + "\\Main.exe";
+        
         String pathDirectory = "C:\\sandbox\\";  ///misdirect user program!!!
         String pathInput = "in\\" + pid + "\\" + sid + ".txt";
         String pathOutput = "sub\\" + id + "\\" + sid + ".txt";
         String pathAnswer = "out\\" + pid + "\\" + sid + ".txt";
         String pathError = "sub\\" + id + "\\err" + sid + ".txt";
+        String pathInfo = dir+"\\sub\\" + id + "\\info" + sid + ".txt";
 
         //pathSubmission="compiler.exe";
 
-        /* System.out.println(pathSubmission);
+        System.out.println(pathSubmission);
+        /*
          System.out.println(pathInput);
          System.out.println(pathOutput);
          System.out.println(pathError);*/
-        int verdict = 0;
+        long verdict = 0;
 
         ProcessBuilder pb;
-
-        pb = new ProcessBuilder(pathSubmission);
+        
+        String  cmdline[]={pathWatcher,pathSubmission,""+limit,"512",pathInfo};
+        
+        pb = new ProcessBuilder(cmdline);
         pb = pb.directory(new File(pathDirectory));
         pb = pb.redirectInput(new File(pathInput));
         pb = pb.redirectOutput(new File(pathOutput));
@@ -198,15 +206,17 @@ public class JudgeCDB {
             process = pb.start();
             System.err.println("Running........");
 
-            process.waitFor(limit, TimeUnit.MILLISECONDS);
-            if (!process.isAlive()) {
-                ret = process.exitValue();
-            }
-            if (process.isAlive()) {
-                verdict = TLE;
-                System.out.println("Time limit Exceeded!! :'( ");
-                process.destroy();
-            }
+            process.waitFor(410000, TimeUnit.MILLISECONDS);//MAXLIMIT
+            
+            Scanner rep=new Scanner(new File(pathInfo));
+            verdict=-100;
+            if(rep.hasNext()) execution_time=rep.nextInt();
+            if(rep.hasNext()) verdict=rep.nextLong();
+            rep.close();
+            
+            
+
+
 
         } catch (Exception e) {
             verdict = -100;
@@ -214,10 +224,9 @@ public class JudgeCDB {
             return SubmissionError;
 
         }
-        execution_time = (System.currentTimeMillis()- start_time);//change
-        System.out.println(ret);
-        System.out.println("Excecution: " + execution_time);
-        if (verdict == TLE); else if (ret == 0) {
+        
+        if (verdict == TLE);
+        else if (verdict == 0) {
             verdict = checker(pid, pathInput, pathOutput, pathAnswer, manualChecker);
 
         } else {
@@ -232,7 +241,7 @@ public class JudgeCDB {
         return passed == dscnt ? 100 : 0;
     }
 
-    void scoreBoardHandler(int id, int pid, int verdict, String cDB, int pscore, int uid) {
+    void scoreBoardHandler(int id, int pid, long verdict, String cDB, int pscore, int uid) {
 
         Statement stmt2;
         ResultSet rs2;
@@ -279,7 +288,7 @@ public class JudgeCDB {
             e.printStackTrace();
         }
 
-        if (verdict == 0) {
+        if (verdict == YES) {
             System.err.println("------updating Scoreboard.........");
 
             try {
@@ -405,7 +414,7 @@ public class JudgeCDB {
 
     void judgeManager(int id, int pid, int lang, String cDB, int uid, String subtype) {
 
-        int verdict = 0;
+        long verdict = 0;
         execution_time = 0;
 
         ///compile the code. then run
