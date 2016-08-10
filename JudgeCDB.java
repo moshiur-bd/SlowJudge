@@ -54,7 +54,7 @@ public class JudgeCDB {
     public long getCpuTime(int id) {
         ThreadMXBean bean = ManagementFactory.getThreadMXBean();
         return bean.isCurrentThreadCpuTimeSupported()
-                ? bean.getThreadCpuTime(id): 0L;
+                ? bean.getThreadCpuTime(id) : 0L;
     }
 
     /**
@@ -78,7 +78,6 @@ public class JudgeCDB {
     /**
      * ****************************
      */
-
     boolean init() {
         System.out.println("-------- MySQL JDBC Connection Testing ------------");
 
@@ -171,17 +170,16 @@ public class JudgeCDB {
     long judge(int id, int pid, int lang, int sid, boolean manualChecker, long limit) {
 
         String pathWatcher = "watcher.exe";
-        String pathSubmission = dir+"\\sub\\" + id + "\\Main.exe";
-        
+        String pathSubmission = dir + "\\sub\\" + id + "\\Main.exe";
+
         String pathDirectory = "C:\\sandbox\\";  ///misdirect user program!!!
         String pathInput = "in\\" + pid + "\\" + sid + ".txt";
         String pathOutput = "sub\\" + id + "\\" + sid + ".txt";
         String pathAnswer = "out\\" + pid + "\\" + sid + ".txt";
         String pathError = "sub\\" + id + "\\err" + sid + ".txt";
-        String pathInfo = dir+"\\sub\\" + id + "\\info" + sid + ".txt";
+        String pathInfo = dir + "\\sub\\" + id + "\\info" + sid + ".txt";
 
         //pathSubmission="compiler.exe";
-
         System.out.println(pathSubmission);
         /*
          System.out.println(pathInput);
@@ -190,9 +188,9 @@ public class JudgeCDB {
         long verdict = 0;
 
         ProcessBuilder pb;
-        
-        String  cmdline[]={pathWatcher,pathSubmission,""+limit,"512",pathInfo};
-        
+
+        String cmdline[] = {pathWatcher, pathSubmission, "" + limit, "512", pathInfo};
+
         pb = new ProcessBuilder(cmdline);
         pb = pb.directory(new File(pathDirectory));
         pb = pb.redirectInput(new File(pathInput));
@@ -207,16 +205,16 @@ public class JudgeCDB {
             System.err.println("Running........");
 
             process.waitFor(410000, TimeUnit.MILLISECONDS);//MAXLIMIT
-            
-            Scanner rep=new Scanner(new File(pathInfo));
-            verdict=-100;
-            if(rep.hasNext()) execution_time=rep.nextInt();
-            if(rep.hasNext()) verdict=rep.nextLong();
+
+            Scanner rep = new Scanner(new File(pathInfo));
+            verdict = -100;
+            if (rep.hasNext()) {
+                execution_time = rep.nextInt();
+            }
+            if (rep.hasNext()) {
+                verdict = rep.nextLong();
+            }
             rep.close();
-            
-            
-
-
 
         } catch (Exception e) {
             verdict = -100;
@@ -224,9 +222,8 @@ public class JudgeCDB {
             return SubmissionError;
 
         }
-        
-        if (verdict == TLE);
-        else if (verdict == 0) {
+
+        if (verdict == TLE); else if (verdict == 0) {
             verdict = checker(pid, pathInput, pathOutput, pathAnswer, manualChecker);
 
         } else {
@@ -239,6 +236,59 @@ public class JudgeCDB {
 
     int getScoreICPC(int passed, int dscnt) {
         return passed == dscnt ? 100 : 0;
+    }
+
+    void updateScoreSum(String cDB, int uid) {
+
+        String sql = "SELECT `problemCount` FROM `" + cDB + "`.settings";
+        try {
+            Statement stmtsc = conn.createStatement();
+            ResultSet rssc = stmtsc.executeQuery(sql);
+            if (rssc.next()) {
+                problemCount = rssc.getInt("problemCount");
+            } else {
+                System.err.println("No result found");
+            }
+            rssc.close();
+            stmtsc.close();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        System.err.println("************ " + cDB + " *** " + problemCount);
+
+        /*sql = "UPDATE `" + cDB + "`.scoreboard SET `score`=0,`penalty`=0  WHERE `uid`=" + uid;
+        System.err.println(sql);
+        try {
+            Statement stmtsc = conn.createStatement();
+            stmtsc.executeUpdate(sql);
+            stmtsc.close();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }*/
+
+        String scrstr = "`score`=0";
+        for (int i = 0; i < problemCount; i++) {
+            scrstr += "+`score" + i + "`";
+        }
+
+        String penstr = "`penalty`=0";
+        for (int i = 0; i < problemCount; i++) {
+            penstr += "+`penalty" + i + "`";
+        }
+
+        sql = "UPDATE `" + cDB + "`.scoreboard SET " + scrstr + " , " + penstr + "  WHERE `uid`=" + uid;
+        try {
+            Statement stmtsc = conn.createStatement();
+            stmtsc.executeUpdate(sql);
+            stmtsc.close();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
     }
 
     void scoreBoardHandler(int id, int pid, long verdict, String cDB, int pscore, int uid) {
@@ -293,12 +343,12 @@ public class JudgeCDB {
 
             try {
 
-                if (facid > id) ///if and only if new ac id is less than prev
+                if (facid >= id) ///if and only if new ac id is less than prev
                 {
 
                     //get WA sub< id
                     int wsub = 0;
-                    sql = "SELECT COUNT(`id`) FROM `" + DB + "`.`submission` WHERE `id` <= " + id + " AND `uid`=" + uid + " AND `pid`= " + pid + " AND `conid` = " + conid + " AND `countable`= 1";
+                    sql = "SELECT COUNT(`id`) FROM `" + DB + "`.`submission` WHERE `id` < " + id + " AND `uid`=" + uid + " AND `pid`= " + pid + " AND `conid` = " + conid + " AND `countable`= 1";
                     stmt2 = conn.createStatement();
                     rs2 = stmt2.executeQuery(sql);
                     if (rs2.next()) {
@@ -336,7 +386,7 @@ public class JudgeCDB {
                     }
                     System.err.println("arr= " + pen);
 
-                    pen += (penalty * wsub);
+                    pen += (penalty * (wsub));
                     //remove privious penalty and add new one
                     String sql2, sql3;
                     sql = "UPDATE `" + cDB + "`.`scoreboard` SET `firstac" + cpid + "` = " + id
@@ -409,6 +459,8 @@ public class JudgeCDB {
             }
 
         }
+
+        updateScoreSum(cDB, uid);
 
     }
 
