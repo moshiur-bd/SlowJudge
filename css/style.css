@@ -191,7 +191,7 @@ td.standing,tr.standing,th.standing{
 
 }
 td.field{
-	width:5em;
+	width:3.4em;
 	height:2.4em;
 }
 
@@ -288,12 +288,13 @@ table.viewsource{
 .buildlog p{
 	color:#f47c3c;
 	position:fixed;
+	z-index:999;
 	width: 20em;
 	background:white;
-    display: inline;
-    padding-left: 4em;
+	display: inline;
+	padding-left: 4em;
 	margin:auto;
-    margin: 3em 1em 1em -22em;
+	margin: 3em 1em 1em -22em;
 }
 
 
@@ -472,27 +473,17 @@ border-radius:5px;
 margin-bottom:15px
 }
 
-
+/*login& register*/
 #login {
-width:300px;
-float:left;
+width:350px;
 border-radius:10px;
 font-family:raleway;
 border:2px solid #ccc;
 padding:10px 40px 25px;
-margin-top:70px
+margin:auto;
+margin-top:200px;
 }
-#register {
-	
-width:300px;
-float:left;
-border-radius:10px;
-font-family:raleway;
-border:2px solid #ccc;
-padding:10px 40px 25px;
-margin-top:70px;
-	
-}
+
 #login  input[type=text],input[type=password] {
 width:99.5%;
 padding:10px;
@@ -503,17 +494,18 @@ font-size:16px;
 font-family:raleway
 }
 #login input[type=submit] {
-width:100%;
-background-color:#FFBC00;
+margin-top: 5px;
+width:30%;
+background-color:#333;
 color:#fff;
-border:2px solid #FFCB00;
+border:2px solid #FFDFDC;
 padding:10px;
 font-size:20px;
 cursor:pointer;
 border-radius:5px;
 margin-bottom:15px
 }
-
+/*.....................*/
 
 
 

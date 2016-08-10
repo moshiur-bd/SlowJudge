@@ -5,6 +5,7 @@
 
 
 <body>
+<div id='body'>
 <?php
 include(__DIR__ . '\\..\\header.php');
 if(isset($_SESSION['uid']))
@@ -14,7 +15,6 @@ if(isset($_SESSION['uid']))
 
  ?>
 
-<div  style="float:right">
 	
 	<div id="login"> 
 		<h2>Login Form</h2>
@@ -26,8 +26,10 @@ if(isset($_SESSION['uid']))
 		<input name="submit" type="submit" value=" Login ">
 		</form
 	</div>
-</div>
 
+</div>
 </body>
+
+
 
 </html>

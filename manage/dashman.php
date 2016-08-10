@@ -6,6 +6,7 @@
 	<?php
 		include(__DIR__ ."\\..\\header.php");
 		include(__DIR__ ."\\..\\connection.php");
+		include("toolbar.php");
 		
 		include("sidebar.php");
 		echo "<div id='content' >\n";
@@ -29,7 +30,8 @@
 				<th class='dash ds'> Edit Dataset </th>
 				<th class='dash ml'> Rejudge </th>  
 				</tr>";
-
+	
+		$cpid=0;
 		while($row=mysqli_fetch_array($respid))
 		{
 			$pid=$row['pid'];
@@ -45,11 +47,13 @@
 					<td class='dash ltr'> $ltr </td>    
 					<td class='dash'> <a href='problemEditor.php?conid=$conid&pid=$pid'> $pname</a> </td> 
 					<td class='dash dataset'> <a href='datasetSingle.php?conid=$conid&pid=$pid' >Edit dataset</a> </td> 
-					<td class='dash rejudge'> <a href='rejudge.php?conid=$conid&pid=$pid'>Rejudge</a> </td> 
+					<td class='dash rejudge'> <a href='rejudge.php?conid=$conid&pid=$pid&cpid=$cpid'>Rejudge</a> </td> 
 				</tr>";
 			$ltr++;
+			$cpid++;
 		}
 		echo "</table></div>";
+		
 		
 		echo "</div>";
 	

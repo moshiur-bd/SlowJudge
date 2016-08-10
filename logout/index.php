@@ -1,7 +1,12 @@
+<div id="body">
 <?php
 	session_start();
-	session_destroy();
+	$_SESSION=array();
+    session_regenerate_id(); 
+    session_destroy();
 	include(__DIR__ ."\\..\\header.php");
 	
+	header("Location: $root");
 	
 ?>
+</div>

@@ -113,7 +113,7 @@ ul.navCon{
     margin: 0;
     padding:0;
     overflow: hidden;
-    background-color: white;
+
 	margin-top:2em;
 	margin-bottom:2em;
 	
@@ -578,6 +578,9 @@ border:dashed 1px gray
 }
 .bggreen{
 		background-color:green;
+}
+.bggreenish{
+		background-color:#999900;
 }
 .bgorange{
 		background-color:orange;

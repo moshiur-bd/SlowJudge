@@ -1,13 +1,13 @@
 <html>
 <head>
+  <link rel="stylesheet" href="highlight/styles/default.css">
 
-<link href="prism/prism.css" rel="stylesheet" />
 </head>
 
 <body>
-
-<script src="prism/prism.js"></script>
 <div id='body'>
+<script src="highlight/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
 
 
 
@@ -91,8 +91,6 @@
 			$path=$target_sub.$id."\\Main.java";
 			$src='java';
 		}
-		$src='language-'.$src;
-		
 	?>
 	
 	
@@ -139,9 +137,17 @@
 	
 
 
-  <pre class='line-numbers' ><code class="<?php echo $src; ?>"><?php echo htmlentities(file_get_contents($path));?></code></pre>
+  <pre>
+  <code class="<?php echo $src; ?>">
+	<?php
+		if(file_exists($path))
+			echo htmlentities("\n".file_get_contents($path));
+	?>
+  </code>
+  </pre>
+
   
-  
+  <script></script>
   </div>
 </body>
 </html>
