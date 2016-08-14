@@ -15,9 +15,9 @@
 		$_SESSION['uname']=$uname;
 		$_SESSION['usertype']='user';
 		echo "ok";
-		header("Location: ".$root."\\profile");
+		header("Location: $root");
 	}
-	//else header("Location: ".$root."\\register");
+	else header("Location: $root/register");
 	echo "username already taken!";
 	
 	

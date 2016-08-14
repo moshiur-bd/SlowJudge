@@ -10,7 +10,7 @@
 include(__DIR__ . '\\..\\header.php');
 if(isset($_SESSION['uid']))
 {
-	header("Location: $root.\\profile");
+	header("Location: $root/profile");
 }
 
  ?>

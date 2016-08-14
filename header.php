@@ -56,9 +56,9 @@
 		if(isset($_SESSION['uid']))
 		{
 
-			echo "<li class='user' ><a class ='uinfo' href='$root\\profile'> $uname </a> | <a class='uinfo' href='$root\\logout'> Logout </a></li>";
+			echo "<li class='user' ><a class ='uinfo' href='$root/profile'> $uname </a> | <a class='uinfo' href='$root/logout'> Logout </a></li>";
 		}else{
-			echo "<li class ='user'><a class='uinfo' href='$root\\login'> Login </a> | <a class= 'uinfo' href='$root\\register'> Register </a></li>";
+			echo "<li class ='user'><a class='uinfo' href='$root/login'> Login </a> | <a class= 'uinfo' href='$root/register'> Register </a></li>";
 			
 		}
 	echo "</ul>";	

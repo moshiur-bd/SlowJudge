@@ -16,8 +16,8 @@
 		
 		
 		echo "<div id='pdf'>
-				<object data='..\\pdf-archive\\$pid.pdf' type='application/pdf' id='pdf-field'>
-				alt : <a href='..\\pdf-archive\\$pid.pdf'>PDF Statement</a>
+				<object data='../pdf-archive/$pid.pdf' type='application/pdf' id='pdf-field'>
+				alt : <a href='../pdf-archive/$pid.pdf'>PDF Statement</a>
 				</object>
 			</div> ";
 		

@@ -544,6 +544,7 @@ border:dashed 1px gray
 
 
 /*manage*/
+/*dash manage*/
 .signals{
 	float:right;
 	text-align:center;
@@ -585,5 +586,14 @@ border:dashed 1px gray
 .bgorange{
 		background-color:orange;
 }
+/*end of dashman*/
+
+/*time table*/
+.timetable input[type=datetime-local]
+{
+		float:right;
+}
+
+
 /*endof manage*/
 

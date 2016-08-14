@@ -5,8 +5,8 @@
 	$uname=$_POST['uname'];
 	$upass=$_POST['upass'];
 	
-	mysqli_select_db($conn,"mosUser");
-	$sql="SELECT * FROM `user` WHERE uname = '$uname' ";
+	
+	$sql="SELECT * FROM `$DB`.`user` WHERE uname = '$uname' ";
 	$result=mysqli_query($conn,$sql);
 	if($row=mysqli_fetch_array($result))
 	{
@@ -16,12 +16,13 @@
 			$_SESSION['uname']=$row['uname'];
 			$_SESSION['usertype']=$row['type'];
 			
-			echo "ok";
-			header("Location: ".$root);
+			//echo "ok $root /login";
+			
+			header("Location: $root");
 			
 		}
 	}
-	else header("Location: ".$root."\\login");
+	else header("Location: ".$root."/login");
 	
 	
 ?>

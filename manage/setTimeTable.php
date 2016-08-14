@@ -8,9 +8,10 @@
 			$conid=$_GET['conid'];
 		?>
 		
-		<form action="timeSubmit.php?conid=<?php echo $conid;?>" method='post'>
-			<input type='datetime-local' name='start' id='start' value='12:00' >Start</input>
-			<input type='time' name='duration' id='duration' value='01:00'>
+		<form action="timeSubmit.php?conid=<?php echo $conid;?>" method='post' class 'timetable'>
+			<input type='datetime-local' name='start' id='start' class='start' >
+			<input type='text' name='durationh' placeholder='hour' class='duration hour' >
+			<input type='text' name='durationm' placeholder='minute' class='duration minute' >
 			<input type='submit'>
 		</form>
 	

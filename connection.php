@@ -3,7 +3,7 @@
 	$pre='mos';
 	$DB=$pre.'user';
 	
-	$root="\\slowjudge";
+	$root="/slowjudge";
 	
 	//back data
 	$slowjudge="C:\\SlowJudge\\";

@@ -91,6 +91,9 @@
 			$path=$target_sub.$id."\\Main.java";
 			$src='java';
 		}
+		if(file_exists($path)==FALSE){
+			$path='';
+		}
 		$src='language-'.$src;
 		
 	?>
