@@ -33,7 +33,7 @@
 		$activecon='active';
 	else if(strpos($url,$mgrurl)!==false)
 		$activemgr='active';
-	else if(strpos($url,$root)!==false) //at last home checking. else it'll activate home always
+	else if($url==$root) //at last home checking. else it'll activate home always
 		$activehome='active';
 	
 	//in manager tab the whole style file is changed

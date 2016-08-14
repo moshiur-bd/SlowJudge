@@ -5,7 +5,6 @@ CSS Settings For HTML Div ExactCenter
 /*global*/
 #body{
 	max-width:1200px;
-	max-height:1080px;
 	min-width:800px;
 	background:#DEE;
 	margin:auto;
@@ -359,14 +358,7 @@ table.dash{
 	margin-left:5%;
 	
 }
-.pname{
-	margin:2% 2%;
-}
-.name{
-	
-	font-size:20px;
-	
-}
+
 .green{
 	color:green;
 	
@@ -460,17 +452,7 @@ font-size:16px;
 font-family:raleway
 }
 
-#dash input[type=submit] {
-width:100%;
-background-color:#FFBC00;
-color:#fff;
-border:2px solid #FFCB00;
-padding:10px;
-font-size:20px;
-cursor:pointer;
-border-radius:5px;
-margin-bottom:15px
-}
+
 
 
 #login {
@@ -588,11 +570,84 @@ border:dashed 1px gray
 }
 /*end of dashman*/
 
+/*nameupload*/
+ input[type=submit].full-submit {
+margin-top:6%;
+width:100%;
+background-color:#BCBCBC;
+color:#fff;
+border:2px solid #FFCB00;
+padding:10px;
+font-size:20px;
+cursor:pointer;
+border-radius:5px;
+margin-bottom:15px;
+
+}
+/*eonameup*/
+
+
+/* dataset*/
+div.dataset{
+	margin:auto;
+	
+}
+table.ds-problems{
+	margin-top:3%;
+	margin-left:1%;
+	background-color:#DDDDDD
+}
+.ds-problems td.pname,td.ds-ltr{
+	font-size:2em;
+}
+.ds-problems td.pdfl,td.srcl{
+	text-align:right;
+}
+
+
+div.ds-io{
+	margin-left:5%;
+	margin-top:2%;
+}
+.ds-io td.sl{
+	text-align:right;
+}
+.ds-io td.in,td.out{
+
+}
+.ds-io td.inl,td.outl{
+	text-align:right;
+}
+.ds-io tr{
+	width:100%;
+}
+
+
+ input[type=submit].big-submit {
+margin-top:6%;
+width:25%;
+background-color:#BCBCBC;
+color:#fff;
+border:2px solid #FFCB00;
+padding:10px;
+font-size:20px;
+cursor:pointer;
+border-radius:5px;
+margin-bottom:15px;
+margin-left:60%;
+}
+/*endof dataset*/
+
+
 /*time table*/
 .timetable input[type=datetime-local]
 {
 		float:right;
 }
+
+/*endof Timtable*/
+
+
 
 
 /*endof manage*/

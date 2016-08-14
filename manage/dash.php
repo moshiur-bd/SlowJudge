@@ -40,7 +40,7 @@
 		
 		echo "<div id='total' ><input type='hidden' name='total' value='$i' ></div> </br>";
 		
-		echo "<input  name='submit' type='submit' value='submit'>";
+		echo "<input  class='full-submit' name='submit' type='submit' value='submit'>";
 		
 		echo "</ol></form></div>";
 		
