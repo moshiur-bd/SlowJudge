@@ -6,13 +6,15 @@
 	//$pre="mos" ///for now only. delete this.
 	//$cDB='mos28';
 	//include(__DIR__ ."\\..\\..\\connection.php");
-	
-	$cDB=$pre.$_GET['conid'];
+	$conid=$_GET['conid'];
+	$cDB=$pre.$conid;
 	
 	$sql="SELECT * FROM `$cDB`.`settings`";
 	if($res=mysqli_query($conn,$sql)){
 		$row=mysqli_fetch_array($res);
-		$conName=$row['name'];
+		$resn=mysqli_query($conn,"SELECT `name` FROM `$DB`.contest WHERE `id`='$conid'");
+		$conName=mysqli_fetch_array($resn)['name'];
+		
 		$status=$row['status'];
 		$delay=$row['delay'];
 		$duration=$row['duration'];
