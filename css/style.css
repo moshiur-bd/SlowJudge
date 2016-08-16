@@ -192,7 +192,7 @@ td.standing,tr.standing,th.standing{
 }
 td.field{
 	width:3.4em;
-	height:2.4em;
+	height:2.2em;
 }
 
 span.field{
@@ -218,6 +218,16 @@ a.field{
 	width:100%;
 
 }
+a.standing-head{
+	display: inline-block;
+	text-decoration:none;
+	text-align:center;
+	background:#777;
+	color:white;
+	height:100%;
+	width:100%;
+}
+
 .sum,.pen{
 	text-align:center;
 	width:4em;

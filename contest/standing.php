@@ -48,12 +48,12 @@
 				<table class='standing'>";
 
 		//declare header
-		echo "<tr class='standing' > <th class='standing rank'> # </th>    <th class='standing name'> Name </th>    <th class='standing sum'> solved </th> <th class='standing pen'> penalty </th> ";
+		echo "<tr class='standing' > <th class='standing rank'> # </th>    <th class='standing name'> Name </th>    <th class='standing sum'> score </th> <th class='standing pen'> penalty </th> ";
 
 
 
 		for($i=0;$i<$problemCount;$i++){
-			echo "<th class='standing field ltr'> $ltr </th>";
+			echo "<th class='standing field ltr'> <a class='standing-head' href='pdfView.php?conid=$conid&pid=$pid[$i]'>$ltr</a> </th>";
 			$ltr++;
 
 		}
