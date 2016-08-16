@@ -1,4 +1,5 @@
 //package com.mkyong.common;
+
 import java.io.*;
 import java.nio.charset.Charset;
 import java.sql.*;
@@ -62,10 +63,11 @@ public class Timer {
         return true;
 
     }
-    void clear() throws SQLException{//clears stmt object
-        if(stmt != null) {
+
+    void clear() throws SQLException {//clears stmt object
+        if (stmt != null) {
             stmt.close();
-         }
+        }
     }
 
     void disconnect() {
@@ -158,7 +160,6 @@ public class Timer {
             }
             clear();
 
-
             //continuous time upgrading....
             while (true) {
                 //know if the contest is running or not!
@@ -169,7 +170,7 @@ public class Timer {
                     String status = rs.getString("status");
                     if (status.equals("running")) {
                         remaining = duration - increaseTime();
-                        long sleepTime = Math.min((2*delay)/3, remaining);
+                        long sleepTime = Math.min((2 * delay) / 3, remaining);
                         System.out.println("Sleeping for " + sleepTime);
                         if (remaining <= 0) {
                             System.out.println("Contest is over!");
@@ -181,9 +182,9 @@ public class Timer {
                                 System.out.println("Someting wrong updating contest status!");
                             }
                             //clear stmt
-                            if(stmt2 != null) {
+                            if (stmt2 != null) {
                                 stmt2.close();
-                             }
+                            }
 
                             return;
                         } else {
@@ -212,12 +213,41 @@ public class Timer {
 
     }
 
+    void startContest() {
+        try {
+            stmt = conn.createStatement();
+            stmt.executeQuery("SELECT * FROM `" + cDB + "`.time");
+        } catch (SQLException e) {
+            
+            try {
+                if (stmt != null) {
+                stmt.close();
+                }
+                stmt = conn.createStatement();
+                stmt.execute("CREATE TABLE IF NOT EXISTS `"+cDB+"`.`time` ("
+                        + "  `elapsed` mediumtext NOT NULL,"
+                        + "  `stamp` mediumtext NOT NULL"
+                        + ") ENGINE=InnoDB DEFAULT CHARSET=latin1;");
+                String sq="INSERT INTO `"+cDB+"`.`time` (`elapsed`,`stamp`) VALUES ( "
+                        + "0,"+System.currentTimeMillis()+") ";
+                stmt.execute(sq);
+                System.err.println(sq);
+                
+                
+            } catch (Exception ee) {
+
+            }
+        }
+        
+
+    }
+
     public static void main(String[] argv) throws SQLException {
 
         Timer obj = new Timer(argv[0]);
         obj.init();
         obj.connect();
-
+        obj.startContest();
         obj.timeManager();
         obj.disconnect();
 
