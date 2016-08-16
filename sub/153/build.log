@@ -1,0 +1,8 @@
+In file included from Main.cpp:2:0:
+Main.cpp: In function 'int main()':
+Main.cpp:13:23: error: 'strlen' was not declared in this scope
+        assert(strlen(s)>=0&&strlen(s)<=(100*102+1));//checks IO validity
+                       ^
+Main.cpp:18:15: warning: converting to non-pointer type 'char' from NULL [-Wconversion-null]
+         s[i-1]=NULL;
+               ^

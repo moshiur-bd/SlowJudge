@@ -16,7 +16,7 @@ public class JudgeCDB {
     String dir;
     String DB;
     String pre; //get later
-    int conid = 28, maxId = 2147483647;
+    int  maxId = 2147483647;
 
     Connection conn = null;
     Statement stmt = null;
@@ -26,7 +26,7 @@ public class JudgeCDB {
     long holdTime = 30;//in sec
     long execution_time = 0;//in milis
 
-    int penalty;
+    int penalty=20;
     int problemCount;
     ThreadMXBean bean;
 
@@ -291,7 +291,7 @@ public class JudgeCDB {
 
     }
 
-    void scoreBoardHandler(int id, int pid, long verdict, String cDB, int pscore, int uid) {
+    void scoreBoardHandler(int id, int pid, long verdict, String cDB, int pscore, int uid,int conid) {
 
         Statement stmt2;
         ResultSet rs2;
@@ -339,7 +339,7 @@ public class JudgeCDB {
         }
 
         if (verdict == YES) {
-            System.err.println("------updating Scoreboard.........");
+            System.err.println("------updating Scoreboard in YES.........");
 
             try {
 
@@ -349,6 +349,7 @@ public class JudgeCDB {
                     //get WA sub< id
                     int wsub = 0;
                     sql = "SELECT COUNT(`id`) FROM `" + DB + "`.`submission` WHERE `id` < " + id + " AND `uid`=" + uid + " AND `pid`= " + pid + " AND `conid` = " + conid + " AND `countable`= 1";
+                    System.out.println(sql);
                     stmt2 = conn.createStatement();
                     rs2 = stmt2.executeQuery(sql);
                     if (rs2.next()) {
@@ -387,6 +388,8 @@ public class JudgeCDB {
                     System.err.println("arr= " + pen);
 
                     pen += (penalty * (wsub));
+                    System.err.println("***Total Penalty = " + pen + " p= "+penalty);
+                    
                     //remove privious penalty and add new one
                     String sql2, sql3;
                     sql = "UPDATE `" + cDB + "`.`scoreboard` SET `firstac" + cpid + "` = " + id
@@ -427,7 +430,7 @@ public class JudgeCDB {
             }
 
         } else {//wrong sub //countable modify later
-
+            System.err.println("------updating Scoreboard in NO.........");
             try {
                 int wsub = 0;
                 sql = "SELECT COUNT(`id`) FROM `" + DB + "`.submission WHERE `countable`=1 AND `pid`= " + pid + " AND `uid`=" + uid + " AND `conid`= " + conid;
@@ -464,7 +467,7 @@ public class JudgeCDB {
 
     }
 
-    void judgeManager(int id, int pid, int lang, String cDB, int uid, String subtype) {
+    void judgeManager(int id, int pid, int lang, String cDB, int uid, String subtype,int conid) {
 
         long verdict = 0;
         execution_time = 0;
@@ -475,7 +478,7 @@ public class JudgeCDB {
         try {
             pb.directory(new File(dir + "\\sub\\" + id + "\\"));
             Process compiler = pb.start();
-            compiler.waitFor(10, TimeUnit.SECONDS); //maxcompile time =10 sec
+            compiler.waitFor(15, TimeUnit.SECONDS); //maxcompile time =15 sec
             verdict = compiler.exitValue();
         } catch (Exception e) {
             System.err.println("Compiler execution failed!!");
@@ -539,7 +542,7 @@ public class JudgeCDB {
 
         System.err.println("# Judgement Complete with verdict: " + verdict + " with runtime= " + runtime + "\n\n");
 
-        scoreBoardHandler(id, pid, verdict, cDB, getScoreICPC(passedTest, dsCnt), uid);
+        scoreBoardHandler(id, pid, verdict, cDB, getScoreICPC(passedTest, dsCnt), uid,conid);
 
         return;
     }
@@ -639,7 +642,7 @@ public class JudgeCDB {
                 int id = rs.getInt("id");
                 //System.out.println(id+" "+rs.getString("hold"));
                 if (hold(id, rs.getString("hold"))) {//look if it's still free
-                    judgeManager(id, rs.getInt("pid"), rs.getInt("lang"), pre + rs.getInt("conid"), rs.getInt("uid"), "official");
+                    judgeManager(id, rs.getInt("pid"), rs.getInt("lang"), pre + rs.getInt("conid"), rs.getInt("uid"), "official",rs.getInt("conid"));
                 }
                 cnt_r++;
                 if (haltInterrupt()) {
@@ -661,7 +664,7 @@ public class JudgeCDB {
                     int id = rs.getInt("id");
                     //System.out.println(id+" "+rs.getString("hold"));
                     if (hold(id, rs.getString("hold"))) {//look if it's still free
-                        judgeManager(id, rs.getInt("pid"), rs.getInt("lang"), pre + rs.getInt("conid"), rs.getInt("uid"), "unofficial");
+                        judgeManager(id, rs.getInt("pid"), rs.getInt("lang"), pre + rs.getInt("conid"), rs.getInt("uid"), "unofficial",rs.getInt("conid"));
                     }
                     cnt_r++;
 

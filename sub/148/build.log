@@ -1,0 +1,4 @@
+Main.cpp: In function 'int main()':
+Main.cpp:17:15: warning: converting to non-pointer type 'char' from NULL [-Wconversion-null]
+         s[i-1]=NULL;
+               ^

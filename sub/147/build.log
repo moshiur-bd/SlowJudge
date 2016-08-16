@@ -1,0 +1,8 @@
+In file included from Main.c:2:0:
+Main.c: In function 'main':
+Main.c:12:16: warning: incompatible implicit declaration of built-in function 'strlen'
+         assert(strlen(s)>=0&&strlen(s)<=(100*101+1));//checks IO validity
+                ^
+Main.c:17:15: warning: assignment makes integer from pointer without a cast
+         s[i-1]=NULL;
+               ^

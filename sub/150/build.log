@@ -1,0 +1,4 @@
+Main.c: In function 'main':
+Main.c:18:15: warning: assignment makes integer from pointer without a cast
+         s[i-1]=NULL;
+               ^
