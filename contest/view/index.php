@@ -106,7 +106,8 @@
 		if($flag==null)
 				echo "<tr class='submission my' >
 						<td class='submission my id'>  $id </td>
-						<td class='submission my pname'> <a class='pname' href='..\\pdfView.php?conid=$conid&pid=$pid' > $pname </a> </td>  						
+						<td class='submission my pname'> <a class='pname' href='../pdfView.php?conid=$conid&pid=$pid' > $pname </a> </td>  						
+						<td class='submission my uname'> <a class='uname' href='../../profile?uname=$suname&uid=$suid'>$suname</a> </td>  
 						<td class='submission my time'>$arrtime</td>
 						<td class='submission my lang'>lang: $lang</td>
 						<td class='submission my cpu'> $runtime ms </td> 
@@ -115,7 +116,8 @@
 			else if($flag==0)
 				echo "<tr class='submission my' >
 						<td class='submission my id'>  $id </td>
-						<td class='submission my pname'> <a class='pname' href='..\\pdfView.php?conid=$conid&pid=$pid' > $pname </a> </td>  						
+						<td class='submission my pname'> <a class='pname' href='../pdfView.php?conid=$conid&pid=$pid' > $pname </a> </td>  	
+						<td class='submission my uname'> <a class='uname' href='../../profile?uname=$suname&uid=$suid'>$suname</a> </td> 
 						<td class='submission my time'>$arrtime</td>
 						<td class='submission my lang'>lang: $lang</td>
 						<td class='submission my cpu'> $runtime ms </td> 
@@ -124,7 +126,8 @@
 				
 			else echo "<tr class='submission my' >
 						<td class='submission my id'>  $id </td>
-						<td class='submission my pname'> <a class='pname' href='..\\pdfView.php?conid=$conid&pid=$pid' > $pname </a> </td>  						
+						<td class='submission my pname'> <a class='pname' href='../pdfView.php?conid=$conid&pid=$pid' > $pname </a> </td>  	
+						<td class='submission my uname'> <a class='uname' href='../../profile?uname=$suname&uid=$suid'>$suname</a> </td> 						
 						<td class='submission my time'>$arrtime</td>
 						<td class='submission my lang'>lang: $lang</td>
 						<td class='submission my cpu'> $runtime ms </td> 

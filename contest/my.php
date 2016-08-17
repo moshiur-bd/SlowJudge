@@ -22,7 +22,7 @@
 
 
 		echo "<div id='submission my' class='submission my'>
-				<table class='submission my'>";
+				<table cellspacing='0' class='submission my'>";
 		echo "<tr class='submission my' >
 				<th class='submission my id'> # </th>  
 				<th class='submission pname'> Problem </th> 
@@ -31,7 +31,7 @@
 				<th class='submission my tl'> CPU Time (ms) </th>
 				<th class='submission my ml'> Memory (MB) </th> 
 				<th class='submission my sub'> verdict </th>  </tr>";
-
+		$rowbg='odd';
 		while($row=mysqli_fetch_array($ressub))
 		{
 			
@@ -58,9 +58,9 @@
 			$arrtime=sec2str($arrtime);
 			$lang=getLanguage($langid,$DB,$conn);
 			if($flag==null)
-				echo "<tr class='submission my' >
+				echo "<tr class='submission my $rowbg' >
 						<td class='submission my id'> <a class='submission' href='view?conid=$conid&id=$id&pid=$pid'> $id</a> </td>
-						<td class='submission my pname'> $pname </td>  
+						<td class='submission my pname'> <a class='pname' href='pdfView.php?pid=$pid&conid=$conid'> $pname</a>  </td>  
 						
 						<td class='submission my time'>$arrtime</td>
 						<td class='submission my lang'>$lang</td>
@@ -68,9 +68,9 @@
 						<td class='submission my memory'> $mb </td>   
 						<td class='submission my verdict'> <a class='submission verdict' href='view?conid=$conid&id=$id&pid=$pid'> <span class='queueText' >$verdict</span></a></td>	</tr>";
 			else if($flag==0)
-				echo "<tr class='submission my' >
+				echo "<tr class='submission my $rowbg' >
 						<td class='submission my id'> <a class='submission' href='view?conid=$conid&id=$id&pid=$pid'> $id</a> </td>
-						<td class='submission my pname'> $pname </td>  
+						<td class='submission my pname'> <a class='pname' href='pdfView.php?pid=$pid&conid=$conid'> $pname</a>  </td>    
 						
 						<td class='submission my time'>$arrtime</td>
 						<td class='submission my lang'>$lang</td>
@@ -78,16 +78,19 @@
 						<td class='submission my memory'> $mb </td>   
 						<td class='submission my verdict'> <a class='submission verdict' href='view?conid=$conid&id=$id&pid=$pid'> <span class='acceptedText' >$verdict</span></a></td>	</tr>";
 				
-			else echo "<tr class='submission my' >
+			else echo "<tr class='submission my $rowbg' >
 						<td class='submission my id'> <a class='submission' href='view?conid=$conid&id=$id&pid=$pid'> $id</a> </td>
-						<td class='submission my pname'> $pname </td>  
+						<td class='submission my pname'> <a class='pname' href='pdfView.php?pid=$pid&conid=$conid'> $pname</a>  </td>    
 						
 						<td class='submission my time'>$arrtime</td>
 						<td class='submission my lang'>$lang</td>
 						<td class='submission my cpu'> $runtime </td> 
 						<td class='submission my memory'> $mb </td>   
 						<td class='submission my verdict'> <a class='submission verdict' href='view?conid=$conid&id=$id&pid=$pid'> <span class='rejectedText' >$verdict</span></a></td>	</tr>";
-}
+			if($rowbg=='odd')
+				$rowbg='even';
+			else $rowbg='odd';
+		}
 		echo "</table></div>";
 
 		echo "</div>";

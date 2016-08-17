@@ -45,10 +45,10 @@
 
 
 		echo "<div id='standing' class='standing'>
-				<table class='standing'>";
+				<table class='standing' cellspacing='0'>";
 
 		//declare header
-		echo "<tr class='standing' > <th class='standing rank'> # </th>    <th class='standing name'> Name </th>    <th class='standing sum'> score </th> <th class='standing pen'> penalty </th> ";
+		echo "<tr class='standing head' > <th class='standing rank'> # </th>    <th class='standing name'> Name </th>    <th class='standing sum'> score </th> <th class='standing pen'> penalty </th> ";
 
 
 
@@ -69,14 +69,22 @@
 		{
 			$penalty=$row['penalty'];
 			$score=$row['score'];
-			$name=$row['name'];
-			$uid=$row['uid'];
+			$puname=$row['uname'];
+			$puid=$row['uid'];
+			$handle_color='default-color';
 			if($ppen==$penalty&&$pscore==$score);
 			else $rank=$cnt;
-
+			$evenodd='odd';
 			if($cnt%2==0)
-				echo "<tr class='standing even' > <td class='standing rank'> $rank </td>    <td class='standing name'> $name </td>    <td class='standing sum'> $score </td> <td class='standing pen'> $penalty</td> ";
-			else echo "<tr class='standing odd' > <td class='standing rank'> $rank </td>    <td class='standing name'> $name </td>    <td class='standing sum'> $score </td> <td class='standing pen'> $penalty</td> ";
+				$evenodd='even';
+			else $evenodd='odd';
+				
+			
+			echo "<tr class='standing $evenodd' > 
+				<td class='standing rank'> $rank </td>   
+				<td class='standing name'> <a class='$handle_color standing-uname' href='../profile?uid=$puid&uname=$puname'>$puname</a> </td> 
+				<td class='standing sum'> $score </td> <td class='standing pen'> $penalty</td> ";
+				
 			for($i=0;$i<$problemCount;$i++){
 				$time=$row["penalty$i"];
 				$wsub=$row["wrong$i"];

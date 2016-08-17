@@ -1,5 +1,6 @@
 <?php
-session_start();
+include(__DIR__ ."\\..\\connection.php");
+include(__DIR__ ."\\..\\header.php");
 if(!isset($_SESSION['uid']))
 	die("you are not logged in!");
 
@@ -9,8 +10,8 @@ if(!isset($_SESSION['uid']))
 
 
 //sql////////////////
-include(__DIR__ ."\\..\\connection.php");
-include(__DIR__ ."\\..\\header.php");
+
+
 
 /*
 $servername = "localhost";

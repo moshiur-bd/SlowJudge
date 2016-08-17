@@ -30,32 +30,32 @@ span.slowjudge-footer{
 	font-family:monospace;
 }
 
-/*style form cf*/
-/*
-div {
-    display: block;
-}
-body {
-    font-size: 1.4rem;
-}
-body, select {
-    font-family: verdana,arial,sans-serif;
-}
-body {
-    background: #fff;
-    margin: 3px 8px;
-}
-body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre, form, fieldset, input, p, blockquote, th, td {
-    margin: 0;
-    padding: 0;
-}
-body {
-    display: block;
-    margin: 8px;
+
+table{
+	margin-bottom:40px;
+	
 }
 
-*/
 /*end of global*/
+/*profile designs*/
+	div.profile-photo{
+		margin-top:30px;
+		margin-right:40px;
+		float:right;
+		border:1px solid #999;
+		padding:2px;
+	}
+	div.photo{
+		margin:auto;
+	}
+	div.photo-upload{
+		margin:auto;
+	}
+	.hidden{
+		display:hidden;
+	}
+	
+/*endof profile designs*/
 
 
 
@@ -185,13 +185,32 @@ table.scrcontestInfo tr{
 }
 
 /*standing table*/
+table.standing{
+	border-top: 2px solid #d3ebeb;
+	border-right: 2px solid #d3ebeb;
+	border-left: 1px solid #d3ebeb;
+	border-bottom: 1px solid #d3ebeb;
+	border-collapse:separate;
+}
 
-td.standing,tr.standing,th.standing{
-   border: 1px solid black;
-
+tr.standing{
+	display:table-row;
+	
+}
+tr.standing,th.standing,td.standing{
+	border-left: 1px solid #d3ebeb;
+	border-bottom: 1px solid #d3ebeb;
+}
+tr.head{
+	background:#EEE;
+	height:30px;
+	font-size:1.5em;
+}
+tr.even{
+	background:#e6eae9;
 }
 td.field{
-	width:3.4em;
+	width:3.5em;
 	height:2.2em;
 }
 
@@ -212,6 +231,7 @@ a.field{
 	display: inline-block;
 	text-decoration:none;
 	text-align:center;
+	font-size:.9em;
 	background:#555;
 	color:white;
 	height:50%;
@@ -228,6 +248,14 @@ a.standing-head{
 	width:100%;
 }
 
+a.standing-uname{
+	
+	text-decoration:none;
+}
+a.default-color{
+	color:#5f526d;
+
+}
 .sum,.pen{
 	text-align:center;
 	width:4em;
@@ -257,13 +285,40 @@ table.standing{
 	color:#555;
 }
 
-table.submission{
-}
 
-td.submission,tr.submission,th.submission{
-   border: 1px solid black;
+
+td.submission{
+	padding-right:5px;
+	padding-left:5px;
+}
+th.submission,td.id,td.time,td.cpu,td.memory,td.verdict{
    text-align:center;
 }
+td.pname,td.lang,td.uname{
+	text-align:left;
+}
+
+
+td.submission,tr.submission,th.submission{
+	border-left: 1px solid #d3ebeb;
+	border-bottom: 1px solid #d3ebeb;
+}
+
+
+table.submission{
+	border-top: 2px solid #d3ebeb;
+	border-right: 2px solid #d3ebeb;
+	border-left: 1px solid #d3ebeb;
+	border-bottom: 1px solid #d3ebeb;
+	border-collapse:separate;
+}
+
+tr.heads{
+	background:#EEE;
+	height:30px;
+	font-size:1em;
+}
+
 
 
 table.submission td.id{
@@ -272,6 +327,9 @@ table.submission td.id{
 }
 a.verdict{
 	text-decoration:none;
+}
+a.pname,a.uname{
+	color:#5f526d;
 }
 
 span.acceptedText{
@@ -328,20 +386,6 @@ table.contestInfo tr{
 
 
 
-
-
-/*unknown
-
-#main {
-width:960px;
-margin:50px auto;
-font-family:raleway
-}
-#header{
-	display:inline;
-}
-*/
-
 /*my code*/
 
 
@@ -371,7 +415,7 @@ table.dash{
 	
 }
 .pname{
-	margin:2% 2%;
+	/*margin:2% 2%;*/
 }
 .name{
 	
@@ -528,17 +572,7 @@ margin-bottom:15px
 
 
 
-#profile {
-padding:50px;
-border:1px dashed grey;
-font-size:20px;
-background-color:#DCE6F7
-}
-#logout {
-float:right;
-padding:5px;
-border:dashed 1px gray
-}
+
 
 
 
