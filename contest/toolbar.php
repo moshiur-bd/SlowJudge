@@ -16,9 +16,10 @@
 	/*...........................*/
 	
 	echo"<ul class='navCon'>
-		<li class='navCon $activedash' ><a href='dash.php?conid=$conid'> Dashboard </a></li>
-		<li class='navCon $activemy' ><a href='my.php?conid=$conid'> My Submissions </a></li>
-		<li class='navCon $activejudge' ><a href='status.php?conid=$conid'> Judge Status </a></li>
+		<li class='navCon $activedash' ><a href='dash.php?conid=$conid'> Dashboard </a></li>";
+	if(isset($_SESSION['uid'])) 
+		echo"<li class='navCon $activemy' ><a href='my.php?conid=$conid'> My Submissions </a></li>";
+	echo "<li class='navCon $activejudge' ><a href='status.php?conid=$conid'> Judge Status </a></li>
 		<li class='navCon $activestanding' ><a href='standing.php?conid=$conid'> Scoreboard </a></li>
 		
 	</ul>"
