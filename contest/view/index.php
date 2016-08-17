@@ -65,7 +65,7 @@
 		}else die("submission info fetching failed!");
 		
 		if($usertype!='manager'&&$status=='private'&& $uid!=$suid)
-			die("Khamosh!!! Onner Solution churi kora thik na! "); //illegal solution access!!
+			die("This solution is not public and you don't have rights to see private solutions"); //illegal solution access!!
 		
 		
 		//get username of the submission
