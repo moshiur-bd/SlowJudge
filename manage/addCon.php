@@ -9,8 +9,8 @@
 	}
 	
 	$conname=$_POST['name'];
-	
-	$sql="INSERT INTO `$DB`.`contest` (`name`) VALUES ( '$conname'); ";
+	$now=floor(mktime()*1000);
+	$sql="INSERT INTO `$DB`.`contest` (`name`,`uid`,`start`) VALUES ( '$conname','$uid',$now); ";
 	if(mysqli_query($conn,$sql))
 	{
 		$conid=mysqli_insert_id($conn);
