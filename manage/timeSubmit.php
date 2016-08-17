@@ -1,7 +1,7 @@
 <?php
-	include("timeOffset.php");
+	include(__DIR__ ."\\..\\functions.php");
 	$start=$_POST['start'];;
-	$start=removeTimeOffset(strtotime($start),$offset)*1000;
+	$start=removeTimeOffset(strtotime($start))*1000;
 	$dur=($_POST['durationh']*60)+($_POST['durationm']);
 	$dur=$dur*60*1000;
 	$conname=$_POST['conname'];

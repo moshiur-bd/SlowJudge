@@ -5,7 +5,7 @@
 		<?php 
 			include(__DIR__ ."\\..\\connection.php");
 			include(__DIR__ ."\\..\\header.php");
-			include("timeOffset.php");
+			include(__DIR__ ."\\..\\functions.php");
 			$conid=$_GET['conid'];
 			$cDB=$pre.$conid;
 			$duration=3600000;
@@ -26,11 +26,11 @@
 			}
 
 			
-			$start=addTimeOffset(round($start/1000),$offset);
+			$start=addTimeOffset(round($start/1000));
 			$duration=round($duration/1000);
 			
 			$durh=floor($duration/3600);
-			$durm=$duration-$durh*3600;
+			$durm=floor(($duration-$durh*3600)/60);;
 			
 			
 			

@@ -7,12 +7,12 @@
 ?>
 <table class='userinfo'>
 <tr class='handle'>
-	<td>handle</td> <td>:</td> <td><?php echo $puname;?></td>
+<td><?php echo $puname;?></td>
 </tr >
 <tr class='uname' >
-	<td>Full name</td> <td>:</td> <td><?php echo $pname;?></td>
+ <td><?php echo $pname;?></td>
 </tr>
 <tr>
-	<td></td> <td></td><td><?php echo $ptype;?></td>
+<td><?php echo $ptype;?></td>
 </tr>
 

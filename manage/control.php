@@ -1,6 +1,6 @@
 
 <?php
-	$color='bgred';
+	$color='bgorange';
 	$conid=$_GET['conid'];
 	$cDB=$pre.$conid;
 	$status='';
@@ -11,7 +11,7 @@
 		else if($status=='paused')
 			$color='bgred';
 		else if($status=='finished'){
-			$color='bgorange';
+			$color='bgblack';
 		}
 	}
 	else "failed to get signals";

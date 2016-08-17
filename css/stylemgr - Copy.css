@@ -6,6 +6,7 @@ CSS Settings For HTML Div ExactCenter
 #body{
 	max-width:1200px;
 	min-width:800px;
+	background:#DEE;
 	margin:auto;
 	display:block;
 	padding:10px;
@@ -28,50 +29,32 @@ span.slowjudge-footer{
 	font-family:monospace;
 }
 
+/*style form cf*/
+/*
+div {
+    display: block;
+}
+body {
+    font-size: 1.4rem;
+}
+body, select {
+    font-family: verdana,arial,sans-serif;
+}
+body {
+    background: #fff;
+    margin: 3px 8px;
+}
+body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre, form, fieldset, input, p, blockquote, th, td {
+    margin: 0;
+    padding: 0;
+}
+body {
+    display: block;
+    margin: 8px;
+}
 
-table{
-	margin-bottom:40px;
-	
-}
-.green{
-	color:green;
-}
-.black{
-	color:black;
-}
-.yellow{
-	color:yellow;
-}
-.orange{
-	color:orange;
-}
-
+*/
 /*end of global*/
-
-/*profile designs*/
-	.handle{
-		font-size:2em;
-	}
-	div.profile-photo{
-		margin-top:30px;
-		margin-right:40px;
-		float:right;
-		border:1px solid #999;
-		padding:2px;
-	}
-	div.photo{
-		margin:auto;
-	}
-	div.photo-upload{
-		margin:auto;
-	}
-	.hidden{
-		display:hidden;
-	}
-	
-/*endof profile designs*/
-
-
 
 
 
@@ -123,49 +106,13 @@ a.uinfo:hover {
 
 /*End of header */
 
-/*contest index*/
-table.conlist{
-	border-top: 2px solid #7d7878;
-	border-right: 2px solid #7d7878;
-	border-left: 1px solid #7d7878;
-	border-bottom: 1px solid #7d7878;
-	border-collapse:separate;
-	font-size:1.3em;
-}
-td.conlist{
-	padding-right:5px;
-	padding-left:5px;
-}
-.cls-start,.cls-status,.cls-in{
-   text-align:center;
-}
-.cls-uname,.cls-name{
-   text-align:left;
-}
-
-td.conlist,tr.conlist,th.conlist{
-	border-left: 1px solid #7d7878;
-	border-bottom: 1px solid #7d7878;
-}
-
-
-tr.head-conlist{
-	background:#EEE;
-	height:30px;
-	font-size:1em;
-}
-
-
-
-/*END contestIndex*/
-
-
 /*Contest navigation bar*/
 ul.navCon{
 	list-style-type: none;
     margin: 0;
     padding:0;
     overflow: hidden;
+
 	margin-top:2em;
 	margin-bottom:2em;
 	
@@ -237,33 +184,14 @@ table.scrcontestInfo tr{
 }
 
 /*standing table*/
-table.standing{
-	border-top: 2px solid #d3ebeb;
-	border-right: 2px solid #d3ebeb;
-	border-left: 1px solid #d3ebeb;
-	border-bottom: 1px solid #d3ebeb;
-	border-collapse:separate;
-}
 
-tr.standing{
-	display:table-row;
-	
-}
-tr.standing,th.standing,td.standing{
-	border-left: 1px solid #d3ebeb;
-	border-bottom: 1px solid #d3ebeb;
-}
-tr.head{
-	background:#EEE;
-	height:30px;
-	font-size:1.5em;
-}
-tr.even{
-	background:#e6eae9;
+td.standing,tr.standing,th.standing{
+   border: 1px solid black;
+
 }
 td.field{
-	width:3.5em;
-	height:2.2em;
+	width:5em;
+	height:2.4em;
 }
 
 span.field{
@@ -283,29 +211,10 @@ a.field{
 	display: inline-block;
 	text-decoration:none;
 	text-align:center;
-	font-size:.9em;
 	background:#555;
 	color:white;
 	height:50%;
 	width:100%;
-
-}
-a.standing-head{
-	display: inline-block;
-	text-decoration:none;
-	text-align:center;
-	background:#777;
-	color:white;
-	height:100%;
-	width:100%;
-}
-
-a.standing-uname{
-	
-	text-decoration:none;
-}
-a.default-color{
-	color:#5f526d;
 
 }
 .sum,.pen{
@@ -337,40 +246,13 @@ table.standing{
 	color:#555;
 }
 
-
-
-td.submission{
-	padding-right:5px;
-	padding-left:5px;
+table.submission{
 }
-th.submission,td.id,td.time,td.cpu,td.memory,td.verdict{
-   text-align:center;
-}
-td.pname,td.lang,td.uname{
-	text-align:left;
-}
-
 
 td.submission,tr.submission,th.submission{
-	border-left: 1px solid #d3ebeb;
-	border-bottom: 1px solid #d3ebeb;
+   border: 1px solid black;
+   text-align:center;
 }
-
-
-table.submission{
-	border-top: 2px solid #d3ebeb;
-	border-right: 2px solid #d3ebeb;
-	border-left: 1px solid #d3ebeb;
-	border-bottom: 1px solid #d3ebeb;
-	border-collapse:separate;
-}
-
-tr.heads{
-	background:#EEE;
-	height:30px;
-	font-size:1em;
-}
-
 
 
 table.submission td.id{
@@ -379,9 +261,6 @@ table.submission td.id{
 }
 a.verdict{
 	text-decoration:none;
-}
-a.pname,a.uname{
-	color:#5f526d;
 }
 
 span.acceptedText{
@@ -408,13 +287,12 @@ table.viewsource{
 .buildlog p{
 	color:#f47c3c;
 	position:fixed;
-	z-index:999;
 	width: 20em;
 	background:white;
-	display: inline;
-	padding-left: 4em;
+    display: inline;
+    padding-left: 4em;
 	margin:auto;
-	margin: 3em 1em 1em -22em;
+    margin: 3em 1em 1em -22em;
 }
 
 
@@ -437,6 +315,20 @@ table.contestInfo tr{
 
 
 
+
+
+
+/*unknown
+
+#main {
+width:960px;
+margin:50px auto;
+font-family:raleway
+}
+#header{
+	display:inline;
+}
+*/
 
 /*my code*/
 
@@ -466,14 +358,7 @@ table.dash{
 	margin-left:5%;
 	
 }
-.pname{
-	/*margin:2% 2%;*/
-}
-.name{
-	
-	font-size:20px;
-	
-}
+
 .green{
 	color:green;
 	
@@ -567,7 +452,39 @@ font-size:16px;
 font-family:raleway
 }
 
-#dash input[type=submit] {
+
+
+
+#login {
+width:300px;
+float:left;
+border-radius:10px;
+font-family:raleway;
+border:2px solid #ccc;
+padding:10px 40px 25px;
+margin-top:70px
+}
+#register {
+	
+width:300px;
+float:left;
+border-radius:10px;
+font-family:raleway;
+border:2px solid #ccc;
+padding:10px 40px 25px;
+margin-top:70px;
+	
+}
+#login  input[type=text],input[type=password] {
+width:99.5%;
+padding:10px;
+margin-top:8px;
+border:1px solid #ccc;
+padding-left:5px;
+font-size:16px;
+font-family:raleway
+}
+#login input[type=submit] {
 width:100%;
 background-color:#FFBC00;
 color:#fff;
@@ -579,39 +496,29 @@ border-radius:5px;
 margin-bottom:15px
 }
 
-/*login& register*/
-#login {
-width:350px;
-border-radius:10px;
-font-family:raleway;
-border:2px solid #ccc;
-padding:10px 40px 25px;
-margin:auto;
-margin-top:200px;
-}
 
-#login  input[type=text],input[type=password] {
-width:99.5%;
-padding:10px;
-margin-top:8px;
-border:1px solid #ccc;
-padding-left:5px;
-font-size:16px;
-font-family:raleway
-}
-#login input[type=submit] {
-margin-top: 5px;
-width:30%;
-background-color:#333;
-color:#fff;
-border:2px solid #FFDFDC;
-padding:10px;
+
+
+
+
+
+
+
+
+
+
+
+#profile {
+padding:50px;
+border:1px dashed grey;
 font-size:20px;
-cursor:pointer;
-border-radius:5px;
-margin-bottom:15px
+background-color:#DCE6F7
 }
-/*.....................*/
+#logout {
+float:right;
+padding:5px;
+border:dashed 1px gray
+}
 
 
 
