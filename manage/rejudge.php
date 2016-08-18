@@ -7,7 +7,7 @@
 	$pid=$_GET['pid'];
 	$cpid=$_GET['cpid'];
 	$sql1="UPDATE `$DB`.`submission` SET 
-		     `flag`=NULL WHERE `pid`='$pid'";
+		     `flag`=NULL, `hold`=NULL WHERE `pid`='$pid'";
 	$sql2="UPDATE `$cDB`.`scoreboard` SET
 			`score`=`score`-`score$cpid`,
 			`penalty`=`penalty`-`penalty$cpid`,

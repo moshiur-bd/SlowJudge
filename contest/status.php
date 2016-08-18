@@ -48,7 +48,7 @@
 			$pname=$data['name'];
 
 			//fetch sub info
-			$sql="SELECT `flag`,`runtime`,`lang`,`uname`,`uid` FROM `$DB`.`submission` WHERE `id`='$id'";
+			$sql="SELECT `flag`,`runtime`,`lang`,`uname`,`uid`,`hold` FROM `$DB`.`submission` WHERE `id`='$id'";
 			$result=mysqli_query($conn,$sql);
 			if(!$data=mysqli_fetch_array($result)){
 				echo "$id $pid  fetching faied!!";
@@ -60,8 +60,13 @@
 			$runtime=$data['runtime'];
 			$langid=$data['lang'];
 			$flag=$data['flag'];
+			$hold=$data['hold'];
+			
 			
 			$verdict=getVerdict($flag);
+			if($hold!=null&&$flag==null)
+				$verdict='running...';
+				
 			$arrtime=sec2str($arrtime);
 			$lang=getLanguage($langid,$DB,$conn);
 			
