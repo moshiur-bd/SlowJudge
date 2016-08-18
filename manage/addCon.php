@@ -25,7 +25,7 @@
 		$sql="CREATE TABLE IF NOT EXISTS `$cDB`.`submission`  ( id int NOT NULL , uid int NOT NULL, pid int NOT NULL,arrtime INT NOT NULL, PRIMARY KEY (id) )";
 		$qcnt+=mysqli_query($conn,$sql);
 		
-		$sql="CREATE TABLE IF NOT EXISTS `$cDB`.`problem` ( pid int NOT NULL ,cpid int NOT NULL)";
+		$sql="CREATE TABLE IF NOT EXISTS `$cDB`.`problem` ( pid int NOT NULL ,cpid int NOT NULL,PRIMARY KEY (pid))";
 		$qcnt+=mysqli_query($conn,$sql);
 		
 		$sql="CREATE TABLE IF NOT EXISTS `$cDB`.`scoreboard` (
@@ -40,11 +40,12 @@
 		$qcnt+=mysqli_query($conn,$sql);
 		
 		$sql="CREATE TABLE IF NOT EXISTS `$cDB`.`settings` (
-			  `delay` int(11) NOT NULL DEFAULT '2000',
+			  `delay` int(11) NOT NULL DEFAULT '5000',
 			  `duration` bigint(20) NOT NULL DEFAULT '3600000',
 			  `penalty` int(11) NOT NULL DEFAULT '20',
 			  `problemCount` int(11) NOT NULL DEFAULT '0',
-			  `status` varchar(30) NOT NULL DEFAULT 'upcoming'
+			  `status` varchar(30) NOT NULL DEFAULT 'upcoming',
+			  PRIMARY KEY (`status`)
 			) ";
 		$qcnt+=mysqli_query($conn,$sql);
 		

@@ -31,5 +31,15 @@
 	
 	</tr>
 	
+	<?php
+		if($status=='upcoming')
+			echo "<tr>
+			<td class='signal'> 
+			<a  href='forcestart.php?conid=$conid' ><span class='box' >Force</span>~</a>
+			<span class='signallabel' >start</span>
+			</td>
+			</tr>"
+	?>
+	
 	
 </table>

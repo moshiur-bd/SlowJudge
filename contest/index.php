@@ -21,7 +21,7 @@
 		<th class='conlist cls-start'>start</th>
 		<th class='conlist cls-start '>duration</th>
 		<th class='conlist cls-status '>status</th>
-		<th class='conlist cls-in'>edit</th> 
+		<th class='conlist cls-in'>enter</th> 
 		</tr>\n";
 	while($row=mysqli_fetch_array($result))
 	{
