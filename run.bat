@@ -1,1 +1,0 @@
-"run contest.exe" 200000

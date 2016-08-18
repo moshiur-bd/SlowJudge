@@ -231,6 +231,7 @@ public class Timer {
                 String sq="INSERT INTO `"+cDB+"`.`time` (`elapsed`,`stamp`) VALUES ( "
                         + "0,"+System.currentTimeMillis()+") ";
                 stmt.execute(sq);
+                stmt.executeUpdate("UPDATE `"+cDB+"`.settings SET `status`='running' ");
                 System.err.println(sq);
                 
                 
