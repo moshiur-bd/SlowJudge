@@ -139,6 +139,15 @@
 				 
 				 $ltr++;
 		}
+		
+		
+		$pdfl='no file uploaded!';
+		
+		
+		echo "</br></br>compete problemset: <td class='pdfl'> <label title='full pdf statement' id='fullpdfl' for='fullpdf' class='pdftxt'>$pdfl</label> </td>
+			<td class='pdf'> <input title='pdf statement'class='pdfbtn' id='fullpdf' type='file' name='fullpdf' onChange='getFileSize(&quot;fullpdf&quot;)'> </td>";
+						
+		
 		//echo "</ol>";
 		//echo "<input name='up' type='hidden' value='$i' >";
 		//echo "<div id='addP' ><input class='plus' type='button' name='plus' value='+' onclick='addP();'> <input class='minus'  type='button' name='minus' value='-' onclick='removeP();'></div> </br>";

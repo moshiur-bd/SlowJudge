@@ -94,13 +94,14 @@
 					if($wsub>0)
 						echo"<td class='standing field rejected' >
 							<span class='field rejected' > </span>
-							<a class='score field' href='submissions.php?conid=$conid&uid=$uid&pid=$pid[$i]'>-$wsub</a>
+							<a class='score field' href='submissions.php?conid=$conid&uid=$puid&pid=$pid[$i]'>-$wsub</a>
 							</td>";
 					else echo"<td class='standing field nosub' ></td>";
 				}
 				else{
 					$wsub++;
-				 echo "<td class='standing field accepted' ><span class='field accepted' > </span> <a class='score field' href='submissions.php?conid=$conid&uid=$puid&pid=$pid[$i]'>$wsub($time)</a> </td>";
+				 echo "<td class='standing field accepted' ><span class='field accepted' > </span> 
+					<a class='score field' href='submissions.php?conid=$conid&uid=$puid&pid=$pid[$i]'>$wsub($time)</a> </td>";
 				}
 
 			}

@@ -14,7 +14,8 @@
 	$in='in';
 	$out='out';
 	$src='src';
-	$cDB=$pre.$_GET['conid'];
+	$conid=$_GET['conid'];
+	$cDB=$pre.$conid;
 	
 	$sql="SELECT * FROM `$cDB`.`problem`";
 	$result=mysqli_query($conn,$sql);
@@ -172,6 +173,23 @@
 		
 		$i++;
 	}
+	
+	//complete pdf
+	$target_pdf="..\\pdf-archive\\";
+	if ($_FILES["fullpdf"]['error']==UPLOAD_ERR_NO_FILE) {
+	}
+	else if($_FILES["fullpdf"]["size"]>$maxSrcSize)
+	{
+		echo "full  Pdf File too large!";
+	}
+			else{
+				if (move_uploaded_file($_FILES["fullpdf"]["tmp_name"], $target_pdf."con$conid.pdf")) {
+					echo" complete problemset uploaded";	
+				} else {
+					echo "</br>Sorry, there was an error uploading your PDF file con$conid.pdf . ";
+				}
+				
+			}
 	
 
 ?>

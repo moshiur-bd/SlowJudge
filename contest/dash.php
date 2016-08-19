@@ -39,9 +39,13 @@
 			echo "<tr class='dash' > <td class='dash ltr'> $ltr </td>    <td class='dash'> <a href='pdfView.php?conid=$conid&pid=$pid'> $pname</a> </td> <td class='dash tl'> $tl</td>  <td class='dash ml'> $ml</td>  <td class='dash sub'> <a href='submit.php?conid=$conid&pid=$pid' >submit</a> </td> <td class='dash cnt'> $slcnt</td> </tr>";
 			$ltr++;
 		}
-		echo "</table></div>";
+		echo "</table>";
+		if(file_exists("../pdf-archive/con$conid.pdf"))
+			echo "<a href='../pdf-archive/con$conid.pdf' > complete problemset</a>";
 		
-		echo "</div>";
+		echo "</div></div>";
+		
+		
 	
 	?>
 
