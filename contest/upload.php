@@ -9,51 +9,13 @@ if(!isset($_SESSION['uid']))
 
 
 
-//sql////////////////
-
-
-
-/*
-$servername = "localhost";
-		$username = "root";
-		$password = "";
-
-		// Create connection
-		$conn = mysqli_connect($servername, $username, $password);
-		// Check connection
-		if (!$conn) {
-			die("Connection failed: " . mysqli_connect_error());
-		}
-		echo "Connected successfully</br>";*/
-		
-		
-
-/////////////////////
-
-
-
 $target_dir = $slowjudge."sub\\";
 if(	!file_exists($target_dir))
 	mkdir($target_dir);
 $target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
 $uploadOk = 1;
 $fileType = pathinfo($target_file,PATHINFO_EXTENSION);
-/*// Check if image file is a actual image or fake image
-if(isset($_POST["submit"])) {
-    $check = getimagesize($_FILES["fileToUpload"]["tmp_name"]);
-    if($check !== false) {
-        echo "File is an image - " . $check["mime"] . ".";
-        $uploadOk = 1;
-    } else {
-        echo "File is not an image.";
-        $uploadOk = 0;
-    }
-}*/
-// Check if file already exists
-/*if (file_exists($target_file)) {
-    echo "Sorry, file already exists.";
-    $uploadOk = 0;
-}*/
+
 // Check file size
 if ($_FILES["fileToUpload"]["size"] > 500000) {
 	
@@ -96,9 +58,11 @@ if ($uploadOk == 0) {
 		$uid=$_SESSION['uid'];
 		$conid=$_GET['conid'];
 		$cDB=$pre.$conid;
-
-		$milliseconds = round(microtime(true) * 1000);//current time in milis
-		$unixTimestamp = round($milliseconds / 1000);//current time in sec
+		
+		$serverTimeInSec= round($_SERVER['REQUEST_TIME']); //get request Time.
+		echo "</br> server time= $serverTimeInSec </br>";
+		$milliseconds = $serverTimeInSec*1000;
+		$unixTimestamp = $serverTimeInSec;
 		$timestamp= date("Y-m-d H:i:s", $unixTimestamp);
 		$arrtime=getArrTime($milliseconds,$cDB,$conn);
 		if($arrtime==-1)
