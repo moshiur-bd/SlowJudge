@@ -1,4 +1,0 @@
-Main.cpp: In function 'int main()':
-Main.cpp:45:15: error: size of array 'a' is too large
-     int a[N][N];
-               ^

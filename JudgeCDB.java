@@ -141,26 +141,30 @@ public class JudgeCDB {
         return;
     }
 
-    int checker(int pid, String pathInput, String pathOutput, String pathAnswer, boolean manualChecker) {//yes or no only
+    int checker(int pid, String pathInput, String pathOutput, String pathAnswer, String pathSubmissionDir, boolean manualChecker,int sid) {//yes or no only
         int ret = 0;
-        String cpath = "checker.exe";
+        String cpath = "checker\\TrailingWhiteSpaceAllowed.exe";
         if (manualChecker) {
             cpath = "checker\\" + pid + "checker.exe";
         }
 
         String[] lst = {cpath, pathInput, pathOutput, pathAnswer};
         ProcessBuilder pb = new ProcessBuilder(lst);
-        pb.redirectOutput(new File("res.txt"));
+        pb.redirectOutput(new File(pathSubmissionDir + "\\"+sid+".verdict"));
+        pb.redirectError(new File(pathSubmissionDir + "\\"+sid+".checker"));
         pb.directory(new File(dir));
         try {
             Process pro = pb.start();
 
-            pro.waitFor(5, TimeUnit.SECONDS);/////////////wait for how nuch time to check
-            Scanner sc = new Scanner(new File(dir + "\\res.txt"));
+            pro.waitFor(10, TimeUnit.SECONDS);/////////////wait for how nuch time to check
+            Scanner sc = new Scanner(new File(pathSubmissionDir + "\\"+sid+".verdict"));
             ret = sc.nextInt();
+            sc.close();
 
         } catch (Exception e) {
+			ret=SubmissionError;
             e.printStackTrace();
+            
         }
         System.err.println("Checker says: " + ret);
 
@@ -171,6 +175,7 @@ public class JudgeCDB {
 
         String pathWatcher = "watcher.exe";
         String pathSubmission = dir + "\\sub\\" + id + "\\Main.exe";
+        String pathSubmissionDir = dir + "\\sub\\" + id ;
 
         String pathDirectory = "C:\\sandbox\\";  ///misdirect user program!!!
         String pathInput = "in\\" + pid + "\\" + sid + ".txt";
@@ -180,7 +185,7 @@ public class JudgeCDB {
         String pathInfo = dir + "\\sub\\" + id + "\\info" + sid + ".txt";
 
         //pathSubmission="compiler.exe";
-        System.out.println(pathSubmission);
+        //System.out.println(pathSubmission);
         /*
          System.out.println(pathInput);
          System.out.println(pathOutput);
@@ -224,7 +229,7 @@ public class JudgeCDB {
         }
 
         if (verdict == TLE); else if (verdict == 0) {
-            verdict = checker(pid, pathInput, pathOutput, pathAnswer, manualChecker);
+            verdict = checker(pid, pathInput, pathOutput, pathAnswer,pathSubmissionDir, manualChecker,sid);
 
         } else {
             verdict = RE;
