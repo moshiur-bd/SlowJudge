@@ -58,6 +58,12 @@ table{
 		float:right;
 		border:1px solid #999;
 		padding:2px;
+		max-width:300px;
+		max-height:300px;
+	}
+	img.profile{
+		max-height:300px;
+		max-width:300px;
 	}
 	div.photo{
 		margin:auto;
@@ -206,6 +212,11 @@ li.navCon a:hover {
 #content{
 	margin-right:22em;
 }
+div.problemnametag{
+	max-width:1100px;
+	text-align:center;
+	margin:auto;
+}
 
 /*End page structure*/
 
@@ -214,6 +225,17 @@ li.navCon a:hover {
 	width:100%;
 	height:80%;
 }
+
+/*submitpage*/
+#submit-onepage{
+	max-width:500px;
+	
+	margin:auto;
+	margin-top:50px;
+	margin-bottom:100px;
+}
+/*endof submitpage*/
+
 /*standing*/
 
 table.scrcontestInfo{

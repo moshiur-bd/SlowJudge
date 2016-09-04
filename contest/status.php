@@ -73,7 +73,7 @@
 			if($flag==null)
 				echo "<tr class='submission my $rowbg' >
 						<td class='submission my id'> <a class='submission' href='view?conid=$conid&id=$id&pid=$pid'> $id</a> </td>
-						<td class='submission my pname'> <a class='pname' href='pdfView.php?pid=$pid&conid=$conid'> $pname</a>  </td>  
+						<td class='submission my pname'> <a class='pname' href='viewproblem.php?pid=$pid&conid=$conid'> $pname</a>  </td>  
 						<td class='submission my uname'> <a class='uname' href='../profile?uid=$puid'> $puname</a> </td>  
 						
 						<td class='submission my time'>$arrtime</td>
@@ -84,7 +84,7 @@
 			else if($flag==0)
 				echo "<tr class='submission my $rowbg' >
 						<td class='submission my id'> <a class='submission' href='view?conid=$conid&id=$id&pid=$pid'> $id</a> </td>
-						<td class='submission my pname'> <a class='pname' href='pdfView.php?pid=$pid&conid=$conid'> $pname</a>  </td>  
+						<td class='submission my pname'> <a class='pname' href='viewproblem.php?pid=$pid&conid=$conid'> $pname</a>  </td>  
 						<td class='submission my uname'> <a class='uname' href='../profile?uid=$puid'> $puname</a> </td>  
 						
 						<td class='submission my time'>$arrtime</td>
@@ -95,7 +95,7 @@
 				
 			else echo "<tr class='submission my $rowbg' >
 						<td class='submission my id'> <a class='submission' href='view?conid=$conid&id=$id&pid=$pid'> $id</a> </td>
-						<td class='submission my pname'> <a class='pname' href='pdfView.php?pid=$pid&conid=$conid'> $pname</a>  </td>  
+						<td class='submission my pname'> <a class='pname' href='viewproblem.php?pid=$pid&conid=$conid'> $pname</a>  </td>  
 						<td class='submission my uname'> <a class='uname' href='../profile?uid=$puid'> $puname</a> </td>  
 						
 						<td class='submission my time'>$arrtime</td>

@@ -15,4 +15,11 @@
 <tr>
 <td><?php echo $ptype;?></td>
 </tr>
+</table>
+<?php
+if($uid==$puid){
+	echo "<a href='editprofile.php'>Edit profile</a>";
+}
+?>
+
 

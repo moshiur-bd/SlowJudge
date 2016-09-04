@@ -9,18 +9,14 @@
 		include(__DIR__ ."\\..\\connection.php");
 		$pid=$_GET['pid'];
 		$conid=$_GET['conid'];
-		
+		$pltr='';
 		include("sidebar.php");
 		echo "<div id='content' >\n";
 		include("toolbar.php");
+		
 		include("problemnametag.php");
 		
-		
-		echo "<div id='pdf'>
-				<object data='../pdf-archive/$pid.pdf' type='application/pdf' id='pdf-field'>
-				alt : <a href='../pdf-archive/$pid.pdf'>PDF Statement</a>
-				</object>
-			</div> ";
+		echo "<a href='pdfview.php?pid=$pid&conid=$conid&ltr=$pltr' >PDF Statement</a>";
 		
 		
 	

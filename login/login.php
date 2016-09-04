@@ -22,7 +22,7 @@
 			
 		}
 	}
-	else header("Location: ".$root."/login");
+	else header("Location: $root/login");
 	
 	
 ?>

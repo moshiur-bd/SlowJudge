@@ -26,7 +26,5 @@
 </div>
 
 <script>
-function onClickBtn(){
-	alert("ok");
-}
+
 </script>

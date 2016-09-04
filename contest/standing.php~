@@ -53,7 +53,7 @@
 
 
 		for($i=0;$i<$problemCount;$i++){
-			echo "<th class='standing field ltr'> <a class='standing-head' href='viewproblem.php?conid=$conid&pid=$pid[$i]'>$ltr</a> </th>";
+			echo "<th class='standing field ltr'> <a class='standing-head' href='pdfView.php?conid=$conid&pid=$pid[$i]'>$ltr</a> </th>";
 			$ltr++;
 
 		}

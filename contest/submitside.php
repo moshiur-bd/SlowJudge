@@ -9,7 +9,7 @@ echo "<div id='submit-sub'>
 									<td><input type='radio' name='lang' value='1' /> C</br>
 									<input type='radio' name='lang' value='2'  /> C++ </br>
 									<input type='radio' name='lang' value='3' checked /> C++11 </br>
-									<input type='radio' name='lang' value='4' /> Java</br>  </td>
+									
 	</tr>
     
 	<tr><td> source </td>           <td><input type='file' name='fileToUpload' id='fileToUpload' accept='.txt,.c,.cpp,.java'></br> </td></tr>
@@ -18,4 +18,6 @@ echo "<div id='submit-sub'>
 	</table>
 </form>
 </div>";
+
+//<input type='radio' name='lang' value='4' /> Java</br>  </td>
 	?>
