@@ -42,6 +42,8 @@
 		echo "</table>";
 		if(file_exists("../pdf-archive/con$conid.pdf"))
 			echo "<a href='../pdf-archive/con$conid.pdf' > complete problemset</a>";
+			
+		include("customlinks.php");
 		
 		echo "</div></div>";
 		

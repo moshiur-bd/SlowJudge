@@ -10,6 +10,7 @@
 	$result=mysqli_query($conn,$sql);
 	if($row=mysqli_fetch_array($result))
 	{
+		echo "fetched!";
 		session_start();
 		if($row['upass']==$upass){
 			$_SESSION['uid']=$row['uid'];
@@ -21,6 +22,7 @@
 			header("Location: $root");
 			
 		}
+		else header("Location: $root/login");
 	}
 	else header("Location: $root/login");
 	

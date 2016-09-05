@@ -6,6 +6,7 @@
 	<?php
 		include(__DIR__ ."\\..\\header.php");
 		include(__DIR__ ."\\..\\connection.php");
+		include("ismanager.php");
 		include("toolbar.php");
 		
 		include("sidebar.php");
@@ -63,6 +64,8 @@
 			$cpid++;
 		}
 		echo "</table></div>";
+		
+		echo "<a href='customlinks.php?conid=$conid'>Custom Links</a>";
 		
 		
 		echo "</div>";
