@@ -25,8 +25,9 @@
 		$sql="CREATE TABLE IF NOT EXISTS `$cDB`.`submission`  ( id int NOT NULL , uid int NOT NULL, pid int NOT NULL,arrtime INT NOT NULL, PRIMARY KEY (id) )";
 		$qcnt+=mysqli_query($conn,$sql);
 		
-		$sql="CREATE TABLE IF NOT EXISTS `$cDB`.`problem` ( pid int NOT NULL ,cpid int NOT NULL,PRIMARY KEY (pid)),  UNIQUE KEY `cpid` (`cpid`) ";
+		$sql="CREATE TABLE IF NOT EXISTS `$cDB`.`problem` ( pid int NOT NULL ,cpid int NOT NULL,PRIMARY KEY (pid),  UNIQUE KEY `cpid` (`cpid`)) ";
 		$qcnt+=mysqli_query($conn,$sql);
+		echo "</br> $sql </br>";
 		
 		$sql="CREATE TABLE IF NOT EXISTS `$cDB`.`scoreboard` (
 			  `uid` int(11) NOT NULL,
@@ -72,6 +73,7 @@
 			$conid=mysqli_insert_id($conn);
 			$sql="DELETE FROM `$DB`.`contest` WHERE `id`='$conid' ";
 			mysqli_query($conn,$sql);
+			echo"</br>queries succedded: $qcnt </br>";
 			
 			die("DATABASE or Table could not be created!!!");
 		}
