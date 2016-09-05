@@ -199,6 +199,8 @@ li.navCon a:hover {
     display: inline;
     padding-left: 4em;
     margin: 3em 1em 1em -22em;
+	border-left:1px solid black;
+	border-bottom:1px solid black;
 	
 }
 #content{

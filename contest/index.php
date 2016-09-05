@@ -35,12 +35,15 @@
 		$duration=$resx['duration'];
 		$colstatus=getColorByConStatus($constatus);
 		
+		$enterbutton="<td class='conlist cls-in'><a href='dash.php?conid=$conid' >enter</a></td> ";
+		if($constatus=='upcoming') $enterbutton="<td class='conlist cls-in'><a> wait </a></td> ";
+		
 		echo "<tr class='conlist'> <td class='conlist cls-name'>".htmlentities($name)."</td>
 		<td class='conlist cls-uname'>".getProfileById($owner)."</td>
 		<td class='conlist cls-start'>".printDateLocal($start)."</td>
 		<td class='conlist cls-start'>".printContestDuration($duration)."</td>
 		<td class='conlist cls-status $colstatus'>  $constatus </td>
-		<td class='conlist cls-in'><a href='dash.php?conid=$conid' >enter</a></td> 
+		$enterbutton
 		</tr>\n";
 		
 	}

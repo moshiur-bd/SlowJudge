@@ -1,13 +1,13 @@
 <?php
 include(__DIR__ ."\\..\\connection.php");
-/*for($i=6;$i<43;$i++){
-	if($i==28);
+for($i=6;$i<43;$i++){
+	if($i==28||$i==29);
 	else{
-		//$sql="DROP DATABASE `mos$i`";
-		//mysqli_query($conn,$sql);
+		$sql="DROP DATABASE `mos$i`";
+		mysqli_query($conn,$sql);
 	}
-}*/
-
+}
+/*
 $sql="SELECT `uid` FROM `mosuser`.submission ";
 $res=mysqli_query($conn,$sql);
 while($row=mysqli_fetch_array($res))
@@ -20,6 +20,6 @@ while($row=mysqli_fetch_array($res))
 	$sql="UPDATE  `mosuser`.`submission` SET `uname`='$uname' WHERE `uid`='$uid'";
 	$r=mysqli_query($conn,$sql);
 }
-
+*/
 
 ?>

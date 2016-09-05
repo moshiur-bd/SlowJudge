@@ -37,7 +37,7 @@
 		}
 
 
-		$sql="SELECT * FROM `$cDB`.`scoreboard` ORDER BY `score` DESC,`penalty` ASC, `name` ASC";
+		$sql="SELECT * FROM `$cDB`.`scoreboard` ORDER BY `score` DESC,`penalty` ASC, `uname` ASC";
 		$result=mysqli_query($conn,$sql);
 
 
@@ -48,7 +48,7 @@
 				<table class='standing' cellspacing='0'>";
 
 		//declare header
-		echo "<tr class='standing head' > <th class='standing rank'> # </th>    <th class='standing name'> Name </th>    <th class='standing sum'> score </th> <th class='standing pen'> penalty </th> ";
+		echo "<tr class='standing head' > <th class='standing rank'> # </th>    <th class='standing name'> Name </th>    <th class='standing sum'> Solved </th> <th class='standing pen'> penalty </th> ";
 
 
 
@@ -68,7 +68,7 @@
 		while($row=mysqli_fetch_array($result))
 		{
 			$penalty=$row['penalty'];
-			$score=$row['score'];
+			$score=round($row['score']/100);
 			$puname=$row['uname'];
 			
 			$puid=$row['uid'];

@@ -6,14 +6,18 @@
 	<?php
 		include(__DIR__ ."\\..\\header.php");
 		include(__DIR__ ."\\..\\connection.php");
+		$conid=$_GET['conid'];
+		$cDB=$pre.$conid;
+		include("isupcoming.php");
 		
 		include("sidebar.php");
 		echo "<div id='content' >\n";
+		
 		include("toolbar.php");
 		include("functions.php");
 		
-		$conid=$_GET['conid'];
-		$cDB=$pre.$conid;
+		
+		
 		
 		$sql="SELECT `pid` FROM `$cDB`.`problem` ORDER BY `cpid` ASC";
 		$respid=mysqli_query($conn,$sql);
@@ -38,7 +42,9 @@
 			$tl=$data['tl'];
 			$ml=$data['ml'];
 			$slcnt="".getACuCount($cpid)." / ".getAlluCount($cpid);
-			echo "<tr class='dash' > <td class='dash ltr'> $ltr </td>    <td class='dash'> <a class='pname' href='viewproblem.php?conid=$conid&pid=$pid&ltr=$ltr'> $pname</a> </td> <td class='dash tl'> $tl</td>  <td class='dash ml'> $ml</td>  <td class='dash sub'> <a class='pname' href='submit.php?conid=$conid&pid=$pid' >submit</a> </td> <td class='dash cnt'> $slcnt</td> </tr>";
+			$isolved=isSolvedByMe($cpid);
+			
+			echo "<tr title='$isolved' class='dash dash-$isolved' > <td class='dash ltr'> $ltr </td>    <td class='dash'> <a class='pname' href='viewproblem.php?conid=$conid&pid=$pid&ltr=$ltr'> $pname</a> </td> <td class='dash tl'> $tl</td>  <td class='dash ml'> $ml</td>  <td class='dash sub'> <a class='pname' href='submit.php?conid=$conid&pid=$pid' >submit</a> </td> <td class='dash cnt'> $slcnt</td> </tr>";
 			$ltr++;
 			$cpid++;
 		}

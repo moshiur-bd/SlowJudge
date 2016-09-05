@@ -70,6 +70,7 @@
 		for($i=$mn;$i<$up;$i++)
 		{
 			$sql="SELECT * FROM `$cDB`.`problem` WHERE `cpid`='$i'";
+			echo $sql;
 			$res=mysqli_query($conn,$sql);
 			$pid=0;
 			if($row=mysqli_fetch_array($res))

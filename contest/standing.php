@@ -13,6 +13,7 @@
 
 		$conid=$_GET['conid'];
 		$cDB=$pre.$conid;
+		include("isupcoming.php");
 
 		$problemCount=0;
 
@@ -37,7 +38,7 @@
 		}
 
 
-		$sql="SELECT * FROM `$cDB`.`scoreboard` ORDER BY `score` DESC,`penalty` ASC, `name` ASC";
+		$sql="SELECT * FROM `$cDB`.`scoreboard` ORDER BY `score` DESC,`penalty` ASC, `uname` ASC";
 		$result=mysqli_query($conn,$sql);
 
 

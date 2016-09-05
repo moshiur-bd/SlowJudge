@@ -207,6 +207,8 @@ li.navCon a:hover {
     display: inline;
     padding-left: 4em;
     margin: 3em 1em 1em -22em;
+	border-left:1px solid #dcdbde;
+	border-bottom:1px solid #dcdbde;
 	
 }
 #content{
@@ -248,6 +250,14 @@ table.dash{
 	margin:1% 1%;
 }
 
+tr.dash-solved{
+	background-color:#93c54b;
+}
+tr.dash-unsolved{
+	background-color:#f47c3c;
+}
+
+
 
 .srctxt,.pdftxt{
 	margin-left:5%;
@@ -280,6 +290,14 @@ table.dash{
 }
 
 /*............*/
+
+/*html-deciption*/
+div.htmldescription{
+	margin-left:1%;
+	margin-right:17em;
+}
+/*.............*/
+
 
 #pdf-field{
 	width:100%;

@@ -25,7 +25,7 @@
 		$sql="CREATE TABLE IF NOT EXISTS `$cDB`.`submission`  ( id int NOT NULL , uid int NOT NULL, pid int NOT NULL,arrtime INT NOT NULL, PRIMARY KEY (id) )";
 		$qcnt+=mysqli_query($conn,$sql);
 		
-		$sql="CREATE TABLE IF NOT EXISTS `$cDB`.`problem` ( pid int NOT NULL ,cpid int NOT NULL,PRIMARY KEY (pid))";
+		$sql="CREATE TABLE IF NOT EXISTS `$cDB`.`problem` ( pid int NOT NULL ,cpid int NOT NULL,PRIMARY KEY (pid)),  UNIQUE KEY `cpid` (`cpid`) ";
 		$qcnt+=mysqli_query($conn,$sql);
 		
 		$sql="CREATE TABLE IF NOT EXISTS `$cDB`.`scoreboard` (
@@ -40,13 +40,16 @@
 		$qcnt+=mysqli_query($conn,$sql);
 		
 		$sql="CREATE TABLE IF NOT EXISTS `$cDB`.`settings` (
-			  `delay` int(11) NOT NULL DEFAULT '5000',
+			  `delay` int(11) NOT NULL DEFAULT '30000',
 			  `duration` bigint(20) NOT NULL DEFAULT '3600000',
 			  `penalty` int(11) NOT NULL DEFAULT '20',
 			  `problemCount` int(11) NOT NULL DEFAULT '0',
 			  `status` varchar(30) NOT NULL DEFAULT 'upcoming',
 			  PRIMARY KEY (`status`)
 			) ";
+		$qcnt+=mysqli_query($conn,$sql);
+		
+		$sql="INSERT INTO `$cDB`.`settings` ( `problemCount` ) VALUES ('0') ";
 		$qcnt+=mysqli_query($conn,$sql);
 		
 		$sql="CREATE TABLE IF NOT EXISTS `$cDB`.`inset` ( pid int NOT NULL, dsid int NOT NULL, `in` VARCHAR(100)  ) ";
@@ -63,7 +66,7 @@
 		
 		
 		
-		if($qcnt==9)
+		if($qcnt==10)
 			echo "Adding Contest was successfull!";
 		else{
 			$conid=mysqli_insert_id($conn);

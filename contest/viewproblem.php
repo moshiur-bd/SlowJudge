@@ -16,7 +16,14 @@
 		
 		include("problemnametag.php");
 		
-		echo "<a href='pdfview.php?pid=$pid&conid=$conid&ltr=$pltr' >PDF Statement</a>";
+		if(file_exists(__DIR__ ."\\..\\pdf-archive\\$pid.pdf"))
+			echo "<a href='pdfview.php?pid=$pid&conid=$conid&ltr=$pltr' >PDF Statement</a>";
+		
+		echo "<div class='htmldescription'>";
+		$htmlpath=__DIR__ ."\\..\\html-description\\$pid.html";
+		if(file_exists($htmlpath))
+			include($htmlpath);
+		echo "</div>";
 		
 		
 	
