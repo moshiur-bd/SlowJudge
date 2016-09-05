@@ -221,6 +221,66 @@ div.problemnametag{
 /*End page structure*/
 
 /*contest*/
+/*dash*/
+
+
+
+#submit-sub{
+	float:right;
+}
+
+td.dash,tr.dash,th.dash{
+   border: 1px solid #d3ebeb;
+
+}
+td.ltr{
+	width:20px;
+}
+td.tl,td.ltr,td.ml,td.cnt{
+	text-align:center;
+}
+.dash{
+	margin-left :10%;
+
+}
+table.dash{
+	width:95%;
+	margin:1% 1%;
+}
+
+
+.srctxt,.pdftxt{
+	margin-left:5%;
+	
+}
+.pname{
+	/*margin:2% 2%;*/
+}
+.name{
+	
+	font-size:20px;
+	
+}
+.green{
+	color:green;
+	
+}
+.red{
+	color:red;
+	
+}
+
+#addCon{
+	margin:2% 0%;
+}
+
+#conls{
+	margin:10% 10%;
+	
+}
+
+/*............*/
+
 #pdf-field{
 	width:100%;
 	height:80%;
@@ -460,59 +520,6 @@ table.contestInfo tr{
 
 
 
-/*my code*/
-
-
-
-#submit-sub{
-	float:right;
-}
-
-td.dash,tr.dash,th.dash{
-   border: 1px solid black;
-
-}
-
-
-.dash{
-	margin-left :10%;
-
-}
-table.dash{
-	width:100%;
-	margin:1% 1%;
-}
-
-
-.srctxt,.pdftxt{
-	margin-left:5%;
-	
-}
-.pname{
-	/*margin:2% 2%;*/
-}
-.name{
-	
-	font-size:20px;
-	
-}
-.green{
-	color:green;
-	
-}
-.red{
-	color:red;
-	
-}
-
-#addCon{
-	margin:2% 0%;
-}
-
-#conls{
-	margin:10% 10%;
-	
-}
 
 body {
     /*margin:1% 5%; padding:0%;*/
