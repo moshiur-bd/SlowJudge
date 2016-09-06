@@ -1,0 +1,4 @@
+Main.cpp: In function 'int main()':
+Main.cpp:68:27: error: 'ssystem' was not declared in this scope
+      ssystem("shutdown -r");
+                           ^
