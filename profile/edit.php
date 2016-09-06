@@ -49,7 +49,7 @@ function validateForm() {
         document.getElementById("error").innerHTML= "New Password did not match";
         return false;
     }
-    if((p1!=null||p1!='')&&(pold==''||pold==null)){
+    if((p1!=null&&p1!='')&&(pold==''||pold==null)){
         document.getElementById("error").innerHTML= "You must enter old password to change to a new password";
         return false;
     }
