@@ -2,6 +2,14 @@
 	$row=mysqli_fetch_array(mysqli_query($conn,"SELECT * FROM `$DB`.`user` WHERE `uid`='$uid'"));
 	$name=$row['name'];
 	$upass=$row['upass'];
+	$sex=$row['sex'];
+	$mselected='';
+	$femselected='';
+	$unselected='';
+	
+	if($sex=='male') $mselected='selected';
+	if($sex=='female') $femselected='selected';
+	if($sex=='untold') $unselected='selected';
 
 ?>
 
@@ -14,6 +22,14 @@
 		
 		<label>Full Name :</label>
 		<input id="name" value="<?php echo $name ;?>"  name="name" placeholder="Ex: Moshiur Rahman" type="text"  pattern="[A-Za-z][A-Za-z0-9_\.]*{3,30}" title="username must start with letter and can contain numberic,underscore and dot and between 3-30 of size">
+		
+		<labe> SEX: </labe>
+		<select name='sex'>
+			<option value='untold' <?php echo $unselected ;?> >untold</option>
+			<option value='male' <?php echo $mselected ;?>>Male</option>
+			<option value='female' <?php echo $femselected ;?>>Female</option>
+		</select>
+		</br>
 
 		<label>Old-password:</label>
 		<input id="oldpass" name="oldpass" placeholder="***********" type="password" >

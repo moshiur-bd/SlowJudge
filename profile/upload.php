@@ -5,8 +5,9 @@
 	
 	$upass=$_POST['upass'];
 	$name=$_POST['name'];
+	$sex=$_POST['sex'];
 	mysqli_select_db($conn,$DB);
-	$sql="UPDATE `$DB`.`user` SET `name`='$name'  WHERE `uid`='$uid'";
+	$sql="UPDATE `$DB`.`user` SET `name`='$name' ,`sex`='$sex'  WHERE `uid`='$uid'";
 	if(mysqli_query($conn,$sql))
 	{
 		

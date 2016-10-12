@@ -13,6 +13,7 @@
 
 		$conid=$_GET['conid'];
 		$cDB=$pre.$conid;
+		include("isupcoming.php");
 
 		$problemCount=0;
 
@@ -48,7 +49,7 @@
 				<table class='standing' cellspacing='0'>";
 
 		//declare header
-		echo "<tr class='standing head' > <th class='standing rank'> # </th>    <th class='standing name'> Name </th>    <th class='standing sum'> Solved </th> <th class='standing pen'> penalty </th> ";
+		echo "<tr class='standing head' > <th class='standing rank'> # </th>    <th class='standing name'> Name </th>    <th class='standing sum'> score </th> <th class='standing pen'> penalty </th> ";
 
 
 
@@ -68,11 +69,9 @@
 		while($row=mysqli_fetch_array($result))
 		{
 			$penalty=$row['penalty'];
-			$score=round($row['score']/100);
+			$score=$row['score'];
 			$puname=$row['uname'];
-			
 			$puid=$row['uid'];
-			$pname=mysqli_fetch_array(mysqli_query($conn,"SELECT `name` FROM `$DB`.`user` WHERE `uid`='$puid' "))['name'];
 			$handle_color='default-color';
 			if($ppen==$penalty&&$pscore==$score);
 			else $rank=$cnt;
@@ -84,7 +83,7 @@
 			
 			echo "<tr class='standing $evenodd' > 
 				<td class='standing rank'> $rank </td>   
-				<td class='standing name'> <a class='$handle_color standing-uname' href='../profile?uid=$puid&uname=$puname'>$pname</a> </td> 
+				<td class='standing name'> <a class='$handle_color standing-uname' href='../profile?uid=$puid&uname=$puname'>$puname</a> </td> 
 				<td class='standing sum'> $score </td> <td class='standing pen'> $penalty</td> ";
 				
 			for($i=0;$i<$problemCount;$i++){

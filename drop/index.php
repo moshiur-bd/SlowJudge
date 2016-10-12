@@ -4,7 +4,7 @@ for($i=6;$i<43;$i++){
 	if($i==28||$i==29);
 	else{
 		$sql="DROP DATABASE `mos$i`";
-		mysqli_query($conn,$sql);
+		//mysqli_query($conn,$sql);
 	}
 }
 /*
