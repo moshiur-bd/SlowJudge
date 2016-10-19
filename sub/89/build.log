@@ -1,3 +1,0 @@
-Main.cpp:100:19: error: size of array 'ara' is too large
- int ara[1000000000];
-                   ^

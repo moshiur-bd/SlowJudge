@@ -1,5 +1,7 @@
 #include<bits/stdc++.h>
 #include<windows.h>
+
+#define ll long long
 using namespace std;
 HANDLE runProgram(char cmd[])
 {
@@ -57,26 +59,54 @@ int main(int argc,char *argv[]){
      long long tl=atol(argv[2]);
     long long ml=atol(argv[3]);
      freopen(argv[4],"w",stderr);
-    long long clk=clock();
+    long long time_now=time(0);
+
+    bool notResponding=0;
 
     if(hand != NULL)
     {
+
+        ll last_cpu=0,cpu=0,last_time=time(0)*1000ll;
         while (WAIT_TIMEOUT == WaitForSingleObject(hand, 100))
         {
-            if(cputimer(hand)>tl)break;
-            if((clock()-clk)>maxTime) break;//is it ok?
+            cpu=cputimer(hand);
+            //cerr<<last_time<<" "<<time(0)*1000ll<<" "<<cpu<<endl;
+
+            if(abs(cpu-last_cpu)<5 && abs(1000ll*time(0)-last_time)>5000) {
+
+                notResponding=1;
+                break;
+            }
+
+            if(cpu>last_cpu) {
+                last_cpu=cpu;
+                last_time=time(0)*1000ll;
+            }
+
+            if(cpu>tl)break;
+            if((time(0)-time_now)>maxTime) break;//is it ok?
 
         }
         DWORD code;
         GetExitCodeProcess(hand,&code);
-        if(code==STILL_ACTIVE){
+        if(notResponding){
             TerminateProcess(hand,1);
+            cerr<<cputimer(hand)<<endl;
+            cerr<<"-1"<<endl;
+            cerr<<"not responding\n";
         }
+        else if(code==STILL_ACTIVE){
+            TerminateProcess(hand,1);
+            cerr<<cputimer(hand)<<endl;
+            cerr<<"1"<<endl;
+
+        }
+        else{
 
         GetExitCodeProcess(hand,&code);
         cerr<<cputimer(hand)<<endl;
         cerr<<code<<endl;
-
+        }
         // close the handle no matter what else.
         CloseHandle(hand);
     }

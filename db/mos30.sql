@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 06, 2016 at 03:19 PM
+-- Generation Time: Oct 18, 2016 at 02:26 PM
 -- Server version: 5.6.21
 -- PHP Version: 5.6.3
 
@@ -186,7 +186,7 @@ CREATE TABLE IF NOT EXISTS `settings` (
 --
 
 INSERT INTO `settings` (`delay`, `duration`, `penalty`, `problemCount`, `status`) VALUES
-(30000, 14400000, 20, 4, 'paused');
+(30000, 14400000, 20, 4, 'finished');
 
 -- --------------------------------------------------------
 
@@ -507,7 +507,7 @@ CREATE TABLE IF NOT EXISTS `time` (
 --
 
 INSERT INTO `time` (`elapsed`, `stamp`) VALUES
-('14168704', '1473156390644');
+('14400015', '1473168432297');
 
 --
 -- Indexes for dumped tables

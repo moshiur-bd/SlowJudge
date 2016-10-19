@@ -1,0 +1,15 @@
+#include<stdio.h>
+#include<string.h>
+#include<math.h>
+int main()
+{
+    int n,m,k,t,i;
+    char a[10001];
+    scanf("%d",&t);
+    while(t--)
+    {
+        scanf("%d%d",&n,&m);
+            printf("%d\n",abs(n-m));
+    }
+    return 0;
+}

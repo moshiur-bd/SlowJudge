@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 06, 2016 at 03:19 PM
+-- Generation Time: Oct 18, 2016 at 02:26 PM
 -- Server version: 5.6.21
 -- PHP Version: 5.6.3
 
@@ -347,7 +347,8 @@ INSERT INTO `submission` (`id`, `uid`, `pid`, `arrtime`) VALUES
 (280, 41, 87, 901502),
 (282, 41, 87, 901722),
 (286, 41, 88, 904635),
-(287, 65, 87, 904699);
+(287, 65, 87, 904699),
+(888, 2, 91, 1241594);
 
 -- --------------------------------------------------------
 
@@ -365,7 +366,7 @@ CREATE TABLE IF NOT EXISTS `time` (
 --
 
 INSERT INTO `time` (`elapsed`, `stamp`) VALUES
-('907392262', '1473083606451');
+('1241700416', '1476792850386');
 
 --
 -- Indexes for dumped tables

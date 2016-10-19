@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 06, 2016 at 03:19 PM
+-- Generation Time: Oct 18, 2016 at 02:26 PM
 -- Server version: 5.6.21
 -- PHP Version: 5.6.3
 
@@ -587,7 +587,7 @@ CREATE TABLE IF NOT EXISTS `time` (
 --
 
 INSERT INTO `time` (`elapsed`, `stamp`) VALUES
-('10800016', '1473163820807');
+('10800016', '1476785185895');
 
 --
 -- Indexes for dumped tables

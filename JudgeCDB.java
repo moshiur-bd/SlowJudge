@@ -38,6 +38,7 @@ public class JudgeCDB {
     int RE = -1;
     int CE = -2;
     int SubmissionError = 100;
+    String ext="";
 
     public JudgeCDB(String s, String s1, String s2) {
         dir = s;
@@ -164,7 +165,7 @@ public class JudgeCDB {
         } catch (Exception e) {
 			ret=SubmissionError;
             e.printStackTrace();
-            
+
         }
         System.err.println("Checker says: " + ret);
 
@@ -221,6 +222,8 @@ public class JudgeCDB {
             }
             rep.close();
 
+            System.out.println("watcher:"+execution_time+" "+verdict);
+
         } catch (Exception e) {
             verdict = -100;
             System.out.println("Error In DataSet or Source");
@@ -228,7 +231,8 @@ public class JudgeCDB {
 
         }
 
-        if (verdict == TLE); else if (verdict == 0) {
+        if (verdict == TLE);
+        else if (verdict == 0) {
             verdict = checker(pid, pathInput, pathOutput, pathAnswer,pathSubmissionDir, manualChecker,sid);
 
         } else {
@@ -284,7 +288,7 @@ public class JudgeCDB {
             penstr += "+`penalty" + i + "`";
         }
 
-        sql = "UPDATE `" + cDB + "`.scoreboard SET " + scrstr + " , " + penstr + "  WHERE `uid`=" + uid;
+        sql = "UPDATE `" + cDB + "`.scoreboard"+ext+" SET " + scrstr + " , " + penstr + "  WHERE `uid`=" + uid;
         try {
             Statement stmtsc = conn.createStatement();
             stmtsc.executeUpdate(sql);
@@ -320,7 +324,7 @@ public class JudgeCDB {
             }
 
             //get AC sub< id
-            sql = "SELECT `firstac" + cpid + "` FROM `" + cDB + "`.`scoreboard` WHERE `uid`=" + uid;
+            sql = "SELECT `firstac" + cpid + "` FROM `" + cDB + "`.`scoreboard"+ext+"` WHERE `uid`=" + uid;
             stmt2 = conn.createStatement();
             rs2 = stmt2.executeQuery(sql);
             if (rs2.next()) {
@@ -368,7 +372,7 @@ public class JudgeCDB {
                     System.err.println("wsub= " + wsub);
 
                     //update wrong submission count
-                    sql = "UPDATE `" + cDB + "`.`scoreboard` SET `wrong" + cpid + "` = " + wsub + " WHERE `uid`= " + uid;
+                    sql = "UPDATE `" + cDB + "`.`scoreboard"+ext+"` SET `wrong" + cpid + "` = " + wsub + " WHERE `uid`= " + uid;
                     stmt2 = conn.createStatement();
                     if (stmt2.executeUpdate(sql) == 0) {
                         System.err.println("wrongCount update failed!!");
@@ -394,15 +398,15 @@ public class JudgeCDB {
 
                     pen += (penalty * (wsub));
                     System.err.println("***Total Penalty = " + pen + " p= "+penalty);
-                    
+
                     //remove privious penalty and add new one
                     String sql2, sql3;
-                    sql = "UPDATE `" + cDB + "`.`scoreboard` SET `firstac" + cpid + "` = " + id
+                    sql = "UPDATE `" + cDB + "`.`scoreboard"+ext+"` SET `firstac" + cpid + "` = " + id
                             + ", `penalty`=`penalty`-`penalty" + cpid + "` ,"
                             + "`score`=`score`-`score" + cpid + "` WHERE `uid`=" + uid + ";";
                     //
 
-                    sql2 = "UPDATE `" + cDB + "`.`scoreboard` SET `penalty" + cpid + "` = " + pen + ", `score" + cpid + "` = " + pscore
+                    sql2 = "UPDATE `" + cDB + "`.`scoreboard"+ext+"` SET `penalty" + cpid + "` = " + pen + ", `score" + cpid + "` = " + pscore
                             + " ,`penalty`=`penalty`+`penalty" + cpid + "` , `score`=`score`+`score" + cpid + "` WHERE `uid` = " + uid + ";";
 
                     stmt2 = conn.createStatement();
@@ -420,7 +424,7 @@ public class JudgeCDB {
                         stmt2.close();
                     }
 
-                    System.err.println("Updated scoreboard");
+                    System.err.println("Updated scoreboard"+ext+"");
 
                 } else {
                     System.err.println("Result is already better. quitting!");
@@ -435,7 +439,7 @@ public class JudgeCDB {
             }
 
         } else {//wrong sub //countable modify later
-            System.err.println("------updating Scoreboard in NO.........");
+            System.err.println("------updating scoreboard"+ext+" in NO.........");
             try {
                 int wsub = 0;
                 sql = "SELECT COUNT(`id`) FROM `" + DB + "`.submission WHERE `countable`=1 AND `pid`= " + pid + " AND `uid`=" + uid + " AND `conid`= " + conid;
@@ -448,7 +452,7 @@ public class JudgeCDB {
                     System.err.println("wsub counting failed - it's a wrong submission");
                 }
 
-                sql = "UPDATE `" + cDB + "`.`scoreboard` SET `score" + cpid + "`= 0 , `penalty" + cpid + "` = 0  ,"
+                sql = "UPDATE `" + cDB + "`.`scoreboard"+ext+"` SET `score" + cpid + "`= 0 , `penalty" + cpid + "` = 0  ,"
                         + " `firstac" + cpid + "`= " + maxId + " , `wrong" + cpid + "` = " + wsub + " WHERE `uid`= " + uid + " AND `firstac" + cpid + "` >= " + id;
                 System.err.println(sql);
                 if (stmt2.executeUpdate(sql) == 0) {
@@ -639,6 +643,7 @@ public class JudgeCDB {
             pstmt = conn.prepareStatement("SELECT * FROM `" + DB + "`.`submission` WHERE (`flag` IS NULL) AND(`hold` IS NULL OR `hold` < " + expireTime + "  ) AND `type`=? ;");
 
             pstmt.setString(1, "official");
+            ext="";
 
             rs = pstmt.executeQuery();
 
@@ -658,6 +663,8 @@ public class JudgeCDB {
             if (exitNow) {
                 return cnt_r;
             }
+            
+            ext="unofficial";
 
             if (cnt_r == 0) {
                 pstmt.setString(1, "unofficial");

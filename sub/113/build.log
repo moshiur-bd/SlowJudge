@@ -1,4 +1,0 @@
-Main.cpp: In function 'int main()':
-Main.cpp:68:14: warning: division by zero [-Wdiv-by-zero]
-      int x=90/0;
-              ^
