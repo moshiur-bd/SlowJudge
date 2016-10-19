@@ -12,15 +12,6 @@
 
 
 		$conid=$_GET['conid'];
-		$girlsOnly=false;
-		$ext="";
-		if(isset($_GET['girlsonly'])){
-			$girlsOnly=true;
-		}
-		if(isset($_GET['unofficial'])){
-			$ext="unofficial";
-		}
-
 		$cDB=$pre.$conid;
 
 		$problemCount=0;
@@ -46,7 +37,7 @@
 		}
 
 
-		$sql="SELECT * FROM `$cDB`.`scoreboard$ext` ORDER BY `score` DESC,`penalty` ASC, `uname` ASC";
+		$sql="SELECT * FROM `$cDB`.`scoreboard` ORDER BY `score` DESC,`penalty` ASC, `uname` ASC";
 		$result=mysqli_query($conn,$sql);
 
 
@@ -72,22 +63,16 @@
 		$pscore=-1;
 		$rank=1;
 		$cnt=1;
-
-
-
+		
+		
 		while($row=mysqli_fetch_array($result))
 		{
 			$penalty=$row['penalty'];
 			$score=round($row['score']/100);
 			$puname=$row['uname'];
-
+			
 			$puid=$row['uid'];
 			$pname=mysqli_fetch_array(mysqli_query($conn,"SELECT `name` FROM `$DB`.`user` WHERE `uid`='$puid' "))['name'];
-			$sex="untold";
-			if($girlsOnly==true){
-				$sex=mysqli_fetch_array(mysqli_query($conn,"SELECT `sex` FROM `$DB`.`user` WHERE `uid`='$puid' "))['sex'];
-				if($sex!='female') continue;
-			}
 			$handle_color='default-color';
 			if($ppen==$penalty&&$pscore==$score);
 			else $rank=$cnt;
@@ -95,13 +80,13 @@
 			if($cnt%2==0)
 				$evenodd='even';
 			else $evenodd='odd';
-
-
-			echo "<tr class='standing $evenodd' >
-				<td class='standing rank'> $rank </td>
-				<td class='standing name'> <a class='$handle_color standing-uname' href='../profile?uid=$puid&uname=$puname'>$pname</a> </td>
+				
+			
+			echo "<tr class='standing $evenodd' > 
+				<td class='standing rank'> $rank </td>   
+				<td class='standing name'> <a class='$handle_color standing-uname' href='../profile?uid=$puid&uname=$puname'>$pname</a> </td> 
 				<td class='standing sum'> $score </td> <td class='standing pen'> $penalty</td> ";
-
+				
 			for($i=0;$i<$problemCount;$i++){
 				$time=$row["penalty$i"];
 				$wsub=$row["wrong$i"];
@@ -117,7 +102,7 @@
 				}
 				else{
 					$wsub++;
-				 echo "<td class='standing field accepted' ><span class='field accepted' > </span>
+				 echo "<td class='standing field accepted' ><span class='field accepted' > </span> 
 					<a class='score field' href='submissions.php?conid=$conid&uid=$puid&pid=$pid[$i]'>$wsub($time)</a> </td>";
 				}
 

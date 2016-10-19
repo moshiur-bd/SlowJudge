@@ -2,7 +2,11 @@
 
 <div id="header">
 <span class='slowjudge'>SlowJudge</span>
-
+<div class="ad" style="float:right" >
+<a href="/cprank"  >Competitive Programmer Rank</a>
+</br>
+<span style="float:right"> auto generated using codeforces!</span>
+</div>
 <?php
 	//get user info
 	session_start();
