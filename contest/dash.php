@@ -44,7 +44,7 @@
 			$slcnt="".getACuCount($cpid)." / ".getAlluCount($cpid);
 			$isolved=isSolvedByMe($cpid);
 			
-			echo "<tr title='$isolved' class='dash dash-$isolved' > <td class='dash ltr'> $ltr </td>    <td class='dash'> <a class='pname' href='viewproblem.php?conid=$conid&pid=$pid&ltr=$ltr'> $pname</a> </td> <td class='dash tl'> $tl</td>  <td class='dash ml'> $ml</td>  <td class='dash sub'> <a class='pname' href='submit.php?conid=$conid&pid=$pid' >submit</a> </td> <td class='dash cnt'> $slcnt</td> </tr>";
+			echo "<tr title='$isolved' class='dash dash-$isolved' > <td class='dash ltr'> $ltr </td>    <td class='dash'> <a class='pname dashpname' href='viewproblem.php?conid=$conid&pid=$pid&ltr=$ltr'> $pname</a> </td> <td class='dash tl'> $tl</td>  <td class='dash ml'> $ml</td>  <td class='dash sub'> <a class='pname' href='submit.php?conid=$conid&pid=$pid' >submit</a> </td> <td class='dash cnt'> $slcnt</td> </tr>";
 			$ltr++;
 			$cpid++;
 		}

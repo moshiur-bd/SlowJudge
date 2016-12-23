@@ -21,6 +21,10 @@
 		include("who.php");//contestant name
 
 
+		$row=mysqli_fetch_array($ressub);
+		
+		if(!$row) die("You haven't submitted yet!");
+
 		echo "<div id='submission my' class='submission my'>
 				<table cellspacing='0' class='submission my'>";
 		echo "<tr class='submission my' >
@@ -32,7 +36,7 @@
 				<th class='submission my ml'> Memory (MB) </th> 
 				<th class='submission my sub'> verdict </th>  </tr>";
 		$rowbg='odd';
-		while($row=mysqli_fetch_array($ressub))
+		do
 		{
 			
 			$pid=$row['pid'];
@@ -90,7 +94,7 @@
 			if($rowbg=='odd')
 				$rowbg='even';
 			else $rowbg='odd';
-		}
+		}while($row=mysqli_fetch_array($ressub));
 		echo "</table></div>";
 
 		echo "</div>";

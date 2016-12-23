@@ -3,6 +3,8 @@
 	include(__DIR__."\\..\\connection.php");
 	$uname=$_POST['uname'];
 	$upass=$_POST['upass'];
+	if( (strlen($upass))<3) die("password too short!");
+	
 	$name=$_POST['name'];
 	if($name==''||$name==null)
 		$name=$uname;
@@ -17,9 +19,17 @@
 		echo "ok";
 		header("Location: $root");
 	}
-	else header("Location: $root/register");
 	echo "username already taken!";
-	
+
 	
 	
 ?>
+	<script>
+		sleep(2000);
+		window.history.back(-1);
+
+		function sleep(delay) {
+		var start = new Date().getTime();
+		while (new Date().getTime() < start + delay);
+	}
+	</script>

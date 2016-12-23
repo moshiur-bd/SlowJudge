@@ -1,6 +1,7 @@
 <html>
 <head>
 
+
 </head>
 
 
@@ -16,16 +17,16 @@ if(isset($_SESSION['uid']))
  ?>
 
 	
-	<div id="login"> 
-		<h2>Login Form</h2>
+	<div id="login" class ="login"> 
+		<h2>Login to your account</h2>
 		<form action="login.php" method="post">
-		<label>UserName :</label>
-		<input id="name" name="uname" placeholder="username" type="text">
-		<label>Password :</label>
-		<input id="password" name="upass" placeholder="**********" type="password">
+		<input id="name" name="uname" placeholder="Username" type="text">
+		<input id="password" name="upass" placeholder="Password" type="password">
 		<input name="submit" type="submit" value=" Login ">
-		</form
+		</form>
 	</div>
+	
+	
 
 </div>
 </body>
