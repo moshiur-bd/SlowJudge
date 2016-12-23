@@ -47,6 +47,14 @@ table{
 }
 
 /*end of global*/
+/*home*/
+div.intro{
+	margin:5% 5%;
+	width:50%;
+	font-size:1.3em;
+}
+/*endof home*/
+
 
 /*profile designs*/
 	.handle{
