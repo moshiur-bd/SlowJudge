@@ -15,7 +15,7 @@
 		$conid=$_GET['conid'];
 		$cDB=$pre.$conid;
 		
-		$sql="SELECT * FROM `$cDB`.`submission` WHERE `uid`=$uid ORDER BY `arrtime` DESC";
+		$sql="SELECT * FROM `$cDB`.`submission` WHERE `uid`=$uid ORDER BY `id` DESC";
 		$ressub=mysqli_query($conn,$sql);
 
 		include("who.php");//contestant name

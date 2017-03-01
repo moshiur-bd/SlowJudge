@@ -19,7 +19,7 @@
 		
 		$cDB=$pre.$conid;
 		
-		$sql="SELECT * FROM `$cDB`.`submission` WHERE `uid`=$uid AND `pid`='$pid'  ORDER BY `arrtime` DESC";
+		$sql="SELECT * FROM `$cDB`.`submission` WHERE `uid`=$uid AND `pid`='$pid'  ORDER BY `id` DESC";
 		$ressub=mysqli_query($conn,$sql);
 
 

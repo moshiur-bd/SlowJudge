@@ -13,13 +13,25 @@
 
 		$conid=$_GET['conid'];
 		$girlsOnly=false;
+		$unofficial=false;
 		$ext="";
-		if(isset($_GET['girlsonly'])){
+		if(isset($_GET['girlsrank'])&&$_GET['girlsrank']==1){
 			$girlsOnly=true;
 		}
-		if(isset($_GET['unofficial'])){
+		if(isset($_GET['unofficial'])&&$_GET['unofficial']==1){
 			$ext="unofficial";
+			$unofficial=true;
 		}
+		
+		include("ranklistfilter.php");
+		
+		?>
+		
+		
+		<?php
+		
+		
+		
 
 		$cDB=$pre.$conid;
 
@@ -72,6 +84,12 @@
 		$pscore=-1;
 		$rank=1;
 		$cnt=1;
+		
+		///latest update
+			if(!$result){
+			} else 
+		
+		///
 
 
 

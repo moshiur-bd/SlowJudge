@@ -9,10 +9,11 @@ include(__DIR__."\\header.php");
 <div class='intro'>
 		<h2>Intro:</h2>
 		<p>Slowjudge is a Desktop Based Programming Contest platform.
-		 It's lightweight. A single Personal Computer can be used as host.
+		 It's lightweight. A single Personal Computer can be used to host this platform.
 		 This is the user-friendly replacement of widely used judging platform PC^2.
 		 It uses serial judging system as there is very little amount of resources in a desktop computer than a server.
 		 Serial judging is slow. that's why the platform is named slowjudge. Thouh it is fast enough for a small number of contestant around 50-100.
+		 The Judging platform requires Windows operating system!
 		 </p>
 		 <h2>Current Features:</h2>
 		<ul>
@@ -26,9 +27,9 @@ include(__DIR__."\\header.php");
 		<h2>Applicable to:</h2>
 			<ul>
 				<li>host a programming contest</li>
-				<li>train programming</li>
+				<li>train programmers</li>
 				<li>Lab work submission</li>
-				<li>Lab work assesment</li>
+				<li>Lab work assessment</li>
 			</ul>
 </div>
 

@@ -3,10 +3,12 @@
 CSS Settings For HTML Div ExactCenter
 ------------------------------------------------*/
 /*global*/
+body{
+	background:#DDE;
+}
 #body{
 	max-width:1200px;
 	min-width:800px;
-	background:#DDE;
 	margin:auto;
 	display:block;
 	padding:10px;

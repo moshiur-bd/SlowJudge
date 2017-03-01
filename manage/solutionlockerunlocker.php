@@ -18,6 +18,10 @@
 	if(mysqli_query($conn,$sql1));
 	else die( "something wrong");
 	
+	$sql2="CREATE TABLE IF NOT EXISTS `$cDB`.`scoreboardunofficial` LIKE `$cDB`.`scoreboard`";
+	if(mysqli_query($conn,$sql2));
+	else die( "something wrong");
+	
 
 	
 ?>

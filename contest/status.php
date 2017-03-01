@@ -18,7 +18,7 @@
 		$cDB=$pre.$conid;
 		include("isupcoming.php");
 		
-		$sql="SELECT * FROM `$cDB`.`submission` ORDER BY `arrtime` DESC";
+		$sql="SELECT * FROM `$cDB`.`submission` ORDER BY `id` DESC";
 		$ressub=mysqli_query($conn,$sql);
 
 
