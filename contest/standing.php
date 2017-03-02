@@ -6,15 +6,18 @@
 	<?php
 		include(__DIR__ ."\\..\\header.php");
 		include(__DIR__ ."\\..\\connection.php");
+		
 		include("toolbar.php");
+		
 		include("info\\scoreinfo.php");
-
+		
 
 
 		$conid=$_GET['conid'];
 		$girlsOnly=false;
 		$unofficial=false;
 		$ext="";
+		include("isupcoming.php");
 		if(isset($_GET['girlsrank'])&&$_GET['girlsrank']==1){
 			$girlsOnly=true;
 		}

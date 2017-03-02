@@ -41,7 +41,7 @@
 		$nameLink="<a class='uname' href='dash.php?conid=$conid'>";
 		$nameLinkClose="</a>";
 		
-		if($constatus=='upcoming'){
+		if($constatus=='upcoming'&& $usertype!='manager'){
 			 $enterbutton="<td class='conlist cls-in'><a> wait </a></td> ";
 			$nameLink="";
 			$nameLinkClose="";

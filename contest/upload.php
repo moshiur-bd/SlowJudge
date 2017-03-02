@@ -158,7 +158,7 @@ if ($uploadOk == 0) {
 		$ext='';
 		/*update for unofficial manager submission*/
 		
-		if($usertype!='user'){
+		if($usertype=='manager'){
 			$ext='unofficial';
 			$submission_type='unofficial';
 		}else 

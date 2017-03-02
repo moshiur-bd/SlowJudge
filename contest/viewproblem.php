@@ -10,9 +10,12 @@
 		$pid=$_GET['pid'];
 		$conid=$_GET['conid'];
 		$pltr='';
+		
 		include("sidebar.php");
+		include("isupcoming.php");
 		echo "<div id='content' >\n";
 		include("toolbar.php");
+		
 		
 		include("problemnametag.php");
 		
