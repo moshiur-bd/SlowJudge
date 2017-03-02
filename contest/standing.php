@@ -105,7 +105,7 @@
 			$puid=$row['uid'];
 			$pname=mysqli_fetch_array(mysqli_query($conn,"SELECT `name` FROM `$DB`.`user` WHERE `uid`='$puid' "))['name'];
 			$sex="untold";
-			if($girlsOnly==true){
+			if($girlsOnly==1){
 				$sex=mysqli_fetch_array(mysqli_query($conn,"SELECT `sex` FROM `$DB`.`user` WHERE `uid`='$puid' "))['sex'];
 				if($sex!='female') continue;
 			}
