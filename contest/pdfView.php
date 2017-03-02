@@ -9,10 +9,10 @@
 		include(__DIR__ ."\\..\\connection.php");
 		$pid=$_GET['pid'];
 		$conid=$_GET['conid'];
-		
+		include("sidebar.php");
 		include("isupcoming.php");
 		
-		include("sidebar.php");
+		
 		echo "<div id='content' >\n";
 		include("toolbar.php");
 		include("problemnametag.php");
