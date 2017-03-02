@@ -156,6 +156,15 @@ if ($uploadOk == 0) {
 
 		$submission_type='none';
 		$ext='';
+		/*update for unofficial manager submission*/
+		
+		if($usertype!='user'){
+			$ext='unofficial';
+			$submission_type='unofficial';
+		}else 
+		
+		/*..................*/
+		
 		if($arrtime!=-1) $submission_type='official';
 		else if(($arrtimeun=getArrTimeUnofficial($milliseconds,$cDB,$conn,$DB,$pid))!=-1) {
 			$arrtime=$arrtimeun;
@@ -165,6 +174,17 @@ if ($uploadOk == 0) {
 		else die("Contest is not running or upsolving is not allowed yet!");
 
 		$arrtime/=1000;
+		
+		/*update for unofficial manager submission*/
+		
+		if($ext=='unofficial'){
+		
+			$sql2xx="CREATE TABLE IF NOT EXISTS `$cDB`.`scoreboardunofficial` LIKE `$cDB`.`scoreboard`";
+			if(mysqli_query($conn,$sql2xx));
+			else die( "something wrong");
+		}
+		
+		/*..................*/
 
 
 		//insert into global DB

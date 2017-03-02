@@ -5,6 +5,9 @@
 	
 	if(isset($_GET['pid']))
 		include("submitside.php");
+		
+	if(isset($instatus)&&$instatus==true)
+		include("submissionfilter.php");
 	
 	
 	echo"</div>";//end

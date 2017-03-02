@@ -25,6 +25,8 @@
 	
 	function getVerdict($x){
 		if($x===null) return "in queue";
+		if($x==='q') return "Queued";
+		if($x==='notset') return "All";
 		if($x==0)return 'Accepted'; 
 		if($x== 1) return 'Time limit Exceeded';
 		if($x== 2) return 'Wrong Answer';

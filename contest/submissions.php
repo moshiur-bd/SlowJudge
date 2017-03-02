@@ -70,7 +70,7 @@
 						<td class='submission my lang'>$lang</td>
 						<td class='submission my cpu'> $runtime </td> 
 						<td class='submission my memory'> $mb </td>   
-						<td class='submission my verdict'> <a class='submission verdict' href='view?conid=$conid&id=$id&pid=$pid'> <span class='queueText' >$verdict</span></a></td>	</tr>";
+						<td class='submission my verdict'> <a class='submission verdict' href='view?conid=$conid&id=$id&pid=$pid'> <span class='queueText' >$verdict</span></a></td>";
 			else if($flag==0)
 				echo "<tr class='submission my $rowbg' >
 						<td class='submission my id'> <a class='submission' href='view?conid=$conid&id=$id&pid=$pid'> $id</a> </td>
@@ -80,7 +80,7 @@
 						<td class='submission my lang'>$lang</td>
 						<td class='submission my cpu'> $runtime </td> 
 						<td class='submission my memory'> $mb </td>   
-						<td class='submission my verdict'> <a class='submission verdict' href='view?conid=$conid&id=$id&pid=$pid'> <span class='acceptedText' >$verdict</span></a></td>	</tr>";
+						<td class='submission my verdict'> <a class='submission verdict' href='view?conid=$conid&id=$id&pid=$pid'> <span class='acceptedText' >$verdict</span></a></td>";
 				
 			else echo "<tr class='submission my $rowbg' >
 						<td class='submission my id'> <a class='submission' href='view?conid=$conid&id=$id&pid=$pid'> $id</a> </td>
@@ -90,10 +90,24 @@
 						<td class='submission my lang'>$lang</td>
 						<td class='submission my cpu'> $runtime </td> 
 						<td class='submission my memory'> $mb </td>   
-						<td class='submission my verdict'> <a class='submission verdict' href='view?conid=$conid&id=$id&pid=$pid'> <span class='rejectedText' >$verdict</span></a></td>	</tr>";
+						<td class='submission my verdict'> <a class='submission verdict' href='view?conid=$conid&id=$id&pid=$pid'> <span class='rejectedText' >$verdict</span></a></td>";
 			if($rowbg=='odd')
 				$rowbg='even';
 			else $rowbg='odd';
+			
+			
+			if(isset($_SESSION['usertype'])&&$_SESSION['usertype']!='user')
+			echo"<td> 
+			
+			<form methos='get' action='rejudge.php'>
+			<input type='hidden' name='id' value='$id'>
+			<input type='submit' value='rejudge?' style='color:white; background-color:#444'>
+			</form>
+			</td>
+			";
+			
+			
+			echo "</tr>";
 		}
 		echo "</table></div>";
 
