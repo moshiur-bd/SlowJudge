@@ -7,13 +7,20 @@
 		include("functions.php");
 		include(__DIR__ ."\\..\\header.php");
 		include(__DIR__ ."\\..\\connection.php");
-
-		$conid=$_GET['conid'];
 		
+		$conid=$_GET['conid'];
+		$cDB=$pre.$conid;
+		
+		///filter//
 		$fltrflag='notset';//filter variable
+		$fltrpid='notset';//filter variable
+		$fltrcpid='notset';//filter variable
 		if(isset($_GET["flag"]))
 			$fltrflag=$_GET["flag"];
-			
+		if(isset($_GET["fltrpid"]))
+			$fltrcpid=$_GET["fltrpid"];
+		/////	
+		$fltrpid=getPid($fltrcpid);
 		$instatus=true;
 			
 		include("sidebar.php");
@@ -23,7 +30,7 @@
 		
 
 		
-		$cDB=$pre.$conid;
+		
 		include("isupcoming.php");
 		
 		$sql="SELECT * FROM `$cDB`.`submission` ORDER BY `id` DESC";
@@ -74,6 +81,9 @@
 				if($flag!=null) continue;
 			}
 			else if( ($fltrflag!='notset' &&((string)$fltrflag!=(string)$flag))) continue;
+			
+			if($fltrpid!='notset' && $fltrpid!=$pid) continue;
+			
 			/////
 			
 			$hold=$data['hold'];
@@ -153,3 +163,14 @@
 
 </body>
 </html>
+
+<?php
+function getPid($cpid){
+		if((string)$cpid=='notset') return $cpid;
+		global $cDB,$conn;
+		$pid=mysqli_fetch_array(mysqli_query($conn,"SELECT `pid` FROM `$cDB`.`problem` WHERE `cpid`='$cpid'"))['pid'];
+		return $pid;
+	}
+ 
+?>
+

@@ -27,16 +27,20 @@
 	$url=rtrim($_SERVER['REQUEST_URI'],"/\\");
 	$conurl=$root."/contest";
 	$mgrurl=$root."/manage";
+	$usrurl="$root/users";
 	//add active class variable
 	$activecon='';
 	$activehome='';
 	$activemgr='';
+	$activeusr='';
 	/*...........................*/
 	
 	if(strpos($url,$conurl)!==false)
 		$activecon='active';
 	else if(strpos($url,$mgrurl)!==false)
 		$activemgr='active';
+	else if(strpos($url,$usrurl)!==false)
+		$activeusr='active';
 	else if($url==$root) //at last home checking. else it'll activate home always
 		$activehome='active';
 	
@@ -50,11 +54,10 @@
 		echo "<li class='nav $activehome'><span id='contestTab' > <a href='$root'>Home</a> </span></li>";
 		echo "<li class='nav $activecon'><span id='homeTab'> <a href='$conurl'>Contest</a> </span></li>";
 			
-		if($usertype=='manager')
+		if($usertype=='manager'){
 			echo "<li class='nav $activemgr'><span id='homeTab'> <a href='$mgrurl'>Manage</a> </span></li>";
-		
-		
-		
+			echo "<li class='nav $activeusr'><span id='homeTab'> <a href='$usrurl'>Users</a> </span></li>";
+		}		
 	
 		
 		if(isset($_SESSION['uid']))
