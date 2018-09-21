@@ -19,7 +19,6 @@
 		$delay=$row['delay'];
 		$duration=$row['duration'];
 	}
-	else echo "contest status fetching failed!!";
 	
 	$elapsed=0;
 	$stamp=0;
@@ -29,7 +28,7 @@
 		$elapsed=$row['elapsed'];
 		$stamp =$row['stamp'];
 	}
-	else echo "contest time fetching failed!!";
+
 	$now=0;
 	if($status=='running'){ //if running check if it's paused by load-sheddingor not
 		$now=round(1000*microtime(true));

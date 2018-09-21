@@ -16,11 +16,11 @@
 	}
 	function getACuCount($cpid){
 		global $conn,$cDB;		
-		return mysqli_fetch_array(mysqli_query($conn,"SELECT COUNT(`uid`) FROM $cDB.`scoreboard` WHERE `score$cpid`>0"))["COUNT(`uid`)"];
+		return mysqli_fetch_array(mysqli_query($conn,"SELECT COUNT(`uid`) FROM `$cDB`.`scoreboard` WHERE `score$cpid`>0"))["COUNT(`uid`)"];
 	}
 	function getALluCount($cpid){
 		global $conn,$cDB;		
-		return mysqli_fetch_array(mysqli_query($conn,"SELECT COUNT(`uid`) FROM $cDB.`scoreboard` WHERE `wrong$cpid`>0 OR `score$cpid`>0 "))["COUNT(`uid`)"];
+		return mysqli_fetch_array(mysqli_query($conn,"SELECT COUNT(`uid`) FROM `$cDB`.`scoreboard` WHERE `wrong$cpid`>0 OR `score$cpid`>0 "))["COUNT(`uid`)"];
 	}
 	
 	function getVerdict($x){

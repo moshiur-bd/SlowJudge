@@ -31,20 +31,19 @@
 			
 			$durh=floor($duration/3600);
 			$durm=floor(($duration-$durh*3600)/60);;
-			
-			
-			
-			
+					
 			
 		?>
-
-		<form action="timeSubmit.php?conid=<?php echo $conid;?>" method='post' class 'timetable'>
+		<br><br><br><br><br><br><br>
+		<div >
+		<form style="margin-left:35%;" action="timeSubmit.php?conid=<?php echo $conid;?>" method='post' class 'timetable'>
 			Contest : <input type='text' name='conname' value='<?php echo $conname;?>'> </br>
 			Start Time:<input type='datetime-local' name='start' id='start' class='start' value='<?php echo date("Y-m-d\TH:i",$start); ?>' ></br>
 			Duration: <input size='5' type='text' name='durationh' placeholder='hour' class='duration hour' value='<?php echo $durh;?>' >
 			: <input size='5' type='text' name='durationm' placeholder='minute' class='duration minute' value='<?php echo $durm;?>' ></br>
 			<input type='submit'>
 		</form>
+		</div>
 	
 	</div>
 </body>

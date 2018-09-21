@@ -1,4 +1,5 @@
 <?php
+
 	include(__DIR__ ."\\..\\functions.php");
 	$start=$_POST['start'];;
 	$start=removeTimeOffset(strtotime($start))*1000;
@@ -11,7 +12,7 @@
 	mysqli_query($conn,"UPDATE `$DB`.`contest` SET `start`='$start',`name`='$conname' WHERE `id`='$conid'");
 	mysqli_query($conn,"UPDATE `$cDB`.`settings` SET `duration`='$dur' ");
 	
-	echo  " $start $dur ";
+	header("Location: $root/manage")
 	
 
 ?>
