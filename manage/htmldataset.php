@@ -69,8 +69,8 @@
 						<td class='ds-ltr'>[$ltr] </td>
 						<td class='pname'> <label title='Name of the problem' class='name' id='name$i'> $name</label> </td> 
 						
-						<td class='pdfl'> <label title='pdf statement' id='pdfl$i' for='pdf$i' class='pdftxt'>$pdfl</label> </td>
-						<td class='pdf'> <input title='pdf statement'class='pdfbtn' id='pdf$i' type='file' name='pdf$i' onChange='getFileSize(&quot;pdf$i&quot;)'> </td>
+						<td class='pdfl'> <label title='html statement' id='pdfl$i' for='pdf$i' class='pdftxt'>$pdfl</label> </td>
+						<td class='pdf'> <input title='html statement'class='pdfbtn' id='pdf$i' type='file' name='pdf$i' onChange='getFileSize(&quot;pdf$i&quot;)'> </td>
 						
 						<td class='srcl'> <label title='source code' id='srcl$i' for='src$i' class='srctxt'>$srcl</label> </td>
 						<td class='src'> <input title='source code' class='srcbtn' id='src$i' type='file' name='src$i' onChange='getFileSize(&quot;src$i&quot;)'> </td>

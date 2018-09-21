@@ -1,3 +1,8 @@
+<html>
+<head></head>
+<body>
+<div id='body'>
+
 <?php
 ///some bug found in this file . need to fix later
 
@@ -20,8 +25,6 @@
 	$sql="SELECT * FROM `$cDB`.`problem`";
 	$result=mysqli_query($conn,$sql);
 	$i=0;
-	echo count($_POST)."</br>";
-	echo count($_FILES)."</br>";
 
 	
 	
@@ -193,3 +196,7 @@
 	
 
 ?>
+</div>
+
+</body>
+</html>

@@ -31,8 +31,7 @@
 				<table class='dash'>";
 		echo "<tr class='dash' > 
 				<th class='dash ltr'> # </th> 
-				<th class='dash prb'> Edit Problem </th>
-				<th class='dash ds'> Edit Dataset </th>
+				<th class='dash prb'> Problem </th>
 				<th class='dash ml'> Rejudge </th>  ";
 				
 		echo "<th class='dash ml'>Solutions</th>  ";
@@ -54,8 +53,7 @@
 			$slcnt=0; //implemet asap
 			echo "<tr class='dash' >
 					<td class='dash ltr'> $ltr </td>    
-					<td class='dash'> <a href='problemEditor.php?conid=$conid&pid=$pid'> $pname</a> </td> 
-					<td class='dash dataset'> <a href='datasetSingle.php?conid=$conid&pid=$pid' >Edit dataset</a> </td> 
+					<td class='dash'> $pname </td>  
 					<td class='dash rejudge'> <a href='rejudge.php?conid=$conid&pid=$pid&cpid=$cpid'>Rejudge</a> </td>"; 
 			echo 	"<td class='dash status'> <a href='solutionlockerunlocker.php?conid=$conid&pid=$pid&cpid=$cpid'>$pstatus</a> </td>"; 
 				
