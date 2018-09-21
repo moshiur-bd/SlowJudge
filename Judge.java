@@ -44,7 +44,7 @@ public class Judge {
         this.dir = SlowjudgeDir;
         this.pre = cDB_pre;
         this.DB = DB;
-        System.out.println("Directory:" + this.dir);
+        System.err.println("Directory:" + this.dir);
         bean = ManagementFactory.getThreadMXBean();
 
     }
@@ -702,7 +702,6 @@ public class Judge {
     }
 
     public static void main(String[] argv) throws SQLException {
-
         Judge obj = new Judge(argv[0], argv[1], argv[2]);
         obj.init();
         obj.connect();
@@ -716,10 +715,10 @@ public class Judge {
             }
             if (obj.fetchSub() == 0) {
                 try {
-                    System.err.println("Kaj nai. 7 second er jonno ghumailam!");
-                    Thread.sleep(7000);
+                    int sleep_sec=7;
+                    System.err.println("No Solution to judge. Sleeping for " + sleep_sec + " seconds");
+                    Thread.sleep(sleep_sec * 1000);
                 } catch (InterruptedException e) {
-                    System.err.println("beshi ghumano hoye geche!");
                     e.printStackTrace();
                 }
             }
