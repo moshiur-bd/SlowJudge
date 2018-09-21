@@ -10,8 +10,6 @@
 		$status=mysqli_fetch_array(mysqli_query($conn,"SELECT `status` FROM `$cDB`.settings"))['status'];
 		if($status=='running')
 			LaunchBackgroundProcess($target_timer,$slowjudge,$cDB);
-		
-		echo "$cDB $status\n";
 	}
 	$judgestatus=mysqli_fetch_array(mysqli_query($conn,"SELECT `status` FROM `$DB`.`judge`"))['status'];
 	if($judgestatus=='on')

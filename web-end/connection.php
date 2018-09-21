@@ -11,8 +11,8 @@
 	$target_out = $slowjudge."out\\";
 	$target_src = $slowjudge."src\\";
 	$target_sub = $slowjudge."sub\\";
-	$target_judge=$slowjudge."Judge.bat";
-	$target_timer=$slowjudge."timer.exe";
+	$target_judge="java Judge";
+	$target_timer="java Timer";
 
 	$conn=mysqli_connect("localhost","root","");
 	if(!$conn)die("connection Failed".mysqli_connect_error());

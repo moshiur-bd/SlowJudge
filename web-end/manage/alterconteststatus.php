@@ -18,7 +18,7 @@
 			
 			mysqli_query($conn,"UPDATE `$cDB`.`time` SET `stamp`='$stamp'");
 			mysqli_query($conn,"UPDATE `$cDB`.`settings` SET `status`='running'");
-			LaunchBackgroundProcess($target_timer,$slowjudge,$cDB);
+			LaunchBackgroundProcess($target_timer,$slowjudge," $DB $cDB ");
 		}
 	}
 	//include("..\\footer.php");

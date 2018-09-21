@@ -8,12 +8,9 @@
 
 		if($status=='off'||$status=='halting'){
 			mysqli_query($conn,"UPDATE `$DB`.`judge` SET `status`='initiating'");
-			LaunchBackgroundProcess($target_judge,$slowjudge,'');
+			LaunchBackgroundProcess($target_judge,$slowjudge,"$slowjudge $DB $pre");
 		}
 		else 	mysqli_query($conn,"UPDATE `$DB`.`judge` SET `status`='halting'");
-		
-		
-	
 
 ?>
 <script>
