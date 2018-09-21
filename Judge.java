@@ -10,7 +10,7 @@ import java.sql.*;
 import java.util.*;
 import java.util.concurrent.TimeUnit;
 
-public class JudgeCDB {
+public class Judge {
 
     boolean exitNow = false;
     String dir;
@@ -40,10 +40,11 @@ public class JudgeCDB {
     int SubmissionError = 100;
     String ext="";
 
-    public JudgeCDB(String s, String s1, String s2) {
-        dir = s;
-        pre = s2;
-        DB = s1;
+    public Judge(String SlowjudgeDir, String DB, String cDB_pre) {
+        this.dir = SlowjudgeDir;
+        this.pre = cDB_pre;
+        this.DB = DB;
+        System.out.println("Directory:" + this.dir);
         bean = ManagementFactory.getThreadMXBean();
 
     }
@@ -702,7 +703,7 @@ public class JudgeCDB {
 
     public static void main(String[] argv) throws SQLException {
 
-        JudgeCDB obj = new JudgeCDB(System.getProperty("user.dir"), argv[0], argv[1]);
+        Judge obj = new Judge(argv[0], argv[1], argv[2]);
         obj.init();
         obj.connect();
 

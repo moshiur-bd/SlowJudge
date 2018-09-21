@@ -9,8 +9,8 @@ import java.util.concurrent.TimeUnit;
 public class Timer {
 
     String dir;
-    String cDB = "slowjudge";
-    String DB = "mosuser";
+    String cDB;
+    String DB;
 
     Connection conn = null;
     Statement stmt = null;
@@ -20,8 +20,9 @@ public class Timer {
     long remaining = 5000;//in milis
     long duration = 5000;//in milis
 
-    public Timer(String s) {
-        cDB = s;
+    public Timer(String DB, String cDB) {
+        this.cDB =cDB;
+        this.DB = DB;
         conn = null;
         stmt = null;
         rs = null;
@@ -245,7 +246,7 @@ public class Timer {
 
     public static void main(String[] argv) throws SQLException {
 
-        Timer obj = new Timer(argv[0]);
+        Timer obj = new Timer(argv[0], argv[1]);
         obj.init();
         obj.connect();
         obj.startContest();
