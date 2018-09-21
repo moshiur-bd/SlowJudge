@@ -8,6 +8,7 @@
 <div id="body">
 <?php
 include(__DIR__ . '\\..\\header.php');
+include(__DIR__."\\..\\connection.php");
 if(isset($_SESSION['uid']))
 {
 	header("Location: $root.\\profile");
