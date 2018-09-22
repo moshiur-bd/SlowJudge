@@ -77,6 +77,9 @@ Section "Install - Website" SecWeb
 SectionEnd
 
 Section "Install - Solution Evaluator" SecEval
+  ;create sandbox folder to run submissions
+  SetOutPath "C:\sandbox"
+
   ;copy necessary files
   SetOutPath "$INSTDIR\checker"
   File "evaluator\checker\TrailingWhiteSpaceAllowed.exe"
@@ -95,7 +98,9 @@ Section "Install - Solution Evaluator" SecEval
   SetOutPath "$INSTDIR\in"
   SetOutPath "$INSTDIR\out"
   SetOutPath "$INSTDIR\src"
+  
   SetOutPath "$INSTDIR\sub"
+  File "evaluator\sub\forbid.c"
   
   ;create registry entry for $INSTDIR
   WriteRegStr HKCU "Software\slowjudge" "store" $INSTDIR
