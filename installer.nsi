@@ -16,6 +16,9 @@
   ;Request application privileges for Windows Vista
   RequestExecutionLevel admin
 
+  ;build source code at compile time
+  !system "evaluator\build.bat"
+
   ;Default installation folder
   InstallDir "C:\Slowjudge"
   ;Read from Registry if available  
@@ -132,7 +135,6 @@ FunctionEnd
 
 Function .onInit
   !insertmacro MUI_LANGDLL_DISPLAY
-
 
   ReadRegStr $XamppDir HKCU "Software\slowjudge" "xamppdir"
 
