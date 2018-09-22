@@ -11,7 +11,7 @@
 			
 	mysqli_query($conn,"UPDATE `$DB`.`contest` SET `start`='$stamp' WHERE `id`='$conid' ");
 	mysqli_query($conn,"UPDATE `$cDB`.`settings` SET `status`='running'");
-	LaunchBackgroundProcess($target_timer,$slowjudge,$cDB);
+	LaunchBackgroundProcess($target_timer,$slowjudge," $DB $cDB ");
 
 	//include("..\\footer.php");
 	

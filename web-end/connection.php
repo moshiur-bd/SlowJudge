@@ -5,8 +5,8 @@
 	
 	$root="/slowjudge";
 	
-	//back data
-	$slowjudge="C:\\SlowJudge\\";
+	//slowjudge storage paths
+	$slowjudge=getenv("slowjudgeback");
 	$target_in = $slowjudge."in\\";
 	$target_out = $slowjudge."out\\";
 	$target_src = $slowjudge."src\\";
