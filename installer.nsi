@@ -104,6 +104,11 @@ Section "Install - Solution Evaluator" SecEval
   WriteUninstaller "$INSTDIR\Uninstall.exe"
 SectionEnd
 
+Section "Replace php.ini" SecReplacePhpIni
+  SetOutPath "$XamppDir\php"
+  File "dependency\php.ini" 
+SectionEnd
+
 Section "Create StartMenu-Shortcut" SecStartMenuShortCut
   SetOutPath "$INSTDIR"
   CreateShortCut "$SMPROGRAMS\slowjudge.lnk" "$INSTDIR\server.bat"
@@ -156,6 +161,7 @@ FunctionEnd
     !insertmacro MUI_DESCRIPTION_TEXT ${SecStartMenuShortCut} "Creates Start Menu shortcut"
     !insertmacro MUI_DESCRIPTION_TEXT ${SecDesktopShortCut} "Creates Desktop shortcut"
     !insertmacro MUI_DESCRIPTION_TEXT ${SecAutoStart} "Runs slowjudge server at system startup. Unselecting this will disable auto start"
+    !insertmacro MUI_DESCRIPTION_TEXT ${SecReplacePhpIni} "New php.ini fine tunes php for slowjudge. It increases some limitations like file upload sizes, session timeouts & memory limitation"
   !insertmacro MUI_FUNCTION_DESCRIPTION_END
 
  
