@@ -1,7 +1,7 @@
 <?php
 	function isSolvedByMe($cpid){
 		global $conn,$cDB,$uid;
-		if($res=mysqli_query($conn,"SELECT `firstac$cpid`,`wrong$cpid` FROM $cDB.`scoreboard` WHERE `uid`='$uid' "))$uid=$uid;
+		if($res=mysqli_query($conn,"SELECT `firstac$cpid`,`wrong$cpid` FROM `$cDB`.`scoreboard` WHERE `uid`='$uid' "))$uid=$uid;
 		else return "untouched";
 		$row= mysqli_fetch_array($res);
 		if(!isset($row["firstac$cpid"]))return "untouched";
