@@ -1,5 +1,9 @@
 set path=%path%;C:\Program Files\Java\jdk1.8.0_102\bin;C:\Program Files (x86)\CodeBlocks\MinGW\bin;
 
+SET mypath=%~dp0
+
+CD %mypath%
+
 javac Judge.java
 javac Timer.java
 

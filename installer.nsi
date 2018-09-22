@@ -1,6 +1,4 @@
-;NSIS Modern User Interface
-;Multilingual Example Script
-;Written by Joost Verburg
+
 
 ;!pragma warning error all
 
@@ -8,16 +6,15 @@
 ;Include Modern UI
 
   !include "MUI2.nsh"
-
 ;--------------------------------
 ;General
 
-  ;Properly display all languages (Installer will not work on Windows 95, 98 or ME!)
-  ;Unicode true
-
   ;Name and file
   Name "Slowjudge"
-  OutFile "Slowjudge-Installer.exe"
+  OutFile "Slowjudge_Installer.exe"
+
+  ;Request application privileges for Windows Vista
+  RequestExecutionLevel admin
 
   ;Default installation folder
   InstallDir "C:\Slowjudge"
@@ -27,28 +24,12 @@
   Var WebDir
   Var XamppDir
 
-
-  ;Request application privileges for Windows Vista
-  RequestExecutionLevel admin
-
 ;--------------------------------
 ;Interface Settings
 
   !define MUI_ABORTWARNING
 
-;   ;Show all languages, despite user's codepage
-;   !define MUI_LANGDLL_ALLLANGUAGES
-
-; ;--------------------------------
-; ;Language Selection Dialog Settings
-
-;   ;Remember the installer language
-;   !define MUI_LANGDLL_REGISTRY_ROOT "HKCU" 
-;   !define MUI_LANGDLL_REGISTRY_KEY "Software\Modern UI Test" 
-;   !define MUI_LANGDLL_REGISTRY_VALUENAME "Installer Language"
-
-; ;--------------------------------
-; ;Pages
+;Pages
 
   !insertmacro MUI_PAGE_WELCOME
   !insertmacro MUI_PAGE_LICENSE "${NSISDIR}\Docs\Modern UI\License.txt"
@@ -93,54 +74,65 @@ Section "Install - Website" SecWeb
 SectionEnd
 
 Section "Install - Solution Evaluator" SecEval
+  ;copy necessary files
   SetOutPath "$INSTDIR\checker"
   File "evaluator\checker\TrailingWhiteSpaceAllowed.exe"
 
   SetOutPath "$INSTDIR"
-
   File "evaluator\Timer.class"
   File "evaluator\Judge.class"
   File "evaluator\cpu.exe"
   File "evaluator\compiler.exe"
   File "evaluator\watcher.exe"
+  File "evaluator\server.bat"
 
-  ;necessary folders
+  File "dependency\mysql-connector-java-5.0.8-bin.jar" 
+
+  ;create necessary folders
   SetOutPath "$INSTDIR\in"
   SetOutPath "$INSTDIR\out"
   SetOutPath "$INSTDIR\src"
   SetOutPath "$INSTDIR\sub"
-
-
-  ;File /r "evaluator\*"
   
+  ;create registry entry for $INSTDIR
   WriteRegStr HKCU "Software\slowjudge" "store" $INSTDIR
+  
   ;Create uninstaller
   WriteUninstaller "$INSTDIR\Uninstall.exe"
-
-  CreateShortCut "$SMPROGRAMS\slowjudge.lnk" "$INSTDIR\server.bat"
 SectionEnd
 
 Section "Create StartMenu-Shortcut" SecStartMenuShortCut
+  SetOutPath "$INSTDIR"
   CreateShortCut "$SMPROGRAMS\slowjudge.lnk" "$INSTDIR\server.bat"
 SectionEnd
 
 Section "Create Desktop-Shortcut " SecDesktopShortCut
-    CreateShortCut "$DESKTOP\slowjudge.lnk" "$INSTDIR\server.bat"
+  SetOutPath "$INSTDIR"
+  CreateShortCut "$DESKTOP\slowjudge.lnk" "$INSTDIR\server.bat"
 SectionEnd
 
 Section "Auto start" SecAutoStart
-    WriteRegStr HKEY_LOCAL_MACHINE "Software\Microsoft\Windows\CurrentVersion\Run" "slowjudge" "$INSTDIR\server.bat"
+  SetOutPath "$INSTDIR"
+  WriteRegStr HKEY_LOCAL_MACHINE "Software\Microsoft\Windows\CurrentVersion\Run" "slowjudge" "$INSTDIR\server.bat"
 SectionEnd
 
 Section "-Delete Auto Start" SecDeleteAutoStart
-    DeleteRegValue HKEY_LOCAL_MACHINE "Software\Microsoft\Windows\CurrentVersion\Run" "slowjudge"
+  DeleteRegValue HKEY_LOCAL_MACHINE "Software\Microsoft\Windows\CurrentVersion\Run" "slowjudge"
 SectionEnd
 
 ;--------------------------------
 ; ;Installer Functions
+Function .onSelChange
+  ${If} ${SectionIsSelected} ${SecAutoStart}
+      !insertmacro UnselectSection ${SecDeleteAutoStart}
+  ${Else}
+      !insertmacro SelectSection ${SecDeleteAutoStart}
+  ${EndIf}
+FunctionEnd
 
 Function .onInit
   !insertmacro MUI_LANGDLL_DISPLAY
+
 
   ReadRegStr $XamppDir HKCU "Software\slowjudge" "xamppdir"
 
@@ -150,20 +142,8 @@ Function .onInit
   StrCpy $WebDir "$XamppDir\htdocs\slowjudge"
 FunctionEnd
 
-Function .onSelChange
-  ${If} ${SectionIsSelected} ${SecAutoStart}
-      !insertmacro UnselectSection ${SecDeleteAutoStart}
-  ${Else}
-      !insertmacro SelectSection ${SecDeleteAutoStart}
-  ${EndIf}
-FunctionEnd
-
 ;--------------------------------
 ;Descriptions
-
-  ;USE A LANGUAGE STRING IF YOU WANT YOUR DESCRIPTIONS TO BE LANGAUGE SPECIFIC
-
-  ;Assign descriptions to sections
   !insertmacro MUI_FUNCTION_DESCRIPTION_BEGIN
     !insertmacro MUI_DESCRIPTION_TEXT ${SecWeb} "Php files to power slowjudge web end"
     !insertmacro MUI_DESCRIPTION_TEXT ${SecEval} "Backend to Evaluation solutions and Run contest. This folder also will store all the problem and IO and solutions."
@@ -183,13 +163,10 @@ Section "Uninstall"
   RMDir /r "$WebDir"
 
   DeleteRegValue HKEY_LOCAL_MACHINE "Software\Microsoft\Windows\CurrentVersion\Run" "slowjudge"
-
-  ;DeleteRegKey /ifempty HKCU "Software\slowjudge"
 SectionEnd
 
 ;--------------------------------
 ;Uninstaller Functions
-
 Function un.onInit
 
  !insertmacro MUI_UNGETLANGUAGE
