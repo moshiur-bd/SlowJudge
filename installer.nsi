@@ -81,8 +81,7 @@
 ;--------------------------------
 ;Installer Sections
 
-Section "Web" SecWeb
-  
+Section "Install - Website" SecWeb
   StrCpy $WebDir "$XamppDir\htdocs\slowjudge"
   SetOutPath "$WebDir"
   
@@ -91,30 +90,56 @@ Section "Web" SecWeb
   ;Store installation folder
   WriteRegStr HKCU "Software\slowjudge" "xamppdir" $XamppDir
   WriteRegStr HKCU "Software\slowjudge" "webdir" $WebDir
-
-  WriteUninstaller "$INSTDIR\Uninstall.exe"
-
 SectionEnd
 
-Section "Evaluator & Storage" SecEval
+Section "Install - Solution Evaluator" SecEval
+  SetOutPath "$INSTDIR\checker"
+  File "evaluator\checker\TrailingWhiteSpaceAllowed.exe"
 
   SetOutPath "$INSTDIR"
 
-  File /r "evaluator\*"
+  File "evaluator\Timer.class"
+  File "evaluator\Judge.class"
+  File "evaluator\cpu.exe"
+  File "evaluator\compiler.exe"
+  File "evaluator\watcher.exe"
 
+  ;necessary folders
+  SetOutPath "$INSTDIR\in"
+  SetOutPath "$INSTDIR\out"
+  SetOutPath "$INSTDIR\src"
+  SetOutPath "$INSTDIR\sub"
+
+
+  ;File /r "evaluator\*"
   
   WriteRegStr HKCU "Software\slowjudge" "store" $INSTDIR
-  
   ;Create uninstaller
   WriteUninstaller "$INSTDIR\Uninstall.exe"
 
+  CreateShortCut "$SMPROGRAMS\slowjudge.lnk" "$INSTDIR\server.bat"
+SectionEnd
+
+Section "Create StartMenu-Shortcut" SecStartMenuShortCut
+  CreateShortCut "$SMPROGRAMS\slowjudge.lnk" "$INSTDIR\server.bat"
+SectionEnd
+
+Section "Create Desktop-Shortcut " SecDesktopShortCut
+    CreateShortCut "$DESKTOP\slowjudge.lnk" "$INSTDIR\server.bat"
+SectionEnd
+
+Section "Auto start" SecAutoStart
+    WriteRegStr HKEY_LOCAL_MACHINE "Software\Microsoft\Windows\CurrentVersion\Run" "slowjudge" "$INSTDIR\server.bat"
+SectionEnd
+
+Section "-Delete Auto Start" SecDeleteAutoStart
+    DeleteRegValue HKEY_LOCAL_MACHINE "Software\Microsoft\Windows\CurrentVersion\Run" "slowjudge"
 SectionEnd
 
 ;--------------------------------
 ; ;Installer Functions
 
 Function .onInit
-
   !insertmacro MUI_LANGDLL_DISPLAY
 
   ReadRegStr $XamppDir HKCU "Software\slowjudge" "xamppdir"
@@ -122,8 +147,15 @@ Function .onInit
   StrCmp $XamppDir "" 0 +2
   StrCpy $XamppDir "C:\Xampp"
   
-  
   StrCpy $WebDir "$XamppDir\htdocs\slowjudge"
+FunctionEnd
+
+Function .onSelChange
+  ${If} ${SectionIsSelected} ${SecAutoStart}
+      !insertmacro UnselectSection ${SecDeleteAutoStart}
+  ${Else}
+      !insertmacro SelectSection ${SecDeleteAutoStart}
+  ${EndIf}
 FunctionEnd
 
 ;--------------------------------
@@ -134,7 +166,10 @@ FunctionEnd
   ;Assign descriptions to sections
   !insertmacro MUI_FUNCTION_DESCRIPTION_BEGIN
     !insertmacro MUI_DESCRIPTION_TEXT ${SecWeb} "Php files to power slowjudge web end"
-      !insertmacro MUI_DESCRIPTION_TEXT ${SecEval} "Backend to Evaluation solutions and Run contest. This folder also will store all the problem and IO and solutions."
+    !insertmacro MUI_DESCRIPTION_TEXT ${SecEval} "Backend to Evaluation solutions and Run contest. This folder also will store all the problem and IO and solutions."
+    !insertmacro MUI_DESCRIPTION_TEXT ${SecStartMenuShortCut} "Creates Start Menu shortcut"
+    !insertmacro MUI_DESCRIPTION_TEXT ${SecDesktopShortCut} "Creates Desktop shortcut"
+    !insertmacro MUI_DESCRIPTION_TEXT ${SecAutoStart} "Runs slowjudge server at system startup. Unselecting this will disable auto start"
   !insertmacro MUI_FUNCTION_DESCRIPTION_END
 
  
@@ -146,6 +181,8 @@ Section "Uninstall"
 
   RMDir "$INSTDIR"
   RMDir /r "$WebDir"
+
+  DeleteRegValue HKEY_LOCAL_MACHINE "Software\Microsoft\Windows\CurrentVersion\Run" "slowjudge"
 
   ;DeleteRegKey /ifempty HKCU "Software\slowjudge"
 SectionEnd
