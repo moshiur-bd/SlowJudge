@@ -116,11 +116,11 @@ SectionEnd
 
 Section "Auto start" SecAutoStart
   SetOutPath "$INSTDIR"
-  WriteRegStr HKEY_LOCAL_MACHINE "Software\Microsoft\Windows\CurrentVersion\Run" "slowjudge" "$INSTDIR\server.bat"
+  WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Run" "slowjudge" "$INSTDIR\server.bat"
 SectionEnd
 
 Section "-Delete Auto Start" SecDeleteAutoStart
-  DeleteRegValue HKEY_LOCAL_MACHINE "Software\Microsoft\Windows\CurrentVersion\Run" "slowjudge"
+  DeleteRegValue HKLM "Software\Microsoft\Windows\CurrentVersion\Run" "slowjudge"
 SectionEnd
 
 ;--------------------------------
@@ -135,6 +135,10 @@ FunctionEnd
 
 Function .onInit
   !insertmacro MUI_LANGDLL_DISPLAY
+  
+  ;by default autstart will be selected and deletautostart will be deselected
+  !insertmacro UnselectSection ${SecDeleteAutoStart}
+  !insertmacro SelectSection ${SecAutoStart}
 
   ReadRegStr $XamppDir HKCU "Software\slowjudge" "xamppdir"
 
@@ -160,11 +164,13 @@ FunctionEnd
 
 Section "Uninstall"
   Delete "$INSTDIR\Uninstall.exe"
+  Delete "$DESKTOP\slowjudge.lnk"
+  Delete "$SMPROGRAMS\slowjudge.lnk"
 
   RMDir "$INSTDIR"
-  RMDir /r "$WebDir"
+  RMDir "$WebDir"
 
-  DeleteRegValue HKEY_LOCAL_MACHINE "Software\Microsoft\Windows\CurrentVersion\Run" "slowjudge"
+  DeleteRegValue HKLM "Software\Microsoft\Windows\CurrentVersion\Run" "slowjudge"
 SectionEnd
 
 ;--------------------------------
