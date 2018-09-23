@@ -1,7 +1,4 @@
 
-
-;!pragma warning error all
-
 ;--------------------------------
 ;Include Modern UI
 
@@ -12,6 +9,18 @@
   ;Name and file
   Name "Slowjudge"
   OutFile "Slowjudge_Installer.exe"
+ 
+;-------------------------------- 
+  ;Version Information
+  
+  VIProductVersion "1.0.1.10"
+  VIAddVersionKey  "ProductName" "Slowjudge"
+  VIAddVersionKey  "Comments" "An easy to maintain contest platform"
+  VIAddVersionKey  "CompanyName" "moshiur-bd"
+  VIAddVersionKey  "LegalTrademarks" "https://github.com/moshiur-bd/SlowJudge"
+  VIAddVersionKey  "FileDescription" "Slowjudge"
+  VIAddVersionKey  "FileVersion" "1.0.1.10"
+;----------------------------------
 
   ;Request application privileges for Windows Vista
   RequestExecutionLevel admin
@@ -24,6 +33,7 @@
   ;Read from Registry if available  
   InstallDirRegKey HKCU "Software\slowjudge" "store"
 
+  ;Define necessary variables to hold directory 
   Var WebDir
   Var XamppDir
 
@@ -32,10 +42,11 @@
 
   !define MUI_ABORTWARNING
 
-;Pages
+;-------------------------------------------------------------------
+  ;Pages
 
   !insertmacro MUI_PAGE_WELCOME
-  !insertmacro MUI_PAGE_LICENSE "${NSISDIR}\Docs\Modern UI\License.txt"
+  !insertmacro MUI_PAGE_LICENSE "License.txt"
   !insertmacro MUI_PAGE_COMPONENTS
 
   !define MUI_PAGE_HEADER_TEXT "Choose a location where slowjudge will be installed"
@@ -54,6 +65,7 @@
 
   !insertmacro MUI_PAGE_INSTFILES
   !insertmacro MUI_PAGE_FINISH
+;-------------------------------------------------------------------------------------------
 
 ;--------------------------------
 ;Languages
