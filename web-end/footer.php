@@ -6,7 +6,7 @@
 
 <div id="footer">
 
-	<p><span class='slowjudge-footer'>SlowJudge</span></br>   - Moshiur Rahman</p> 
+	<p> <a href='https://github.com/moshiur-bd/SlowJudge'>SlowJudge</a>(1.1.0.2) <br>   - <a href='https://linkedin.com/in/moshiur-bd/'>Moshiur Rahman</a></p> 
 	
 	
 

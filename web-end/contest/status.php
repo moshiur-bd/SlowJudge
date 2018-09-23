@@ -154,7 +154,8 @@
 		echo "</div>";
 
 	?>
-	<?php include(__DIR__ ."\\..\\footer.php"); ?>
+
+	<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 	
 	</div>
 	

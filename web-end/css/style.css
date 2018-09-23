@@ -5,19 +5,18 @@ CSS Settings For HTML Div ExactCenter
 /*global*/
 #body{
 	max-width:1200px;
-	min-width:800px;
+	min-width:600px;
 	margin:auto;
 	display:block;
 	padding:10px;
-	padding-bottom:100px;
+	padding-bottom:10px;
 }
 #footer{
 	width:100%;
-	padding: 3em 3em;
 	text-align:center;
 	color:#333378;
 	font-size:1.5em;
-	height:2em;
+	height:1em;
 }
 span.slowjudge{
 	font-size:2.5em;
