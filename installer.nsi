@@ -90,7 +90,6 @@ Section "Install - Solution Evaluator" SecEval
   File "evaluator\cpu.exe"
   File "evaluator\compiler.exe"
   File "evaluator\watcher.exe"
-  File "evaluator\server.bat"
 
   File "dependency\mysql-connector-java-5.0.8-bin.jar" 
 
@@ -133,6 +132,19 @@ Section "-Delete Auto Start" SecDeleteAutoStart
   DeleteRegValue HKLM "Software\Microsoft\Windows\CurrentVersion\Run" "slowjudge"
 SectionEnd
 
+Section "-Create Server.bat" SecCreateServerBatch
+  SetOutPath "$INSTDIR"
+  FileOpen $0 "$INSTDIR\server.bat" w
+  FileWrite $0 'set path=%path%;C:\Program Files\Java\jdk1.8.0_102\bin;C:\Program Files (x86)\CodeBlocks\MinGW\bin;$\r$\n'
+  FileWrite $0 'set slowjudgeback=$INSTDIR\$\r$\n'
+  FileWrite $0 'set classpath=%slowjudgeback%;%slowjudgeback%mysql-connector-java-5.0.8-bin.jar;$\r$\n'
+  FileWrite $0 'start $XamppDir\mysql_start.bat$\r$\n'
+  FileWrite $0 'start $XamppDir\apache_start.bat$\r$\n'
+  FileWrite $0 'timeout /t 20$\r$\n'
+  FileWrite $0 'start /SEPARATE /MIN /D $INSTDIR\ "" java Judge $INSTDIR\ slowjudge-contest-engine slowjudge-contest-$\r$\n'
+  FileClose $0
+SectionEnd
+
 ;--------------------------------
 ; ;Installer Functions
 Function .onSelChange
@@ -153,7 +165,7 @@ Function .onInit
   ReadRegStr $XamppDir HKCU "Software\slowjudge" "xamppdir"
 
   StrCmp $XamppDir "" 0 +2
-  StrCpy $XamppDir "C:\Xampp"
+  StrCpy $XamppDir "C:\xampp"
   
   StrCpy $WebDir "$XamppDir\htdocs\slowjudge"
 FunctionEnd
