@@ -11,8 +11,7 @@ include(__DIR__."\\header.php");
 		<p>Slowjudge is a Desktop Based Programming Contest platform.
 		 It's lightweight. A single Personal Computer can be used to host this platform.
 		 This is the user-friendly replacement of widely used judging platform PC^2.
-		 It uses serial judging system as there is very little amount of resources in a desktop computer than a server.
-		 Serial judging is slow. that's why the platform is named slowjudge. Thouh it is fast enough for a small number of contestant around 50-100.
+		 The platform is fast enough for a small number of contestant around 50-100.
 		 The Judging platform requires Windows operating system!
 		 </p>
 		 <h2>Current Features:</h2>
@@ -28,9 +27,13 @@ include(__DIR__."\\header.php");
 			<ul>
 				<li>host a programming contest</li>
 				<li>train programmers</li>
-				<li>Lab work submission</li>
-				<li>Lab work assessment</li>
 			</ul>
+		<h2>Development:</h2>
+		<p>Slowjudge is a hobby of Moshiur Rahman. The source code of this project is open.
+		 If the project helped you, <b>give the project a star on github.</b>
+		 Project link is <a href="https://github.com/moshiur-bd/SlowJudge">here</a>
+		</p>
+		
 </div>
 
 </div>

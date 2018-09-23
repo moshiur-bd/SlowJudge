@@ -13,13 +13,13 @@
 ;-------------------------------- 
   ;Version Information
   
-  VIProductVersion "1.0.1.10"
+  VIProductVersion "1.1.0.2"
   VIAddVersionKey  "ProductName" "Slowjudge"
   VIAddVersionKey  "Comments" "An easy to maintain contest platform"
   VIAddVersionKey  "CompanyName" "moshiur-bd"
   VIAddVersionKey  "LegalTrademarks" "https://github.com/moshiur-bd/SlowJudge"
   VIAddVersionKey  "FileDescription" "Slowjudge"
-  VIAddVersionKey  "FileVersion" "1.0.1.10"
+  VIAddVersionKey  "FileVersion" "1.1.0.2"
 ;----------------------------------
 
   ;Request application privileges for Windows Vista
